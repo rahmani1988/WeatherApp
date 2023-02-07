@@ -98,9 +98,18 @@ if (signPropsFile.exists()) {
                 keyAlias props['keyAlias']
                 keyPassword props['keyPass']
             }
+            staging {
+                storeFile file("../signing/release.keystore")
+                storePassword props['storePass']
+                keyAlias props['keyAlias']
+                keyPassword props['keyPass']
+            }
         }
         buildTypes {
             release {
+                signingConfig signingConfigs.release
+            }
+            staging {
                 signingConfig signingConfigs.release
             }
         }
