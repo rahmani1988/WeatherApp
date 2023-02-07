@@ -1,4 +1,4 @@
-package com.example.data
+package com.reza.weatherapp
 
 import org.junit.Test
 

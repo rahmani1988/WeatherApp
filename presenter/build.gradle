@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.weatherapp'
+    namespace 'com.reza.weatherapp'
     compileSdk 33
 
     defaultConfig {
@@ -19,8 +19,46 @@ android {
 
     buildTypes {
         release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ext.config = getProps('../config/release.properties')
+            ext.config.each { p ->
+                if (p.key == "APP_NAME") {
+                    resValue "string", "app_name", p.value
+                } else if (p.key == "APPLICATION_ID_SUFFIX") {
+                    applicationIdSuffix p.value
+                } else
+                    buildConfigField 'String', p.key, p.value
+            }
+        }
+
+        staging {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            ext.config = getProps('../config/staging.properties')
+            ext.config.each { p ->
+                if (p.key == "APP_NAME") {
+                    resValue "string", "app_name", p.value.replace('"', '')
+                } else if (p.key == "APPLICATION_ID_SUFFIX") {
+                    applicationIdSuffix p.value
+                } else {
+                    buildConfigField 'String', p.key, p.value
+                }
+            }
+        }
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            ext.config = getProps('../config/development.properties')
+            ext.config.each { p ->
+                if (p.key == "APP_NAME") {
+                    resValue "string", "app_name", p.value
+                } else if (p.key == "APPLICATION_ID_SUFFIX") {
+                    applicationIdSuffix p.value
+                } else
+                    buildConfigField 'String', p.key, p.value
+            }
         }
     }
     compileOptions {
@@ -34,11 +72,51 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // Tests
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation project(':data')
+    implementation project(':domain')
+}
+
+File signPropsFile = file("../signing/release.props")
+if (signPropsFile.exists()) {
+    Properties props = new Properties()
+    props.load(new FileInputStream(signPropsFile))
+    android {
+        signingConfigs {
+            release {
+                storeFile file("../signing/release.keystore")
+                storePassword props['storePass']
+                keyAlias props['keyAlias']
+                keyPassword props['keyPass']
+            }
+        }
+        buildTypes {
+            release {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+} else {
+    android {
+        buildTypes {
+            release {
+                signingConfig signingConfigs.debug
+            }
+        }
+    }
+}
+
+def getProps(path) {
+    Properties props = new Properties()
+    props.load(new FileInputStream(file(path)))
+    return props
 }
