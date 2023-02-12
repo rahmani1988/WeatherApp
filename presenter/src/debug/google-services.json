@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "130319771623",
+    "project_id": "weather-app-debug",
+    "storage_bucket": "weather-app-debug.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130319771623:android:a3a5c0da2747c00c5a7f42",
+        "android_client_info": {
+          "package_name": "com.reza.weatherapp.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130319771623-envoclu9ck342jqd175pp29m3h6e9gc7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reza.weatherapp.dev",
+            "certificate_hash": "b95311cff9f2ab7ab6085e49d8275f9e84389328"
+          }
+        },
+        {
+          "client_id": "130319771623-dbfj2p389nna3gt4bdd7m0nfd9j0jojc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCijtTcN7INA70wZ7IfigLlJ6VmPYCmIRY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130319771623-dbfj2p389nna3gt4bdd7m0nfd9j0jojc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

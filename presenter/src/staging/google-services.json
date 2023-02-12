@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "829346185170",
+    "project_id": "weather-app-staging",
+    "storage_bucket": "weather-app-staging.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829346185170:android:af75c842b479f438e0d20b",
+        "android_client_info": {
+          "package_name": "com.reza.weatherapp.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829346185170-kt4jqmkahl2d75u6k0m6bi9qfslb1d54.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reza.weatherapp.staging",
+            "certificate_hash": "07a3985d15a53076b3688da2ddf376357f760c99"
+          }
+        },
+        {
+          "client_id": "829346185170-3gvm0blembbdnuhv10mbgpgv4glj44sr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg4BU8uGSQfRjz7E3-WlWAQV3BekTjh4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829346185170-3gvm0blembbdnuhv10mbgpgv4glj44sr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
