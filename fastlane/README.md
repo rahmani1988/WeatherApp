@@ -13,6 +13,17 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 # Available Actions
 
+### clean
+
+```sh
+[bundle exec] fastlane clean
+```
+
+clean
+
+----
+
+
 ## Android
 
 ### android build

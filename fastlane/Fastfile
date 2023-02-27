@@ -15,18 +15,25 @@
 
 default_platform(:android)
 
+desc "clean"
+lane :clean do
+  gradle(
+     task: "clean"
+   )
+end
+
 platform :android do
  desc "Generate build and upload to firebase"
  lane :build do
    gradle(
      task: "assemble",
-     build_type: ENV['BUILD_TYPE'],
+     build_type: ENV["BUILD_TYPE"],
    )
    firebase_app_distribution(
      app: ENV["FIREBASE_APP_ID"],
      release_notes_file: "releaseNotes.txt",
      groups: "Internal",
-     firebase_cli_token: ENV['FIREBASE_CI_TOKEN'],
+     firebase_cli_token: ENV["FIREBASE_CI_TOKEN"],
      debug: false
    )
   end
