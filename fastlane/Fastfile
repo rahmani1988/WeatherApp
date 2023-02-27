@@ -14,32 +14,7 @@
 # update_fastlane
 
 default_platform(:android)
-
-# platform :android do
-
-# before_all do
-#     ENV["FIREBASE_CI_TOKEN"] = "1//03v1Pl0r7AWorCgYIARAAGAMSNwF-L9IrkrlQOtK6f3EJkBDRWEPTvMLS3viAeKBidd2KRfo_Q6SYojKulLbeWZxo57ialwcxD30"
-#     ENV["FIREBASE_APP_ID"] = "1:829346185170:android:af75c842b479f438e0d20b"
-#   end
-
-#  desc "Generate build and upload to firebase"
-#  lane :build do
-#    gradle(
-#      task: "assemble",
-#      build_type: "Staging"
-#    )
-#    firebase_app_distribution(
-#      app: ENV["FIREBASE_APP_ID"],
-#      release_notes_file: "releaseNotes.txt",
-#      groups: "Internal",
-#      firebase_cli_token: ENV['FIREBASE_CI_TOKEN'],
-#      debug: false
-#    )
-#   end
-# end
-
 platform :android do
-
  desc "Generate build and upload to firebase"
  lane :build do
    gradle(

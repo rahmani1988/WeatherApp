@@ -38,3 +38,9 @@ render.experimental.xml
 
 # Releases
 /app/prod/release/
+
+# Fastlane
+/.env.development
+/.env.master
+/.env.staging
+
