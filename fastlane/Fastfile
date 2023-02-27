@@ -14,6 +14,7 @@
 # update_fastlane
 
 default_platform(:android)
+
 platform :android do
  desc "Generate build and upload to firebase"
  lane :build do
