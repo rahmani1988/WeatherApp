@@ -26,6 +26,9 @@ platform :android do
  desc "Generate build and upload to firebase"
  lane :build do
    gradle(
+      task: "clean"
+   )
+   gradle(
      task: "assemble",
      build_type: ENV["BUILD_TYPE"],
    )
