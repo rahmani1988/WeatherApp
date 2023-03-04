@@ -40,6 +40,6 @@ render.experimental.xml
 /app/prod/release/
 
 # Fastlane
-./fastlane/.env.staging
-./fastlane/.env.development
-./fastlane/.env.master
+/fastlane/.env.staging
+/fastlane/.env.development
+/fastlane/.env.master
