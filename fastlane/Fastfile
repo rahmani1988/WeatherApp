@@ -22,16 +22,23 @@ lane :clean do
    )
 end
 
+desc "unit tests"
+lane :tests do
+  gradle(task: "test")
+end
+
 platform :android do
  desc "Generate build and upload to firebase"
  lane :build do
    gradle(
       task: "clean"
    )
+   slack_send(':crossed_fingers: Generating '+ENV['BUILD_TYPE']+' build')
    gradle(
      task: "assemble",
      build_type: ENV["BUILD_TYPE"],
    )
+   slack_send(ENV['BUILD_TYPE']+' Build Successfully completed...:star-struck: \n Uploading to Firebase')
    firebase_app_distribution(
      app: ENV["FIREBASE_APP_ID"],
      release_notes_file: "releaseNotes.txt",
@@ -39,5 +46,15 @@ platform :android do
      firebase_cli_token: ENV["FIREBASE_CI_TOKEN"],
      debug: false
    )
+   slack_send(':tada: Hooooooorrrayyyyy!!! '+ENV['BUILD_TYPE']+' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:')
   end
+end
+
+def slack_send(msg)
+    slack(
+      message: msg,
+      success: true,
+      channel: "weather_app_release",
+      default_payloads: []
+    )
 end
