@@ -5,37 +5,37 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000168">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000282">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: clean" time="0.930328">
+      <testcase classname="fastlane.lanes" name="1: clean" time="1.294847">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: slack" time="0.763748">
+      <testcase classname="fastlane.lanes" name="2: slack" time="0.236568">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: assembleRelease" time="13.704052">
+      <testcase classname="fastlane.lanes" name="3: assembleRelease" time="24.51515">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: slack" time="0.217883">
+      <testcase classname="fastlane.lanes" name="4: slack" time="0.21342">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: firebase_app_distribution" time="10.430953">
+      <testcase classname="fastlane.lanes" name="5: firebase_app_distribution" time="10.525438">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: slack" time="0.247684">
+      <testcase classname="fastlane.lanes" name="6: slack" time="0.369799">
         
       </testcase>
     

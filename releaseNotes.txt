@@ -1,1 +1,6 @@
-Hi
+Hi,
+
+The release is ready to be tested.
+
+Thanks,
+Android Team

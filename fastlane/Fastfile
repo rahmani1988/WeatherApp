@@ -22,7 +22,7 @@ lane :clean do
    )
 end
 
-desc "unit tests"
+desc "Unit tests"
 lane :tests do
   gradle(task: "test")
 end
