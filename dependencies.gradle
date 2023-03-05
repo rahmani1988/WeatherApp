@@ -1,12 +1,8 @@
 ext {
-
     // Android
     minSdkVersion = 21
     targetSdkVersion = 33
     compileSdkVersion = 33
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    versionCode 1
-    versionName "1.0.0"
 
     // Retrofit
     retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
@@ -29,6 +25,13 @@ ext {
     // Dagger2
     dagger = "com.google.dagger:dagger:2.40"
     daggerCompiler = "com.google.dagger:dagger-compiler:2.40"
+
+    // ConstraintLayout
+    constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
+
+    // Firebase
+    firebaseBom = "com.google.firebase:firebase-bom:31.2.0"
+    firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
 
     // Testing
     junit = "junit:junit:4.13.2"

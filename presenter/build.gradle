@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.reza.weatherapp'
-    compileSdk 33
+    compileSdk rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "com.reza.weatherapp"
-        minSdk 21
-        targetSdk 33
+        minSdk rootProject.ext.minSdkVersion
+        targetSdk rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -74,13 +74,13 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation rootProject.ext.constraintlayout
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:31.2.0')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation platform(rootProject.ext.firebaseBom)
+    implementation rootProject.ext.firebaseAnalytics
 
     // Tests
     testImplementation 'junit:junit:4.13.2'

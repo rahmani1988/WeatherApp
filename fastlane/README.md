@@ -27,7 +27,7 @@ clean
 [bundle exec] fastlane tests
 ```
 
-unit tests
+Unit tests
 
 ----
 
