@@ -56,18 +56,15 @@ pipeline
             deleteDir()
         }
         success{
-
              slack_send("Jenkins job  for *${env.BRANCH_NAME}* completed successfully. ","#0066ff")
         }
         aborted{
             slack_send("Jenkins job  for *${env.BRANCH_NAME}* Skipped/Aborted.","warning")
         }
         failure {
-
           slack_send("*${env.BRANCH_NAME}* Something went wrong.Build failed. Check here: Console Output*: <${BUILD_URL}/console | (Open)>","danger")
         }
     }
-
 }
 
 def slack_send(slackMessage,messageColor="good")
