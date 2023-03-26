@@ -10,47 +10,47 @@
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: Switch to android clean lane" time="8.5e-05">
+      <testcase classname="fastlane.lanes" name="1: Switch to android clean lane" time="8.4e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: clean" time="1.245625">
+      <testcase classname="fastlane.lanes" name="2: clean" time="1.482996">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: Switch to android download_dependencies lane" time="0.000215">
+      <testcase classname="fastlane.lanes" name="3: Switch to android download_dependencies lane" time="0.000325">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: androidDependencies" time="1.190675">
+      <testcase classname="fastlane.lanes" name="4: androidDependencies" time="1.248406">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: slack" time="0.237625">
+      <testcase classname="fastlane.lanes" name="5: slack" time="0.25429">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: assembleStaging" time="6.0648">
+      <testcase classname="fastlane.lanes" name="6: assembleStaging" time="6.581743">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: slack" time="0.222846">
+      <testcase classname="fastlane.lanes" name="7: slack" time="0.221749">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="8: firebase_app_distribution" time="11.670824">
+      <testcase classname="fastlane.lanes" name="8: firebase_app_distribution" time="11.577404">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="9: slack" time="0.281421">
+      <testcase classname="fastlane.lanes" name="9: slack" time="0.285186">
         
       </testcase>
     
