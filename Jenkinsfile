@@ -1,30 +1,30 @@
-slack_channel = 'android-ci-cd'
+#! groovy
 
-pipeline
-{
-    agent{
-        docker{
-            image 'mindbowser/android-30-sdk:1.0'
-            args '-u root:root'
+slack_channel = 'weather_app_release'
+
+pipeline {
+    agent any
+    stages {
+        stage('Setup') {
+              steps {
+                echo "Setup"
+                // Install bundler in order to use fastlane
+                sh "gem install bundler"
+                // set the local path for bundles in vendor/bundle
+                sh "bundle config set --local path 'vendor/bundle'"
+                // install bundles if they're not installed
+                sh "bundle check || bundle install --jobs=4 --retry=3"
+              }
         }
-    }
-    stages{
-        stage('Init')
-        {
-            //check git commit message contains "skip ci" if found don't run the pipeline
-
+        /* stage('Init') {
+            // check git commit message contains "skip ci" if found don't run the pipeline
             steps {
                 script {
-
                     lastCommitInfo = sh(script: "git log -1", returnStdout: true).trim()
-
                     commitContainsSkip = sh(script: "git log -1 | grep 'skip ci'", returnStatus: true)
-
                     slackMessage = "*${env.JOB_NAME}* *${env.BRANCH_NAME}* received a new commit. \nHere is commmit info: ${lastCommitInfo}\n*Console Output*: <${BUILD_URL}/console | (Open)>"
-
                     slack_send(slackMessage)
-
-                    if(commitContainsSkip == 0) {
+                    if (commitContainsSkip == 0) {
                         skippingText = " Skipping Build for *${env.BRANCH_NAME}* branch."
                         currentBuild.result = 'ABORTED'
                         slack_send(skippingText,"warning")
@@ -32,42 +32,41 @@ pipeline
                     }
                 }
             }
+        } */
+        stage('Build') {
+              // call fastlane lane for generate apk and uploading to firebase console
+              steps {
+                echo "Building"
+                sh "bundle exec fastlane android build --env staging"
+              }
         }
-        stage('build')
-        {
+        /* stage('build') {
             // call fastlane lane for generate apk and uploading to testflight
-                 steps{
-
-                    sh "chmod +x gradlew"
-
-                    sh "chmod +x Gemfile"
-
-                    sh "fastlane build --env ${env.BRANCH_NAME}"    //eg. fastlane build --env development
-                }
-        }
-
+            steps{
+               sh "chmod +x gradlew"
+               sh "chmod +x Gemfile"
+               sh "fastlane build --env ${env.BRANCH_NAME}"    //eg. fastlane build --env development
+            }
+        } */
     }
-    post {
+    /* post {
         always {
             // delete the workspace
-
             sh "chmod -R 777 ."
-
             deleteDir()
         }
-        success{
-             slack_send("Jenkins job  for *${env.BRANCH_NAME}* completed successfully. ","#0066ff")
+        success {
+             slack_send("Jenkins job  for staging completed successfully. ","#0066ff")
         }
-        aborted{
-            slack_send("Jenkins job  for *${env.BRANCH_NAME}* Skipped/Aborted.","warning")
+        aborted {
+            slack_send("Jenkins job  for staging Skipped/Aborted.","warning")
         }
         failure {
-          slack_send("*${env.BRANCH_NAME}* Something went wrong.Build failed. Check here: Console Output*: <${BUILD_URL}/console | (Open)>","danger")
+          slack_send("staging Something went wrong.Build failed. Check here: Console Output*: <${BUILD_URL}/console | (Open)>","danger")
         }
-    }
+    } */
 }
 
-def slack_send(slackMessage,messageColor="good")
-{
+def slack_send(slackMessage, messageColor="good") {
     slackSend channel: slack_channel , color: messageColor, message: slackMessage
 }
