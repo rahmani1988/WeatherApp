@@ -14,9 +14,7 @@
 # update_fastlane
 
 default_platform(:android)
-
 platform :android do
-
     # private_lanes
     desc "Clean"
     private_lane :clean do
@@ -26,6 +24,15 @@ platform :android do
     desc "Download dependencies"
     private_lane :download_dependencies do
     gradle(task: "androidDependencies")
+    end
+
+    desc "Setup variables"
+    private_lane :setup_variables do
+        BUILD_TYPE = ENV["BUILD_TYPE"]
+        FIREBASE_APP_ID = ENV["FIREBASE_APP_ID"]
+        FIREBASE_CI_TOKEN = ENV["FIREBASE_CI_TOKEN"]
+        CHANNEL = ENV["CHANNEL"]
+        SLACK_URL = ENV["SLACK_URL"]
     end
 
     # public_lanes
@@ -38,20 +45,21 @@ platform :android do
     lane :build do
     clean
     download_dependencies
-    slack_send(':crossed_fingers: Generating '+ENV['BUILD_TYPE']+' build', ENV['CHANNEL'])
+    setup_variables
+    slack_send(':crossed_fingers: Generating ' + BUILD_TYPE + ' build', CHANNEL)
     gradle(
         task: "assemble",
-        build_type: ENV["BUILD_TYPE"],
+        build_type: BUILD_TYPE,
     )
-    slack_send(ENV['BUILD_TYPE']+' Build Successfully completed...:star-struck: \n Uploading to Firebase', ENV['CHANNEL'])
+    slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL)
     firebase_app_distribution(
-        app: ENV["FIREBASE_APP_ID"],
+        app: FIREBASE_APP_ID,
         release_notes_file: "releaseNotes.txt",
         groups: "Internal",
-        firebase_cli_token: ENV["FIREBASE_CI_TOKEN"],
+        firebase_cli_token: FIREBASE_CI_TOKEN,
         debug: false
     )
-    slack_send(':tada: Hooooooorrrayyyyy!!! '+ENV['BUILD_TYPE']+' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', ENV['CHANNEL'])
+    slack_send(':tada: Hooooooorrrayyyyy!!! ' + BUILD_TYPE + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', CHANNEL)
     end
 end
 
@@ -59,7 +67,7 @@ def slack_send(msg, channel)
     slack(
       message: msg,
       success: true,
-      channel: "weather_app_release",
+      channel: channel,
       default_payloads: []
     )
 end
