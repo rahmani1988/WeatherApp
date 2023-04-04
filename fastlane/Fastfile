@@ -53,10 +53,10 @@ platform :android do
     )
     #slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL)
     firebase_app_distribution(
-        app: FIREBASE_APP_ID,
+        app: "1:829346185170:android:af75c842b479f438e0d20b",
         release_notes_file: "releaseNotes.txt",
         groups: "Internal",
-        firebase_cli_token: FIREBASE_CI_TOKEN,
+        firebase_cli_token: "1//03v1Pl0r7AWorCgYIARAAGAMSNwF-L9IrkrlQOtK6f3EJkBDRWEPTvMLS3viAeKBidd2KRfo_Q6SYojKulLbeWZxo57ialwcxD30",
         debug: false
     )
     #slack_send(':tada: Hooooooorrrayyyyy!!! ' + BUILD_TYPE + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', CHANNEL)
