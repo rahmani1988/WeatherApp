@@ -49,7 +49,7 @@ platform :android do
     #slack_send(':crossed_fingers: Generating ' + BUILD_TYPE + ' build', CHANNEL)
     gradle(
         task: "assemble",
-        build_type: BUILD_TYPE,
+        build_type: "staging",
     )
     #slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL)
     firebase_app_distribution(
