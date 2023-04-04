@@ -51,7 +51,7 @@ platform :android do
         task: "assemble",
         build_type: "Staging",
     )
-    slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', 'weather_app_release')
+    slack_send('Staging' + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', 'weather_app_release')
     firebase_app_distribution(
         app: "1:829346185170:android:af75c842b479f438e0d20b",
         release_notes_file: "releaseNotes.txt",
@@ -59,7 +59,7 @@ platform :android do
         firebase_cli_token: "1//03v1Pl0r7AWorCgYIARAAGAMSNwF-L9IrkrlQOtK6f3EJkBDRWEPTvMLS3viAeKBidd2KRfo_Q6SYojKulLbeWZxo57ialwcxD30",
         debug: false
     )
-    slack_send(':tada: Hooooooorrrayyyyy!!! ' + 'Staging' + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', CHANNEL)
+    slack_send(':tada: Hooooooorrrayyyyy!!! ' + 'Staging' + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', 'weather_app_release')
     end
 end
 
