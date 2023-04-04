@@ -65,7 +65,7 @@ end
 
 def slack_send(msg, channel)
     slack(
-      slack_url: "https://hooks.slack.com/services/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",
+      slack_url: "https://hooks.slack.com/services/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",
       message: msg,
       success: true,
       channel: channel,
