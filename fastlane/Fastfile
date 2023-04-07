@@ -14,7 +14,7 @@
 # update_fastlane
 
 default_platform(:android)
-platform :android do
+platform :android do |options|
     # private_lanes
     desc "Clean"
     private_lane :clean do
@@ -28,11 +28,16 @@ platform :android do
 
     desc "Setup variables"
     private_lane :setup_variables do
-        BUILD_TYPE = ENV["BUILD_TYPE"]
-        FIREBASE_APP_ID = ENV["FIREBASE_APP_ID"]
-        FIREBASE_CI_TOKEN = ENV["FIREBASE_CI_TOKEN"]
-        CHANNEL = ENV["CHANNEL"]
-        SLACK_URL = ENV["SLACK_URL"]
+#         BUILD_TYPE = ENV["BUILD_TYPE"]
+#         FIREBASE_APP_ID = ENV["FIREBASE_APP_ID"]
+#         FIREBASE_CI_TOKEN = ENV["FIREBASE_CI_TOKEN"]
+#         CHANNEL = ENV["CHANNEL"]
+#         SLACK_URL = ENV["SLACK_URL"]
+        BUILD_TYPE = options[:BUILD_TYPE]
+        FIREBASE_APP_ID = options[:FIREBASE_APP_ID]
+        FIREBASE_CI_TOKEN = options[:FIREBASE_CI_TOKEN]
+        CHANNEL = options[:CHANNEL]
+        SLACK_URL = options[:SLACK_URL]
     end
 
     # public_lanes
