@@ -46,26 +46,26 @@ platform :android do
     clean
     download_dependencies
     setup_variables
-    slack_send(':crossed_fingers: Generating ' + 'Staging' + ' build', 'weather_app_release')
+    slack_send(':crossed_fingers: Generating ' + BUILD_TYPE + ' build', CHANNEL, SLACK_URL)
     gradle(
         task: "assemble",
-        build_type: "Staging",
+        build_type: BUILD_TYPE,
     )
-    slack_send('Staging' + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', 'weather_app_release')
+    slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL, SLACK_URL)
     firebase_app_distribution(
-        app: "1:829346185170:android:af75c842b479f438e0d20b",
+        app: FIREBASE_APP_ID,
         release_notes_file: "releaseNotes.txt",
         groups: "Internal",
-        firebase_cli_token: "1//03v1Pl0r7AWorCgYIARAAGAMSNwF-L9IrkrlQOtK6f3EJkBDRWEPTvMLS3viAeKBidd2KRfo_Q6SYojKulLbeWZxo57ialwcxD30",
+        firebase_cli_token: FIREBASE_CI_TOKEN,
         debug: false
     )
-    slack_send(':tada: Hooooooorrrayyyyy!!! ' + 'Staging' + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', 'weather_app_release')
+    slack_send(':tada: Hooooooorrrayyyyy!!! ' + BUILD_TYPE + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', CHANNEL, SLACK_URL)
     end
 end
 
-def slack_send(msg, channel)
+def slack_send(msg, channel, url)
     slack(
-      slack_url: "https://hooks.slack.com/services/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",
+      slack_url: url,
       message: msg,
       success: true,
       channel: channel,
