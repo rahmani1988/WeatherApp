@@ -46,12 +46,12 @@ platform :android do
     clean
     download_dependencies
     setup_variables
-    slack_send(':crossed_fingers: Generating ' + BUILD_TYPE + ' build', CHANNEL, SLACK_URL)
+#     slack_send(':crossed_fingers: Generating ' + BUILD_TYPE + ' build', CHANNEL, SLACK_URL)
     gradle(
         task: "assemble",
         build_type: BUILD_TYPE,
     )
-    slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL, SLACK_URL)
+#     slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL, SLACK_URL)
     firebase_app_distribution(
         app: FIREBASE_APP_ID,
         release_notes_file: "releaseNotes.txt",
@@ -59,7 +59,7 @@ platform :android do
         firebase_cli_token: FIREBASE_CI_TOKEN,
         debug: false
     )
-    slack_send(':tada: Hooooooorrrayyyyy!!! ' + BUILD_TYPE + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', CHANNEL, SLACK_URL)
+#     slack_send(':tada: Hooooooorrrayyyyy!!! ' + BUILD_TYPE + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', CHANNEL, SLACK_URL)
     end
 end
 
