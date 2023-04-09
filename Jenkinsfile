@@ -4,6 +4,16 @@ slack_channel = 'weather_app_release'
 
 pipeline {
     agent any
+    environment {
+        BUILD_TYPE = "$env.BUILD_TYPE"
+        FIREBASE_APP_ID = "$env.FIREBASE_APP_ID"
+        FIREBASE_CI_TOKEN = "$env.FIREBASE_CI_TOKEN"
+        CHANNEL = "$env.CHANNEL"
+        SLACK_URL = "$env.SLACK_URL"
+        LC_ALL = "en_US.UTF-8"
+        LANG = "en_US.UTF-8"
+    }
+
     stages {
 
         /* stage('Init') {
@@ -23,16 +33,6 @@ pipeline {
                 }
             }
         } */
-
-        environment {
-            BUILD_TYPE = "$env.BUILD_TYPE"
-            FIREBASE_APP_ID = "$env.FIREBASE_APP_ID"
-            FIREBASE_CI_TOKEN = "$env.FIREBASE_CI_TOKEN"
-            CHANNEL = "$env.CHANNEL"
-            SLACK_URL = "$env.SLACK_URL"
-            LC_ALL = "en_US.UTF-8"
-            LANG = "en_US.UTF-8"
-        }
 
         stage('Build') {
               // call fastlane lane for generate apk and uploading to firebase console
