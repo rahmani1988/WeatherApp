@@ -4,6 +4,7 @@ slack_channel = 'weather_app_release'
 
 pipeline {
     agent any
+
     environment {
         BUILD_TYPE = "$env.BUILD_TYPE"
         FIREBASE_APP_ID = "$env.FIREBASE_APP_ID"
@@ -50,7 +51,7 @@ pipeline {
             }
         } */
     }
-    /* post {
+    post {
         always {
             // delete the workspace
             sh "chmod -R 777 ."
@@ -65,7 +66,7 @@ pipeline {
         failure {
           slack_send("staging Something went wrong.Build failed. Check here: Console Output*: <${BUILD_URL}/console | (Open)>","danger")
         }
-    } */
+    }
 }
 
 def slack_send(slackMessage, messageColor="good") {
