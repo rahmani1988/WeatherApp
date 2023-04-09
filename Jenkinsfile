@@ -35,21 +35,13 @@ pipeline {
             }
         } */
 
-        stage('Build') {
+        stage('Build and upload to firebase app distribution') {
               // call fastlane lane for generate apk and uploading to firebase console
               steps {
                 echo "Building"
                 sh "bundle exec fastlane android build --env development"
               }
         }
-        /* stage('build') {
-            // call fastlane lane for generate apk and uploading to testflight
-            steps{
-               sh "chmod +x gradlew"
-               sh "chmod +x Gemfile"
-               sh "fastlane build --env ${env.BRANCH_NAME}"    //eg. fastlane build --env development
-            }
-        } */
     }
     post {
         always {
@@ -64,7 +56,7 @@ pipeline {
             slack_send("Jenkins job  for staging Skipped/Aborted.","warning")
         }
         failure {
-          slack_send("staging Something went wrong.Build failed. Check here: Console Output*: <${BUILD_URL}/console | (Open)>","danger")
+            slack_send("staging Something went wrong.Build failed. Check here: Console Output*: <${BUILD_URL}/console | (Open)>","danger")
         }
     }
 }
