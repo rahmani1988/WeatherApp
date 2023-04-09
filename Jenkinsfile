@@ -17,7 +17,6 @@ pipeline {
     }
 
     stages {
-
         /* stage('Init') {
             // check git commit message contains "skip ci" if found don't run the pipeline
             steps {
