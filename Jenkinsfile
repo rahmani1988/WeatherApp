@@ -23,11 +23,22 @@ pipeline {
                 }
             }
         } */
+
+        environment {
+            BUILD_TYPE = "$env.BUILD_TYPE"
+            FIREBASE_APP_ID = "$env.FIREBASE_APP_ID"
+            FIREBASE_CI_TOKEN = "$env.FIREBASE_CI_TOKEN"
+            CHANNEL = "$env.CHANNEL"
+            SLACK_URL = "$env.SLACK_URL"
+            LC_ALL = "en_US.UTF-8"
+            LANG = "en_US.UTF-8"
+        }
+
         stage('Build') {
               // call fastlane lane for generate apk and uploading to firebase console
               steps {
                 echo "Building"
-                sh "bundle exec fastlane android build BUILD_TYPE:Debug FIREBASE_APP_ID=1:130319771623:android:a3a5c0da2747c00c5a7f42 FIREBASE_CI_TOKEN=1//03v1Pl0r7AWorCgYIARAAGAMSNwF-L9IrkrlQOtK6f3EJkBDRWEPTvMLS3viAeKBidd2KRfo_Q6SYojKulLbeWZxo57ialwcxD30 CHANNEL=weather_app_release"
+                sh "bundle exec fastlane android build --env development"
               }
         }
         /* stage('build') {

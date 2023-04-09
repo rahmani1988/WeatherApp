@@ -14,7 +14,7 @@
 # update_fastlane
 
 default_platform(:android)
-platform :android do |options|
+platform :android do
     # private_lanes
     desc "Clean"
     private_lane :clean do
@@ -28,16 +28,11 @@ platform :android do |options|
 
     desc "Setup variables"
     private_lane :setup_variables do
-#         BUILD_TYPE = ENV["BUILD_TYPE"]
-#         FIREBASE_APP_ID = ENV["FIREBASE_APP_ID"]
-#         FIREBASE_CI_TOKEN = ENV["FIREBASE_CI_TOKEN"]
-#         CHANNEL = ENV["CHANNEL"]
-#         SLACK_URL = ENV["SLACK_URL"]
-        BUILD_TYPE = options[:BUILD_TYPE]
-        FIREBASE_APP_ID = options[:FIREBASE_APP_ID]
-        FIREBASE_CI_TOKEN = options[:FIREBASE_CI_TOKEN]
-        CHANNEL = options[:CHANNEL]
-        SLACK_URL = options[:SLACK_URL]
+        BUILD_TYPE = ENV["BUILD_TYPE"]
+        FIREBASE_APP_ID = ENV["FIREBASE_APP_ID"]
+        FIREBASE_CI_TOKEN = ENV["FIREBASE_CI_TOKEN"]
+        CHANNEL = ENV["CHANNEL"]
+        SLACK_URL = ENV["SLACK_URL"]
     end
 
     # public_lanes
@@ -51,12 +46,12 @@ platform :android do |options|
     clean
     download_dependencies
     setup_variables
-#     slack_send(':crossed_fingers: Generating ' + BUILD_TYPE + ' build', CHANNEL, SLACK_URL)
+    slack_send(':crossed_fingers: Generating ' + BUILD_TYPE + ' build', CHANNEL, SLACK_URL)
     gradle(
         task: "assemble",
         build_type: BUILD_TYPE,
     )
-#     slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL, SLACK_URL)
+    slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL, SLACK_URL)
     firebase_app_distribution(
         app: FIREBASE_APP_ID,
         release_notes_file: "releaseNotes.txt",
@@ -64,7 +59,7 @@ platform :android do |options|
         firebase_cli_token: FIREBASE_CI_TOKEN,
         debug: false
     )
-#     slack_send(':tada: Hooooooorrrayyyyy!!! ' + BUILD_TYPE + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', CHANNEL, SLACK_URL)
+    slack_send(':tada: Hooooooorrrayyyyy!!! ' + BUILD_TYPE + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', CHANNEL, SLACK_URL)
     end
 end
 
