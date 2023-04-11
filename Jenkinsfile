@@ -4,8 +4,18 @@ slack_channel = 'weather_app_release'
 
 pipeline {
     agent any
-    stages {
 
+    environment {
+            BUILD_TYPE = "$env.BUILD_TYPE_STAGING"
+            FIREBASE_APP_ID = "$env.FIREBASE_APP_ID_STAGING"
+            FIREBASE_CI_TOKEN = "$env.FIREBASE_CI_TOKEN"
+            CHANNEL = "$env.CHANNEL"
+            SLACK_URL = "$env.SLACK_URL"
+            LC_ALL = "en_US.UTF-8"
+            LANG = "en_US.UTF-8"
+        }
+
+    stages {
         /* stage('Init') {
             // check git commit message contains "skip ci" if found don't run the pipeline
             steps {
@@ -23,23 +33,15 @@ pipeline {
                 }
             }
         } */
-        stage('Build') {
+        stage('Build and upload to firebase app distribution') {
               // call fastlane lane for generate apk and uploading to firebase console
               steps {
                 echo "Building"
                 sh "bundle exec fastlane android build --env staging"
               }
         }
-        /* stage('build') {
-            // call fastlane lane for generate apk and uploading to testflight
-            steps{
-               sh "chmod +x gradlew"
-               sh "chmod +x Gemfile"
-               sh "fastlane build --env ${env.BRANCH_NAME}"    //eg. fastlane build --env development
-            }
-        } */
     }
-    /* post {
+    post {
         always {
             // delete the workspace
             sh "chmod -R 777 ."
@@ -54,7 +56,7 @@ pipeline {
         failure {
           slack_send("staging Something went wrong.Build failed. Check here: Console Output*: <${BUILD_URL}/console | (Open)>","danger")
         }
-    } */
+    }
 }
 
 def slack_send(slackMessage, messageColor="good") {
