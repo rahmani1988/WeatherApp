@@ -29,7 +29,7 @@ platform :android do
     desc "Setup variables"
     private_lane :setup_variables do
         BUILD_TYPE_RELEASE = ENV["BUILD_TYPE_RELEASE"]
-        FIREBASE_APP_ID = ENV["FIREBASE_APP_ID"]
+        FIREBASE_APP_ID_RELEASE = ENV["FIREBASE_APP_ID_RELEASE"]
         FIREBASE_CI_TOKEN = ENV["FIREBASE_CI_TOKEN"]
         CHANNEL = ENV["CHANNEL"]
         SLACK_URL = ENV["SLACK_URL"]
@@ -53,7 +53,7 @@ platform :android do
     )
     slack_send(BUILD_TYPE_RELEASE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL, SLACK_URL)
     firebase_app_distribution(
-        app: FIREBASE_APP_ID,
+        app: FIREBASE_APP_ID_RELEASE,
         release_notes_file: "releaseNotes.txt",
         groups: "Internal",
         firebase_cli_token: FIREBASE_CI_TOKEN,
