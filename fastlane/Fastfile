@@ -28,8 +28,8 @@ platform :android do
 
     desc "Setup variables"
     private_lane :setup_variables do
-        BUILD_TYPE_RELEASE = ENV["BUILD_TYPE_RELEASE"]
-        FIREBASE_APP_ID_RELEASE = ENV["FIREBASE_APP_ID_RELEASE"]
+        BUILD_TYPE = ENV["BUILD_TYPE"]
+        FIREBASE_APP_ID = ENV["FIREBASE_APP_ID"]
         FIREBASE_CI_TOKEN = ENV["FIREBASE_CI_TOKEN"]
         CHANNEL = ENV["CHANNEL"]
         SLACK_URL = ENV["SLACK_URL"]
@@ -46,20 +46,20 @@ platform :android do
     clean
     download_dependencies
     setup_variables
-    slack_send(':crossed_fingers: Generating ' + BUILD_TYPE_RELEASE + ' build', CHANNEL, SLACK_URL)
+    slack_send(':crossed_fingers: Generating ' + BUILD_TYPE + ' build', CHANNEL, SLACK_URL)
     gradle(
         task: "assemble",
-        build_type: BUILD_TYPE_RELEASE,
+        build_type: BUILD_TYPE,
     )
-    slack_send(BUILD_TYPE_RELEASE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL, SLACK_URL)
+    slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL, SLACK_URL)
     firebase_app_distribution(
-        app: FIREBASE_APP_ID_RELEASE,
+        app: FIREBASE_APP_ID,
         release_notes_file: "releaseNotes.txt",
         groups: "Internal",
         firebase_cli_token: FIREBASE_CI_TOKEN,
         debug: false
     )
-    slack_send(':tada: Hooooooorrrayyyyy!!! ' + BUILD_TYPE_RELEASE + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', CHANNEL, SLACK_URL)
+    slack_send(':tada: Hooooooorrrayyyyy!!! ' + BUILD_TYPE + ' Build is successfully uploaded on Firebase  Distribution!! :dancer::man_dancing:', CHANNEL, SLACK_URL)
     end
 end
 
