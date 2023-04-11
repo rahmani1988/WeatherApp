@@ -6,8 +6,8 @@ pipeline {
     agent any
 
     environment {
-        BUILD_TYPE = "$env.BUILD_TYPE"
-        FIREBASE_APP_ID = "$env.FIREBASE_APP_ID"
+        BUILD_TYPE = "$env.BUILD_TYPE_DEBUG"
+        FIREBASE_APP_ID = "$env.FIREBASE_APP_ID_DEBUG"
         FIREBASE_CI_TOKEN = "$env.FIREBASE_CI_TOKEN"
         CHANNEL = "$env.CHANNEL"
         SLACK_URL = "$env.SLACK_URL"
