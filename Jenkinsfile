@@ -6,7 +6,7 @@ pipeline {
     agent any
 
     environment {
-        BUILD_TYPE = "$env.BUILD_TYPE"
+        BUILD_TYPE = "$env.BUILD_TYPE_RELEASE"
         FIREBASE_APP_ID = "$env.FIREBASE_APP_ID"
         FIREBASE_CI_TOKEN = "$env.FIREBASE_CI_TOKEN"
         CHANNEL = "$env.CHANNEL"
@@ -38,7 +38,7 @@ pipeline {
               // call fastlane lane for generate apk and uploading to firebase console
               steps {
                 echo "Building"
-                sh "bundle exec fastlane android build --env development"
+                sh "bundle exec fastlane android build --env master"
               }
         }
     }
