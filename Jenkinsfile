@@ -38,7 +38,7 @@ pipeline {
 
               when {
                     anyOf {
-                        branch "development";
+//                         branch "development";
                         branch "staging";
                         branch "feature/*";
                     }
@@ -58,7 +58,7 @@ pipeline {
             deleteDir()
         }
         success {
-             slack_send("Jenkins job  for staging completed successfully. ","#0066ff")
+             slack_send("Jenkins job  for staging completed successfully.","#0066ff")
         }
         aborted {
             slack_send("Jenkins job  for staging Skipped/Aborted.","warning")
