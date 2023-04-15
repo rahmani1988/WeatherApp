@@ -14,6 +14,7 @@
 # update_fastlane
 
 default_platform(:android)
+
 platform :android do
     # private_lanes
     desc "Clean"
@@ -38,7 +39,10 @@ platform :android do
     # public_lanes
     desc "Unit tests"
     lane :tests do
-      gradle(task: "test")
+        clean
+#         slack_send(':crossed_fingers: Running Unit Tests ' + BUILD_TYPE, CHANNEL, SLACK_URL)
+        gradle(task: "test")
+#         slack_send(':tada: Hooooooorrrayyyyy!!! ' + BUILD_TYPE + ' Unit tests are successfully tested', CHANNEL, SLACK_URL)
     end
 
     desc "Generate build and upload to firebase"
