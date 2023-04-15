@@ -54,7 +54,7 @@ android {
             ext.config = getProps('../config/benchmark.properties')
             ext.config.each { p ->
                 if (p.key == "APP_NAME") {
-                    resValue "string", "app_name", p.value
+                    resValue "string", "app_name", p.value.replace('"', '')
                 } else if (p.key == "APPLICATION_ID_SUFFIX") {
                     applicationIdSuffix p.value
                 } else {
