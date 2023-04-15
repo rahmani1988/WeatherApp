@@ -47,6 +47,11 @@ android {
                 }
             }
         }
+        benchmark {
+            signingConfig signingConfigs.debug
+            matchingFallbacks = ['release']
+            debuggable false
+        }
 
         debug {
             minifyEnabled false
