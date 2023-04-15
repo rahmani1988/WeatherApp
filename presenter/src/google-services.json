@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "130319771623",
-    "project_id": "weather-app-debug",
-    "storage_bucket": "weather-app-debug.appspot.com"
+    "project_number": "379294229380",
+    "project_id": "weather-app-dca1c",
+    "storage_bucket": "weather-app-dca1c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:130319771623:android:a3a5c0da2747c00c5a7f42",
+        "mobilesdk_app_id": "1:379294229380:android:b35fa13093592d8615b3d1",
         "android_client_info": {
-          "package_name": "com.reza.weatherapp.dev"
+          "package_name": "com.reza.weatherapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "130319771623-envoclu9ck342jqd175pp29m3h6e9gc7.apps.googleusercontent.com",
+          "client_id": "379294229380-nk6nt99mf1v9cct66sg5j8s86h3igh3d.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.reza.weatherapp.dev",
-            "certificate_hash": "b95311cff9f2ab7ab6085e49d8275f9e84389328"
+            "package_name": "com.reza.weatherapp",
+            "certificate_hash": "07a3985d15a53076b3688da2ddf376357f760c99"
           }
         },
         {
-          "client_id": "130319771623-dbfj2p389nna3gt4bdd7m0nfd9j0jojc.apps.googleusercontent.com",
+          "client_id": "379294229380-tn5828otgnkcm9groff7h7hqhrg5raii.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCijtTcN7INA70wZ7IfigLlJ6VmPYCmIRY"
+          "current_key": "AIzaSyCpCo0Bl6itV6t46xd-30pNXoyio2RjfrQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "130319771623-dbfj2p389nna3gt4bdd7m0nfd9j0jojc.apps.googleusercontent.com",
+              "client_id": "379294229380-tn5828otgnkcm9groff7h7hqhrg5raii.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
