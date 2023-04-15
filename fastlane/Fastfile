@@ -39,6 +39,10 @@ platform :android do
     # public_lanes
     desc "Unit tests"
     lane :tests do
+        gradle(
+            task: "assemble",
+            build_type: BUILD_TYPE,
+        )
         clean
 #         slack_send(':crossed_fingers: Running Unit Tests ' + BUILD_TYPE, CHANNEL, SLACK_URL)
         gradle(task: "test")
