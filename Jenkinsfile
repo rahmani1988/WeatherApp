@@ -38,7 +38,7 @@ pipeline {
 
               when {
                     anyOf {
-//                         branch "development";
+                        branch "development";
                         branch "staging";
                         branch "feature/*";
                     }
