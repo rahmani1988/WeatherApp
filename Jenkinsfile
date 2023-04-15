@@ -34,14 +34,20 @@ pipeline {
             }
         } */
 
-        stage('Build and upload to firebase app distribution') {
+        stage('Run unit tests') {
+            steps {
+                echo "Testing"
+                sh "bundle exec fastlane android tests"
+            }
+        }
 
+        stage('Build and upload to firebase app distribution') {
               when {
-                    anyOf {
-                        branch "development";
-                        branch "staging";
-                        branch "feature/*";
-                    }
+                anyOf {
+                    branch "development";
+                    branch "staging";
+                    branch "feature/*";
+                }
               }
 
               // call fastlane lane for generate apk and uploading to firebase console
