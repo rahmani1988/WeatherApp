@@ -16,7 +16,7 @@ pipeline {
         }
 
     stages {
-        /* stage('Init') {
+         stage('Init') {
             // check git commit message contains "skip ci" if found don't run the pipeline
             steps {
                 script {
@@ -32,6 +32,24 @@ pipeline {
                     }
                 }
             }
+        }
+
+        stage('Run unit tests') {
+            steps {
+                echo "Testing"
+                sh "bundle exec fastlane android tests"
+            }
+        }
+
+        stage('Build and upload to firebase app distribution') {
+              when {
+                anyOf {
+                    branch "development";
+                    branch "staging";
+                    branch "feature/*";
+                }
+              }
+
         } */
         stage('Build and upload to firebase app distribution') {
               // call fastlane lane for generate apk and uploading to firebase console
@@ -41,6 +59,7 @@ pipeline {
               }
         }
     }
+
     post {
         always {
             // delete the workspace
