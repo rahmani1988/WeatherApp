@@ -16,7 +16,7 @@ pipeline {
     }
 
     stages {
-        /* stage('Init') {
+         stage('Init') {
             // check git commit message contains "skip ci" if found don't run the pipeline
             steps {
                 script {
@@ -32,9 +32,24 @@ pipeline {
                     }
                 }
             }
-        } */
+        }
+
+        stage('Run unit tests') {
+            steps {
+                echo "Testing"
+                sh "bundle exec fastlane android tests"
+            }
+        }
 
         stage('Build and upload to firebase app distribution') {
+              when {
+                anyOf {
+                    branch "development";
+                    branch "staging";
+                    branch "feature/*";
+                }
+              }
+
               // call fastlane lane for generate apk and uploading to firebase console
               steps {
                 echo "Building"
@@ -42,6 +57,7 @@ pipeline {
               }
         }
     }
+
     post {
         always {
             // delete the workspace
@@ -49,10 +65,10 @@ pipeline {
             deleteDir()
         }
         success {
-             slack_send("Jenkins job  for staging completed successfully. ","#0066ff")
+             slack_send("Jenkins job for release completed successfully.","#0066ff")
         }
         aborted {
-            slack_send("Jenkins job  for staging Skipped/Aborted.","warning")
+            slack_send("Jenkins job for release Skipped/Aborted.","warning")
         }
         failure {
             slack_send("staging Something went wrong.Build failed. Check here: Console Output*: <${BUILD_URL}/console | (Open)>","danger")

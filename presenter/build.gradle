@@ -39,7 +39,23 @@ android {
             ext.config = getProps('../config/staging.properties')
             ext.config.each { p ->
                 if (p.key == "APP_NAME") {
-                    resValue "string", "app_name", p.value.replace('"', '')
+                    resValue "string", "app_name", p.value
+                } else if (p.key == "APPLICATION_ID_SUFFIX") {
+                    applicationIdSuffix p.value
+                } else {
+                    buildConfigField 'String', p.key, p.value
+                }
+            }
+        }
+
+        benchmark {
+            signingConfig signingConfigs.debug
+            matchingFallbacks = ['release']
+            debuggable false
+            ext.config = getProps('../config/release.properties')
+            ext.config.each { p ->
+                if (p.key == "APP_NAME") {
+                    resValue "string", "app_name", p.value
                 } else if (p.key == "APPLICATION_ID_SUFFIX") {
                     applicationIdSuffix p.value
                 } else {

@@ -6,10 +6,10 @@
     
       
       <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000157">
-        
+
       </testcase>
-    
-      
+
+
       <testcase classname="fastlane.lanes" name="1: Switch to android clean lane" time="8.4e-05">
         
       </testcase>

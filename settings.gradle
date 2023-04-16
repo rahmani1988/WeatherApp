@@ -2,3 +2,4 @@ rootProject.name = "WeatherApp"
 include ':presenter'
 include ':domain'
 include ':data'
+include ':benchmark'
