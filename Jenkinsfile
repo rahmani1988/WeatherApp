@@ -65,10 +65,10 @@ pipeline {
             deleteDir()
         }
         success {
-             slack_send("Jenkins job  for staging completed successfully.","#0066ff")
+             slack_send("Jenkins job for development completed successfully.","#0066ff")
         }
         aborted {
-            slack_send("Jenkins job  for staging Skipped/Aborted.","warning")
+            slack_send("Jenkins job for development Skipped/Aborted.","warning")
         }
         failure {
             slack_send("staging Something went wrong.Build failed. Check here: Console Output*: <${BUILD_URL}/console | (Open)>","danger")
