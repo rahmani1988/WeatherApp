@@ -5,6 +5,8 @@ import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.uiautomator.By
+import androidx.test.uiautomator.Until
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,6 +36,8 @@ class ExampleStartupBenchmark {
         startupMode = StartupMode.COLD
     ) {
         pressHome()
-        startActivityAndWait()
+        startActivityAndWait() // Time To Initial Drawn (TTID)
+
+        device.wait(Until.hasObject(By.text("Hello World!")), 30_000) // Time To Fully Drawn (TTFD)
     }
 }
