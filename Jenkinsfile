@@ -49,8 +49,8 @@ pipeline {
                     branch "feature/*";
                 }
               }
+        }
 
-        } */
         stage('Build and upload to firebase app distribution') {
               // call fastlane lane for generate apk and uploading to firebase console
               steps {
