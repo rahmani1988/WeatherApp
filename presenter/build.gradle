@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -32,7 +33,6 @@ android {
                     buildConfigField 'String', p.key, p.value
             }
         }
-
         staging {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -47,7 +47,6 @@ android {
                 }
             }
         }
-
         benchmark {
             signingConfig signingConfigs.debug
             matchingFallbacks = ['release']
@@ -63,7 +62,6 @@ android {
                 }
             }
         }
-
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -93,6 +91,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation rootProject.ext.constraintlayout
+
+    // Dagger2
+    implementation rootProject.ext.dagger
+    kapt rootProject.ext.daggerCompiler
 
     // Firebase
     implementation platform(rootProject.ext.firebaseBom)
