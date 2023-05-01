@@ -11,7 +11,6 @@ open class MyApp: Application() {
     }
 
     open fun initializeComponent(): AppComponent {
-        // Test comment
         return DaggerAppComponent.factory().create(applicationContext)
     }
 }
