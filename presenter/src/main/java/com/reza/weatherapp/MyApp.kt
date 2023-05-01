@@ -11,6 +11,7 @@ open class MyApp: Application() {
     }
 
     open fun initializeComponent(): AppComponent {
+        // Test ngrok tunneling to localhost
         return DaggerAppComponent.factory().create(applicationContext)
     }
 }
