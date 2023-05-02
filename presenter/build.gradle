@@ -17,7 +17,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
+    } 
 
     buildTypes {
         release {
@@ -50,7 +50,7 @@ android {
         benchmark {
             signingConfig signingConfigs.debug
             matchingFallbacks = ['release']
-            debuggable false
+             
             ext.config = getProps('../config/release.properties')
             ext.config.each { p ->
                 if (p.key == "APP_NAME") {
@@ -99,6 +99,7 @@ dependencies {
     // Firebase
     implementation platform(rootProject.ext.firebaseBom)
     implementation rootProject.ext.firebaseAnalytics
+    implementation rootProject.ext.addMob
 
     // Tests
     testImplementation 'junit:junit:4.13.2'

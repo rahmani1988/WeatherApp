@@ -32,6 +32,7 @@ ext {
     // Firebase
     firebaseBom = "com.google.firebase:firebase-bom:31.2.0"
     firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx"
+    addMob = "com.google.android.gms:play-services-ads:22.0.0"
 
     // Testing
     junit = "junit:junit:4.13.2"
