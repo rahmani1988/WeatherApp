@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-kapt'
 }
 
+def adMob_key_value = System.getenv("ADMOB_KEY")
+
 android {
     namespace 'com.reza.weatherapp'
     compileSdk rootProject.ext.compileSdkVersion
@@ -17,6 +19,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [adMob_key: "$System.env.ADMOB_KEY"]
     } 
 
     buildTypes {
@@ -87,25 +91,61 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation rootProject.ext.constraintlayout
 
     // Dagger2
     implementation rootProject.ext.dagger
     kapt rootProject.ext.daggerCompiler
 
+    // RxJava2
+    implementation rootProject.rxJava
+    implementation rootProject.rxAndroid
+
+    // Gson
+    implementation rootProject.gson
+
+    // Glide
+    implementation rootProject.glide
+    annotationProcessor rootProject.glideAnnotationProcessor
+
+    // Networking
+    implementation rootProject.retrofit
+    implementation rootProject.retrofitGsonConverter
+    implementation rootProject.retrofitRxJava2Adapter
+    implementation rootProject.okHttp3
+    implementation rootProject.okHttp3LoggingInterceptor
+
+    // Logging
+    implementation rootProject.timber
+
+    // SharedPref
+    implementation rootProject.rxSharedPref
+
+    // Lottie
+    implementation rootProject.lottie
+
     // Firebase
     implementation platform(rootProject.ext.firebaseBom)
     implementation rootProject.ext.firebaseAnalytics
     implementation rootProject.ext.addMob
 
-    // Tests
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // To fix Duplicate class kotlin.random.jdk8 found in modules jetified-kotlin-stdlib-1.8.10, with start-up benchmark
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 
+    // Tests
+    testImplementation rootProject.junit
+    testImplementation rootProject.mockitoCore
+    testImplementation rootProject.mockitoKotlin
+    testImplementation rootProject.truth
+
+    // Android Test
+    androidTestImplementation rootProject.extJunit
+    androidTestImplementation rootProject.espresso
+
+    // Projects
     implementation project(':data')
     implementation project(':domain')
 }
