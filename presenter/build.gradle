@@ -174,6 +174,8 @@ dependencies {
 
     // To fix Duplicate class kotlin.random.jdk8 found in modules jetified-kotlin-stdlib-1.8.10, with start-up benchmark
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
 }
 
 File signPropsFile = file('../signing/release.props')
