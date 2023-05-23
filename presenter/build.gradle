@@ -6,7 +6,7 @@ plugins {
     id 'kotlin-parcelize'
 }
 
-def adMob_key_value = System.getenv("ADMOB_KEY")
+def adMobKey = System.getenv("adMobKey")
 
 android {
     namespace 'com.reza.weatherapp'
@@ -21,7 +21,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        manifestPlaceholders = [adMob_key: "$System.env.ADMOB_KEY"]
+        manifestPlaceholders = [adMobKey: "$System.env.adMobKey"]
     } 
 
     buildTypes {
@@ -175,6 +175,7 @@ dependencies {
     // To fix Duplicate class kotlin.random.jdk8 found in modules jetified-kotlin-stdlib-1.8.10, with start-up benchmark
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 
+    // To avoid Duplicate class androidx.lifecycle.ViewModelLazy found in modules lifecycle-viewmodel-2.5.1-runtime (androidx.lifecycle:lifecycle-viewmodel:2.5.1) and lifecycle-viewmodel-ktx-2.2.0-runtime (androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0)
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
 }
 
