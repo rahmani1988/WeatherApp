@@ -20,7 +20,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        manifestPlaceholders = [adMobKey: "$System.env.adMobKey"]
+        manifestPlaceholders = [adMobKey: getAdMobApiKey()]
     } 
 
     buildTypes {
@@ -220,4 +220,18 @@ def getProps(path) {
     Properties props = new Properties()
     props.load(new FileInputStream(file(path)))
     return props
+}
+
+def getAdMobApiKey() {
+    def adMobApiKey = System.getenv("AD_MOB_API_KEY")
+    if (adMobApiKey == null || adMobApiKey.length() == 0) {
+        def localFile = file("../local.properties")
+        def properties = new Properties()
+        properties.load(new FileInputStream(localFile))
+        adMobApiKey = properties['AD_MOB_API_KEY']
+        if (adMobApiKey == null) {
+            logger.error("You need to either place appropriate local.properties or set proper environment variables on Jenkins for API key")
+        }
+    }
+    return adMobApiKey
 }
