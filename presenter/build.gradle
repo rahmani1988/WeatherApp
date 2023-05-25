@@ -4,9 +4,8 @@ plugins {
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
-
-def adMobKey = System.getenv("adMobKey")
 
 android {
     namespace 'com.reza.weatherapp'

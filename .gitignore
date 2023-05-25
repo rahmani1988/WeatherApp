@@ -8,6 +8,7 @@ build/
 /development.properties
 /release.properties
 /staging.properties
+/local.properties
 
 # Log/OS Files
 *.log

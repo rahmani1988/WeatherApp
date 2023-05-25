@@ -29,7 +29,7 @@
         <!-- AdMob -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2963330209763809~7408463915"/>
+            android:value="${AD_MOB_API_KEY}"/>
     </application>
 
 </manifest>
