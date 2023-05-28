@@ -222,12 +222,12 @@ def getProps(path) {
 }
 
 def getAdMobApiKey() {
-    def adMobApiKey = System.getenv("AD_MOB_API_KEY")
+    def adMobApiKey = System.getenv("AD_MOB_APP_ID")
     if (adMobApiKey == null || adMobApiKey.length() == 0) {
         def localFile = file("../local.properties")
         def properties = new Properties()
         properties.load(new FileInputStream(localFile))
-        adMobApiKey = properties['AD_MOB_API_KEY']
+        adMobApiKey = properties['AD_MOB_APP_ID']
         if (adMobApiKey == null) {
             logger.error("You need to either place appropriate local.properties or set proper environment variables on Jenkins for API key")
         }
