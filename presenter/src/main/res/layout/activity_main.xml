@@ -15,16 +15,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        ads:layout_constraintBottom_toBottomOf="parent"
-        ads:layout_constraintStart_toStartOf="parent"
-        ads:layout_constraintEnd_toEndOf="parent"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-2963330209763809/9709580190">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
