@@ -151,6 +151,9 @@ dependencies {
     // Idling Resource
     implementation rootProject.idlingResources
 
+    // Splash
+    implementation rootProject.splash
+
     // Tests
     testImplementation rootProject.junit
     testImplementation rootProject.mockitoCore
