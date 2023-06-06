@@ -10,7 +10,6 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // Enable support for Splash Screen API for proper Android 12+ support
         installSplashScreen()
-
         setContentView(R.layout.activity_start)
     }
 }
