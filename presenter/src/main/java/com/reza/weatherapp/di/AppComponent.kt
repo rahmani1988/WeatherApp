@@ -6,7 +6,12 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppSubcomponents::class])
+@Component(
+    modules = [
+        AppSubcomponents::class,
+        FirebaseModule::class
+    ]
+)
 interface AppComponent {
 
     // Factory to create instances of the AppComponent

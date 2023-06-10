@@ -1,7 +1,7 @@
 package com.reza.weatherapp.di
 
 import com.reza.weatherapp.auth.AuthComponent
-import com.reza.weatherapp.home.HomeComponent
+import com.reza.weatherapp.ui.home.HomeComponent
 import dagger.Module
 
 @Module(

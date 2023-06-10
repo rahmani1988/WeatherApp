@@ -135,7 +135,7 @@ dependencies {
 
     // Firebase
     implementation platform(rootProject.firebaseBom)
-    implementation rootProject.firebaseAnalytics
+    implementation rootProject.analytics
     implementation rootProject.addMob
 
     // Shimmer

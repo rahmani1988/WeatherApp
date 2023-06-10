@@ -1,13 +1,9 @@
-package com.reza.weatherapp
+package com.reza.weatherapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Trace
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.MobileAds
+import com.reza.weatherapp.R
 
 class MainActivity : AppCompatActivity() {
 

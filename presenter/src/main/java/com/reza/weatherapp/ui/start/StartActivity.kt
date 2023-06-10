@@ -1,4 +1,4 @@
-package com.reza.weatherapp.start
+package com.reza.weatherapp.ui.start
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
