@@ -13,6 +13,7 @@ class StartPresenter @Inject constructor(
 
     private var view: StartContract.View? = null
     private val compositeDisposable = CompositeDisposable()
+
     override fun getUserStatus() {
 
     }
