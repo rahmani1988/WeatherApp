@@ -1,6 +1,7 @@
 package com.reza.weatherapp.di
 
 import android.content.Context
+import com.reza.weatherapp.ui.start.StartComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -9,7 +10,9 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AppSubcomponents::class,
-        FirebaseModule::class
+        FirebaseModule::class,
+        ThreadingModule::class,
+        PresenterModule::class
     ]
 )
 interface AppComponent {
@@ -19,4 +22,6 @@ interface AppComponent {
     interface Factory {
         fun create(@BindsInstance context: Context): AppComponent
     }
+
+    fun startComponent(): StartComponent.Factory
 }
