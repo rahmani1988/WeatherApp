@@ -1,4 +1,4 @@
-package com.reza.weatherapp.auth
+package com.reza.weatherapp.ui.auth
 
 import com.reza.weatherapp.di.ActivityScope
 import dagger.Subcomponent
