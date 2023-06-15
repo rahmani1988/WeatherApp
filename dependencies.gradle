@@ -45,7 +45,7 @@ ext {
     timber = "com.jakewharton.timber:timber:4.7.1"
 
     // Lottie
-    lottie = "com.airbnb.android:lottie:4.1.0"
+    lottie = "com.airbnb.android:lottie:4.2.0"
 
     // Rxjava integration into sharedPreferences
     rxSharedPref = "com.f2prateek.rx.preferences2:rx-preferences:2.0.1"

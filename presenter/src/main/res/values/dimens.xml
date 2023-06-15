@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- dimensions -->
+    <dimen name="regular_size_dp">12dp</dimen>
+    <dimen name="big_size_dp">12dp</dimen>
+    <dimen name="fix_300_dp">300dp</dimen>
+
+    <!-- font size -->
+    <dimen name="regular_size_sp">12sp</dimen>
+    <dimen name="big_size_sp">20sp</dimen>
+
+</resources>
