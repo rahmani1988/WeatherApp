@@ -34,7 +34,7 @@ android {
         }
     }
 
-    targetProjectPath = ":presenter"
+    targetProjectPath = ":app"
     experimentalProperties["android.experimental.self-instrumenting"] = true
 }
 

@@ -7,7 +7,7 @@ import com.google.firebase.ktx.Firebase
 import com.reza.models.analytics.Event
 import com.reza.models.analytics.ParamData
 
-class AnalyticsHelperImpl : AnalyticsHelper {
+class DefaultAnalyticsHelper : AnalyticsHelper {
 
     private var firebaseAnalytics: FirebaseAnalytics = Firebase.analytics
 

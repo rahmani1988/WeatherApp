@@ -1,7 +1,7 @@
 package com.reza.weatherapp.di
 
 import com.reza.weatherapp.util.analytics.AnalyticsHelper
-import com.reza.weatherapp.util.analytics.AnalyticsHelperImpl
+import com.reza.weatherapp.util.analytics.DefaultAnalyticsHelper
 import dagger.Binds
 import dagger.Module
 
@@ -9,5 +9,5 @@ import dagger.Module
 abstract class AnalyticsModule {
 
     @Binds
-    abstract fun bindAnalyticHelper(analyticsHelper: AnalyticsHelper): AnalyticsHelperImpl
+    abstract fun bindAnalyticHelper(defaultAnalyticsHelper: DefaultAnalyticsHelper): AnalyticsHelper
 }

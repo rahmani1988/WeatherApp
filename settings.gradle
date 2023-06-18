@@ -1,5 +1,5 @@
 rootProject.name = "WeatherApp"
-include ':presenter'
-include ':domain'
-include ':data'
+include ':app'
+include ':core'
 include ':benchmark'
+include ':auth'
