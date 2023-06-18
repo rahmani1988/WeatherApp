@@ -93,6 +93,9 @@ android {
 
 dependencies {
 
+    // Projects
+    implementation project(':core')
+
     // AndroidX core
     implementation rootProject.androidXCode
 
@@ -106,15 +109,14 @@ dependencies {
     implementation rootProject.constraintlayout
 
     // Dagger2
-    implementation rootProject.dagger
     kapt rootProject.daggerCompiler
 
     // RxJava2
-    implementation rootProject.rxJava
-    implementation rootProject.rxAndroid
+//    implementation rootProject.rxJava
+//    implementation rootProject.rxAndroid
 
     // Gson
-    implementation rootProject.gson
+//    implementation rootProject.gson
 
     // Glide
     implementation rootProject.glide
@@ -171,9 +173,6 @@ dependencies {
     androidTestImplementation rootProject.espresso
     androidTestImplementation rootProject.truth
     kaptAndroidTest rootProject.daggerCompiler
-
-    // Projects
-    implementation project(':core')
 
     // To fix Duplicate class kotlin.random.jdk8 found in modules jetified-kotlin-stdlib-1.8.10, with start-up benchmark
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
