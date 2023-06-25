@@ -1,12 +1,10 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
 }
 
 android {
-    namespace 'com.reza.data'
+    namespace 'com.reza.auth'
     compileSdk 33
 
     defaultConfig {
@@ -19,11 +17,6 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-
-        staging {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -35,43 +28,23 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.9.0'
 
+    // Projects
+    implementation project(':core')
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    // AndroidX core
-    api rootProject.androidXCode
-
-    // Appcompat
-    api rootProject.appcompat
-
-    // Material
-    api rootProject.material
-
-    // ConstraintLayout
-    api rootProject.constraintlayout
-
-    // Dagger2
-    api rootProject.dagger
-    kapt rootProject.daggerCompiler
-
-    // RxJava2
-    api rootProject.rxJava
-    api rootProject.rxAndroid
-
-    // Gson
-    api rootProject.gson
-
-    // Firebase
-    api platform(rootProject.firebaseBom)
-    api rootProject.analytics
-    api rootProject.addMob
-
-    // Lottie
-    api rootProject.lottie
+    // Splash
+    implementation rootProject.splash
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.reza.app.ui.start.StartActivity">
+    tools:context="com.reza.auth.ui.start.StartActivity">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
@@ -24,6 +24,4 @@
         app:lottie_autoPlay="true"
         app:lottie_fileName="weather_anim.json"
         app:lottie_loop="true" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

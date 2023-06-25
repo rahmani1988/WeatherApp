@@ -3,7 +3,4 @@
     <!-- AddMob add unit ids -->
     <string name="main_activity_add_unit_id">ca-app-pub-2963330209763809/9709580190</string>
 
-    <!-- StartActivity -->
-    <string name="weather_app_start_activity">Weather App</string>
-
 </resources>
