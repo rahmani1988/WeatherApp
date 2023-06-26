@@ -1,7 +1,8 @@
 package com.reza.app.di
 
-import com.reza.app.ui.start.StartContract
-import com.reza.app.ui.start.StartPresenter
+
+import com.reza.auth.ui.start.StartContract
+import com.reza.auth.ui.start.StartPresenter
 import dagger.Binds
 import dagger.Module
 

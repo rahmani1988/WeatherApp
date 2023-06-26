@@ -16,7 +16,7 @@ class StartActivity : BaseActivity(), StartContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // To initialise startComponent
-        startComponent = (application as MyApp).appComponent.startComponent().create()
+        startComponent = (applicationContext as StartComponentProvider).provideStartComponent()
         startComponent.inject(this)
 
         super.onCreate(savedInstanceState)
