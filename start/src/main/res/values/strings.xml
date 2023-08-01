@@ -2,5 +2,6 @@
 <resources>
 
     <!-- StartActivity -->
-    <string name="weather_app_start_activity">Weather App</string>
+    <string name="weather_app_start_activity">Weather Application</string>
+
 </resources>

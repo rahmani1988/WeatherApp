@@ -1,7 +1,8 @@
 package com.reza.app.di
 
 import android.content.Context
-import com.reza.auth.ui.start.StartComponent
+import com.reza.auth.ui.AuthComponent
+import com.reza.start.ui.start.StartComponent
 import com.reza.core.di.ThreadingModule
 import dagger.BindsInstance
 import dagger.Component
@@ -24,4 +25,5 @@ interface AppComponent {
     }
 
     fun startComponent(): StartComponent.Factory
+    fun authComponent(): AuthComponent.Factory
 }

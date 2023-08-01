@@ -1,4 +1,4 @@
-package com.reza.auth.ui.start
+package com.reza.start.ui.start
 
 import com.reza.core.ui.base.BasePresenter
 import com.reza.core.ui.base.BaseView

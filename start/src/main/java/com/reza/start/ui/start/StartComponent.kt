@@ -1,16 +1,16 @@
-package com.reza.app.ui.auth
-
-
+package com.reza.start.ui.start
 
 import com.reza.core.di.ActivityScope
 import dagger.Subcomponent
 
 @ActivityScope
 @Subcomponent
-interface AuthComponent {
-    // Factory to create instances of LoginComponent
+interface StartComponent {
+
     @Subcomponent.Factory
     interface Factory {
-        fun create(): AuthComponent
+        fun create(): StartComponent
     }
+
+    fun inject(activity: StartActivity)
 }

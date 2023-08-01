@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name="com.reza.auth.ui.start.StartActivity"
+            android:name="com.reza.start.ui.start.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -96,6 +96,7 @@ dependencies {
     // Projects
     implementation project(':core')
     implementation project(':start')
+    implementation project(':auth')
 
     // AndroidX core
     implementation rootProject.androidXCode
@@ -111,13 +112,6 @@ dependencies {
 
     // Dagger2
     kapt rootProject.daggerCompiler
-
-    // RxJava2
-//    implementation rootProject.rxJava
-//    implementation rootProject.rxAndroid
-
-    // Gson
-//    implementation rootProject.gson
 
     // Glide
     implementation rootProject.glide

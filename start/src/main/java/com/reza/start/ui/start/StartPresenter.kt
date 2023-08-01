@@ -1,6 +1,5 @@
-package com.reza.auth.ui.start
+package com.reza.start.ui.start
 
-import com.reza.auth.ui.start.StartContract
 import com.reza.core.di.IoSchedulers
 import com.reza.core.di.MainSchedulers
 import io.reactivex.Scheduler

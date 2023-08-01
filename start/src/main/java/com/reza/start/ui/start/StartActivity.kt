@@ -1,9 +1,9 @@
-package com.reza.auth.ui.start
+package com.reza.start.ui.start
 
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.reza.auth.databinding.ActivityStartBinding
 import com.reza.core.ui.base.BaseActivity
+import com.reza.start.databinding.ActivityStartBinding
 import javax.inject.Inject
 
 class StartActivity : BaseActivity(), StartContract.View {

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.reza.data'
+    namespace 'com.reza.core'
     compileSdk 33
 
     defaultConfig {

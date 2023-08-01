@@ -7,8 +7,6 @@ import com.reza.weatherapp.R
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mAdView : AdView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
