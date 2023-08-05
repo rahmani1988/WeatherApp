@@ -21,6 +21,7 @@ ext {
     // RxJava2
     rxJava = "io.reactivex.rxjava2:rxjava:2.2.21"
     rxAndroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
+    retrofitRxJava2Adapter = "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
 
     // Dagger2
     dagger = "com.google.dagger:dagger-android:2.44.2"
