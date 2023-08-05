@@ -29,6 +29,7 @@ object NetworkModule {
             .writeTimeout(30, TimeUnit.SECONDS)
             .followRedirects(true)
             .followSslRedirects(true)
+        // TODO: adding api key here
 //            .addInterceptor { chain ->
 //                val newRequest =
 //                    chain.request().newBuilder().addHeader("x-api-key", BuildConfig.API_KEY).build()
