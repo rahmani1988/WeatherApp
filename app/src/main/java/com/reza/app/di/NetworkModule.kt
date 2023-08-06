@@ -12,6 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+private const val THIRTY_SECONDS = 30L
 @Module
 object NetworkModule {
 
@@ -24,9 +25,9 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         val builder = OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(THIRTY_SECONDS, TimeUnit.SECONDS)
+            .readTimeout(THIRTY_SECONDS, TimeUnit.SECONDS)
+            .writeTimeout(THIRTY_SECONDS, TimeUnit.SECONDS)
             .followRedirects(true)
             .followSslRedirects(true)
         // TODO: adding api key here

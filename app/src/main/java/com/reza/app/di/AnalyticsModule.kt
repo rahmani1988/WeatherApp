@@ -1,4 +1,5 @@
-package com.reza.core.di
+package com.reza.app.di
+
 
 import com.reza.core.util.analytics.AnalyticsHelper
 import com.reza.core.util.analytics.DefaultAnalyticsHelper

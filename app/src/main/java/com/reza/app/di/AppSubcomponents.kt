@@ -1,7 +1,7 @@
 package com.reza.app.di
 
-import com.reza.app.ui.home.HomeComponent
 import com.reza.auth.ui.AuthComponent
+import com.reza.home.di.HomeComponent
 import com.reza.start.ui.start.StartComponent
 import dagger.Module
 

@@ -2,8 +2,8 @@ package com.reza.app.di
 
 import android.content.Context
 import com.reza.auth.ui.AuthComponent
-import com.reza.start.ui.start.StartComponent
 import com.reza.core.di.ThreadingModule
+import com.reza.start.ui.start.StartComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

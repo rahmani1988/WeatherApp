@@ -1,4 +1,4 @@
-package com.reza.app.ui.home
+package com.reza.home.di
 
 import com.reza.core.di.ActivityScope
 import dagger.Subcomponent

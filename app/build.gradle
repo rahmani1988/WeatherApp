@@ -97,6 +97,7 @@ dependencies {
     implementation project(':core')
     implementation project(':start')
     implementation project(':auth')
+    implementation project(':home')
 
     // AndroidX core
     implementation rootProject.androidXCode
