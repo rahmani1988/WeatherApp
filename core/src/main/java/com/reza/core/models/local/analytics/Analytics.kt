@@ -7,10 +7,12 @@ data class ParamData(
 
 enum class Param(val paramName: String) {
     SCREEN_NAME("screen_name"),
-    SCREEN_CLASS("screen_class")
+    SCREEN_CLASS("screen_class"),
+    PARAM_TEST("param_test")
 }
 
 enum class Event(val eventName: String) {
     SCREEN_VIEW("screen_view"),
-    APP_OPEN("app_open")
+    APP_OPEN("app_open"),
+    TEST("test")
 }

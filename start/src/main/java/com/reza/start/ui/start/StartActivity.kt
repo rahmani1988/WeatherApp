@@ -2,7 +2,12 @@ package com.reza.start.ui.start
 
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.reza.core.models.local.analytics.Event
+import com.reza.core.models.local.analytics.Param
+import com.reza.core.models.local.analytics.ParamData
 import com.reza.core.ui.base.BaseActivity
+import com.reza.core.util.analytics.AnalyticsHelper
 import com.reza.start.databinding.ActivityStartBinding
 import javax.inject.Inject
 
@@ -13,6 +18,9 @@ class StartActivity : BaseActivity(), StartContract.View {
 
     @Inject
     lateinit var presenter: StartContract.Presenter
+
+    @Inject
+    lateinit var analytics: AnalyticsHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // To initialise startComponent
@@ -33,7 +41,7 @@ class StartActivity : BaseActivity(), StartContract.View {
     }
 
     override fun setupUi() {
-
+        analytics.logEvent(Event.TEST, ParamData(Param.PARAM_TEST, "reza"))
     }
 
     override fun setupSubscribers() {
