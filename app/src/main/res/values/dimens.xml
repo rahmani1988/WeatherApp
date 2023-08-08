@@ -3,10 +3,10 @@
     <!-- dimensions -->
     <dimen name="regular_size_dp">12dp</dimen>
     <dimen name="big_size_dp">12dp</dimen>
-    <dimen name="fix_300_dp">300dp</dimen>
+    <dimen name="fix_300">300dp</dimen>
 
     <!-- font size -->
-    <dimen name="regular_size_sp">12sp</dimen>
-    <dimen name="big_size_sp">20sp</dimen>
+    <dimen name="small">12sp</dimen>
+    <dimen name="large">20sp</dimen>
 
 </resources>

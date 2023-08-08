@@ -1,7 +1,6 @@
 package com.reza.app.di
 
 import android.content.Context
-import com.google.firebase.ktx.Firebase
 import com.reza.auth.ui.AuthComponent
 import com.reza.core.di.ThreadingModule
 import com.reza.start.ui.start.StartComponent
@@ -11,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [AppSubcomponents::class, ThreadingModule::class, PresenterModule::class, AnalyticsModule::class]
+    modules = [SubcomponentsModule::class, ThreadingModule::class, PresenterModule::class, AnalyticsModule::class]
 )
 interface AppComponent {
 

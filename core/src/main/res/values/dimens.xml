@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- dimensions -->
-    <dimen name="regular_size_dp">12dp</dimen>
-    <dimen name="big_size_dp">12dp</dimen>
-    <dimen name="fix_300_dp">300dp</dimen>
+
+    <!-- fixed -->
+    <dimen name="fix_300">300dp</dimen>
 
     <!-- font size -->
-    <dimen name="regular_size_sp">12sp</dimen>
-    <dimen name="big_size_sp">20sp</dimen>
+    <dimen name="small">12sp</dimen>
+    <dimen name="regular">16sp</dimen>
+    <dimen name="large">20sp</dimen>
+
+    <!-- paddings -->
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+
+    <!-- margins -->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_large">16dp</dimen>
 </resources>

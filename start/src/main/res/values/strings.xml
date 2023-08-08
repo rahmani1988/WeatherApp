@@ -3,5 +3,6 @@
 
     <!-- StartActivity -->
     <string name="weather_app_start_activity">Weather Application</string>
+    <string name="start">Start</string>
 
 </resources>
