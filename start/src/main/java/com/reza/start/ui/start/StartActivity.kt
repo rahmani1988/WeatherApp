@@ -41,7 +41,9 @@ class StartActivity : BaseActivity(), StartContract.View {
     }
 
     override fun setupUi() {
-        analytics.logEvent(Event.TEST, ParamData(Param.PARAM_TEST, "reza"))
+        binding.btnStart.setOnClickListener {
+            analytics.logEvent(Event.TEST, ParamData(Param.PARAM_TEST, "reza"))
+        }
     }
 
     override fun setupSubscribers() {
