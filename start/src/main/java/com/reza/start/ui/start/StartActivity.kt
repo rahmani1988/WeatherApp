@@ -11,9 +11,8 @@ import com.reza.core.util.analytics.AnalyticsHelper
 import com.reza.start.databinding.ActivityStartBinding
 import javax.inject.Inject
 
-class StartActivity : BaseActivity(), StartContract.View {
+class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
 
-    private lateinit var binding: ActivityStartBinding
     private lateinit var startComponent: StartComponent
 
     @Inject
@@ -31,9 +30,6 @@ class StartActivity : BaseActivity(), StartContract.View {
 
         // Enable support for Splash Screen API for proper Android 12+ support
         installSplashScreen()
-        // To initialise Binding
-        binding = ActivityStartBinding.inflate(layoutInflater)
-        setContentView(binding.root)
     }
 
     override fun registerView() {
@@ -41,6 +37,7 @@ class StartActivity : BaseActivity(), StartContract.View {
     }
 
     override fun setupUi() {
+        // sending test event
         binding.btnStart.setOnClickListener {
             analytics.logEvent(Event.TEST, ParamData(Param.PARAM_TEST, "reza"))
         }
@@ -52,6 +49,10 @@ class StartActivity : BaseActivity(), StartContract.View {
 
     override fun setupListeners() {
 
+    }
+
+    override fun getViewBinding(): ActivityStartBinding {
+        return ActivityStartBinding.inflate(layoutInflater)
     }
 
     override fun showLoader() {

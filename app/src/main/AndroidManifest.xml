@@ -26,5 +26,4 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="${adMobKey}" />
     </application>
-
 </manifest>
