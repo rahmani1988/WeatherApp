@@ -3,14 +3,14 @@
 
     <!-- Splash Screen Theme -->
     <style name="Theme.AppSplash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="windowSplashScreenBackground">@color/colorOnPrimary</item>
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
         <item name="windowSplashScreenAnimationDuration">300</item>
         <item name="postSplashScreenTheme">@style/Theme.WeatherApp</item>
 
         <!-- Status bar and Nav bar configs -->
-        <item name="android:statusBarColor">@color/black</item>
-        <item name="android:navigationBarColor">@color/black</item>
+        <item name="android:statusBarColor">@color/colorOnPrimary</item>
+        <item name="android:navigationBarColor">@color/colorOnPrimary</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
 
