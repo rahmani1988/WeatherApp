@@ -1,7 +1,14 @@
 package com.reza.core.models.local.analytics
 
+import com.google.firebase.analytics.FirebaseAnalytics
+
 data class ParamData(
     val param: Param,
+    val value: String
+)
+
+data class FirebaseParamDate(
+    val param: String,
     val value: String
 )
 

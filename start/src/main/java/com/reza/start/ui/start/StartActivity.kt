@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.reza.core.models.local.analytics.Event
+import com.reza.core.models.local.analytics.FirebaseParamDate
 import com.reza.core.models.local.analytics.Param
 import com.reza.core.models.local.analytics.ParamData
 import com.reza.core.ui.base.BaseActivity
@@ -39,7 +40,15 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     override fun setupUi() {
         // sending test event
         binding.btnStart.setOnClickListener {
-            analytics.logEvent(Event.TEST, ParamData(Param.PARAM_TEST, "reza"))
+            analytics.logCustomEvent(Event.TEST, ParamData(Param.PARAM_TEST, "reza"))
+            val params = arrayOf(
+                FirebaseParamDate(FirebaseAnalytics.Param.LEVEL, "1"),
+                FirebaseParamDate(FirebaseAnalytics.Param.CAMPAIGN, "2")
+            )
+            analytics.logEvent(
+                event = FirebaseAnalytics.Event.LEVEL_START,
+                params = params
+            )
         }
     }
 
