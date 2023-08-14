@@ -35,7 +35,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     }
 
     override fun setupUi() {
-
+        sendAnalyticsData()
     }
 
     private fun sendAnalyticsData() {
