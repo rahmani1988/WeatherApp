@@ -3,10 +3,7 @@ package com.reza.start.ui.start
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.reza.core.models.local.analytics.Event
-import com.reza.core.models.local.analytics.FirebaseParamDate
-import com.reza.core.models.local.analytics.Param
-import com.reza.core.models.local.analytics.ParamData
+import com.reza.core.models.local.analytics.Analytics
 import com.reza.core.ui.base.BaseActivity
 import com.reza.core.util.analytics.AnalyticsHelper
 import com.reza.start.databinding.ActivityStartBinding
@@ -38,18 +35,18 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     }
 
     override fun setupUi() {
-        // sending test event
-        binding.btnStart.setOnClickListener {
-            analytics.logCustomEvent(Event.TEST, ParamData(Param.PARAM_TEST, "reza"))
-            val params = arrayOf(
-                FirebaseParamDate(FirebaseAnalytics.Param.LEVEL, "1"),
-                FirebaseParamDate(FirebaseAnalytics.Param.CAMPAIGN, "2")
-            )
-            analytics.logEvent(
-                event = FirebaseAnalytics.Event.LEVEL_START,
-                params = params
-            )
-        }
+
+    }
+
+    private fun sendAnalyticsData() {
+        val params = arrayOf(
+            Analytics.ParamData(Analytics.Param.SCREEN_NAME, StartActivity::class.java.name),
+            Analytics.ParamData(Analytics.Param.SCREEN_CLASS, StartActivity::class.java.simpleName),
+        )
+        analytics.logEvent(
+            event = Analytics.Event.SCREEN_VIEW,
+            params = *params
+        )
     }
 
     override fun setupSubscribers() {
