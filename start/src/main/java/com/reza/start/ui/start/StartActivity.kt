@@ -60,6 +60,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
         binding.apply {
             btnStart.setOnClickListener {
                 sendAnalyticsData()
+                // TODO: Navigate to Auth/Home Activity depending on user status
             }
         }
     }
