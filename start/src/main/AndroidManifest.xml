@@ -4,8 +4,8 @@
     <application>
         <activity
             android:name="com.reza.start.ui.start.StartActivity"
-            android:theme="@style/Theme.WeatherApp"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.WeatherApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

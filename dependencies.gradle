@@ -38,9 +38,9 @@ ext {
     constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 
     // Firebase
-    firebaseBom = "com.google.firebase:firebase-bom:31.2.0"
+    firebaseBom = "com.google.firebase:firebase-bom:32.2.2"
     analytics = "com.google.firebase:firebase-analytics-ktx"
-    addMob = "com.google.android.gms:play-services-ads:22.0.0"
+    auth = "com.google.firebase:firebase-auth-ktx"
 
     // Timber
     timber = "com.jakewharton.timber:timber:4.7.1"
@@ -55,7 +55,7 @@ ext {
     appcompat = "androidx.appcompat:appcompat:1.6.1"
 
     // AndroidX core
-    androidXCode = "androidx.core:core-ktx:1.10.1"
+    androidXCore = "androidx.core:core-ktx:1.10.1"
 
     // Material
     material = "com.google.android.material:material:1.9.0"

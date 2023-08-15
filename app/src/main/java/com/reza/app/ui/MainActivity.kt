@@ -1,8 +1,7 @@
 package com.reza.app.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.gms.ads.AdView
+import androidx.appcompat.app.AppCompatActivity
 import com.reza.weatherapp.R
 
 class MainActivity : AppCompatActivity() {

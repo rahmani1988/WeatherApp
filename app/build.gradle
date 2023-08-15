@@ -99,76 +99,8 @@ dependencies {
     implementation project(':auth')
     implementation project(':home')
 
-    // AndroidX core
-    implementation rootProject.androidXCode
-
-    // Appcompat
-    implementation rootProject.appcompat
-
-    // Material
-    implementation rootProject.material
-
-    // ConstraintLayout
-    implementation rootProject.constraintlayout
-
     // Dagger2
     kapt rootProject.daggerCompiler
-
-    // Glide
-    implementation rootProject.glide
-    annotationProcessor rootProject.glideAnnotationProcessor
-
-    // Networking
-    implementation rootProject.retrofit
-    implementation rootProject.retrofitGsonConverter
-    implementation rootProject.retrofitRxJava2Adapter
-    implementation rootProject.okHttp3
-    implementation rootProject.okHttp3LoggingInterceptor
-
-    // Timber
-    implementation rootProject.timber
-
-    // RxSharedPref
-    implementation rootProject.rxSharedPref
-
-    // Lottie
-    implementation rootProject.lottie
-
-    // Firebase
-    implementation platform(rootProject.firebaseBom)
-    implementation rootProject.analytics
-    implementation rootProject.addMob
-
-    // Shimmer
-    implementation rootProject.shimmer
-
-    // Pagination3
-    implementation rootProject.pagination3
-    implementation rootProject.pagination3RxIntegration
-
-    // RxBinding
-    implementation rootProject.rxBinding
-
-    // Idling Resource
-    implementation rootProject.idlingResources
-
-    // Splash
-    implementation rootProject.splash
-
-    // Tests
-    testImplementation rootProject.junit
-    testImplementation rootProject.mockitoCore
-    testImplementation rootProject.mockitoKotlin
-    testImplementation rootProject.truth
-    testImplementation rootProject.mockitoNhaarman
-    testImplementation rootProject.robolectric
-    testImplementation rootProject.androidXjunit
-
-    // Android Test
-    androidTestImplementation rootProject.androidXjunit
-    androidTestImplementation rootProject.espresso
-    androidTestImplementation rootProject.truth
-    kaptAndroidTest rootProject.daggerCompiler
 
     // To fix Duplicate class kotlin.random.jdk8 found in modules jetified-kotlin-stdlib-1.8.10, with start-up benchmark
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))

@@ -41,14 +41,8 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.9.0'
-
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
     // AndroidX core
-    api rootProject.androidXCode
+    api rootProject.androidXCore
 
     // Appcompat
     api rootProject.appcompat
@@ -63,6 +57,20 @@ dependencies {
     api rootProject.dagger
     kapt rootProject.daggerCompiler
 
+    // Glide
+    api rootProject.glide
+    annotationProcessor rootProject.glideAnnotationProcessor
+
+    // Networking
+    api rootProject.retrofit
+    api rootProject.retrofitGsonConverter
+    api rootProject.retrofitRxJava2Adapter
+    api rootProject.okHttp3
+    api rootProject.okHttp3LoggingInterceptor
+
+    // Timber
+    api rootProject.timber
+
     // RxJava2
     api rootProject.rxJava
     api rootProject.rxAndroid
@@ -74,8 +82,41 @@ dependencies {
     // Firebase
     api platform(rootProject.firebaseBom)
     api rootProject.analytics
-    api rootProject.addMob
+    api rootProject.auth
 
     // Lottie
     api rootProject.lottie
+
+    // RxSharedPref
+    api rootProject.rxSharedPref
+
+    // Shimmer
+    api rootProject.shimmer
+
+
+    // Idling Resource
+    api rootProject.idlingResources
+
+    // RxBinding
+    api rootProject.rxBinding
+
+    // Pagination3
+    api rootProject.pagination3
+    api rootProject.pagination3RxIntegration
+
+    // Tests
+    testImplementation rootProject.junit
+    testImplementation rootProject.mockitoCore
+    testImplementation rootProject.mockitoKotlin
+    testImplementation rootProject.truth
+    testImplementation rootProject.mockitoNhaarman
+    testImplementation rootProject.robolectric
+    testImplementation rootProject.androidXjunit
+
+    // Android Test
+    androidTestImplementation rootProject.androidXjunit
+    androidTestImplementation rootProject.espresso
+    androidTestImplementation rootProject.truth
+    kaptAndroidTest rootProject.daggerCompiler
+
 }

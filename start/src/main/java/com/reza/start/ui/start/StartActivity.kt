@@ -41,11 +41,14 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     private fun sendAnalyticsData() {
         val params = arrayOf(
             Analytics.ParamData(Analytics.Param.SCREEN_NAME, StartActivity::class.java.name),
-            Analytics.ParamData(Analytics.Param.SCREEN_CLASS, StartActivity::class.java.simpleName),
+            Analytics.ParamData(
+                Analytics.Param.SCREEN_CLASS,
+                StartActivity::class.java.simpleName
+            ),
         )
         analytics.logEvent(
             event = Analytics.Event.SCREEN_VIEW,
-            params = *params
+            params = params
         )
     }
 
@@ -54,7 +57,11 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     }
 
     override fun setupListeners() {
-
+        binding.apply {
+            btnStart.setOnClickListener {
+                sendAnalyticsData()
+            }
+        }
     }
 
     override fun getViewBinding(): ActivityStartBinding {
