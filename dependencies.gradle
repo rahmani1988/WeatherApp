@@ -41,6 +41,8 @@ ext {
     firebaseBom = "com.google.firebase:firebase-bom:32.2.2"
     analytics = "com.google.firebase:firebase-analytics-ktx"
     auth = "com.google.firebase:firebase-auth-ktx"
+    appCheck = "com.google.firebase:firebase-appcheck-ktx"
+    appCheckPlayIntegrity = "com.google.firebase:firebase-appcheck-playintegrity"
 
     // Timber
     timber = "com.jakewharton.timber:timber:4.7.1"

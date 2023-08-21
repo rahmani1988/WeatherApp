@@ -83,6 +83,8 @@ dependencies {
     api platform(rootProject.firebaseBom)
     api rootProject.analytics
     api rootProject.auth
+    api rootProject.appCheck
+    api rootProject.appCheckPlayIntegrity
 
     // Lottie
     api rootProject.lottie
