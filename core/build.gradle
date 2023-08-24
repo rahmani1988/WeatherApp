@@ -85,6 +85,8 @@ dependencies {
     api rootProject.auth
     api rootProject.appCheck
     api rootProject.appCheckPlayIntegrity
+    // Don't use the debug provider in production builds of your app
+    api rootProject.appCheckDubug
 
     // Lottie
     api rootProject.lottie

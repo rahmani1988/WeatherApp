@@ -1,8 +1,10 @@
 package com.reza.app
 
 import android.app.Application
+import com.google.firebase.appcheck.debug.DebugAppCheckProviderFactory
 import com.google.firebase.appcheck.ktx.appCheck
 import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
+import com.google.firebase.ktx.BuildConfig
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.initialize
 import com.reza.app.di.AppComponent
@@ -12,11 +14,12 @@ import com.reza.app.di.DaggerAppComponent
 import com.reza.auth.ui.AuthComponent
 import com.reza.auth.ui.AuthComponentProvider
 
-open class MyApp: Application(), StartComponentProvider, AuthComponentProvider {
+open class MyApp : Application(), StartComponentProvider, AuthComponentProvider {
 
     private val appComponent: AppComponent by lazy {
         initializeComponent()
     }
+
     override fun onCreate() {
         super.onCreate()
         initializeAppCheck()
@@ -24,9 +27,15 @@ open class MyApp: Application(), StartComponentProvider, AuthComponentProvider {
 
     private fun initializeAppCheck() {
         Firebase.initialize(context = this)
-        Firebase.appCheck.installAppCheckProviderFactory(
-            PlayIntegrityAppCheckProviderFactory.getInstance(),
-        )
+        if (BuildConfig.DEBUG) {
+            Firebase.appCheck.installAppCheckProviderFactory(
+                PlayIntegrityAppCheckProviderFactory.getInstance(),
+            )
+        } else {
+            Firebase.appCheck.installAppCheckProviderFactory(
+                DebugAppCheckProviderFactory.getInstance(),
+            )
+        }
     }
 
     open fun initializeComponent(): AppComponent {
