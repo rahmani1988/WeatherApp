@@ -27,6 +27,7 @@ open class MyApp : Application(), StartComponentProvider, AuthComponentProvider 
 
     private fun initializeAppCheck() {
         Firebase.initialize(context = this)
+        // To get a token for testing purposes in debug mode
         if (BuildConfig.DEBUG) {
             Firebase.appCheck.installAppCheckProviderFactory(
                 PlayIntegrityAppCheckProviderFactory.getInstance(),
