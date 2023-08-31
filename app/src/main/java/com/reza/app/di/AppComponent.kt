@@ -10,7 +10,13 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [SubcomponentsModule::class, ThreadingModule::class, PresenterModule::class, AnalyticsModule::class]
+    modules = [
+        SubcomponentsModule::class,
+        ThreadingModule::class,
+        PresenterModule::class,
+        AnalyticsModule::class,
+        UserManagerModule::class
+    ]
 )
 interface AppComponent {
 

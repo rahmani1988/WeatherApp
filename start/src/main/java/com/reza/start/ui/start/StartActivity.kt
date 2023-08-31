@@ -59,8 +59,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     override fun setupListeners() {
         binding.apply {
             btnStart.setOnClickListener {
-                sendAnalyticsData()
-                // TODO: Navigate to Auth/Home Activity depending on user status
+                presenter.getUser()
             }
         }
     }

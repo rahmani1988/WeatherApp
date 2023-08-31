@@ -1,6 +1,6 @@
 package com.reza.core.util.user
 
-interface UserHelper {
+interface UserManager {
     fun isUserSignedIn(): Boolean
     fun signUp(email: String, password: String)
 }

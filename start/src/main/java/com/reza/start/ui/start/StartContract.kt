@@ -13,6 +13,6 @@ interface StartContract {
     }
 
     interface Presenter : BasePresenter<View> {
-        fun getUserStatus()
+        fun getUser()
     }
 }
