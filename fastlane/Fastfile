@@ -34,6 +34,9 @@ platform :android do
         FIREBASE_CI_TOKEN = ENV["FIREBASE_CI_TOKEN"]
         CHANNEL = ENV["CHANNEL"]
         SLACK_URL = ENV["SLACK_URL"]
+        KEY_STORE_FILE = ENV["KEY_STORE_FILE"]
+        KEY_ALIAS = ENV["KEY_ALIAS"]
+        KEY_PASSWORD = ENV["KEY_PASSWORD"]
     end
 
     # public_lanes
@@ -59,6 +62,12 @@ platform :android do
     gradle(
         task: "assemble",
         build_type: BUILD_TYPE,
+        properties: {
+            "android.injected.signing.store.file" => KEY_STORE_FILE,
+            "android.injected.signing.store.password" => KEY_PASSWORD,
+            "android.injected.signing.key.alias" => KEY_ALIAS,
+            "android.injected.signing.key.password" => KEY_PASSWORD,
+          }
     )
     slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL, SLACK_URL)
     firebase_app_distribution(
