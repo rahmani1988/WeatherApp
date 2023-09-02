@@ -1,7 +1,8 @@
 package com.reza.app.di
 
-import android.os.UserManager
+
 import com.reza.core.util.user.DefaultUserManager
+import com.reza.core.util.user.UserManager
 import dagger.Binds
 import dagger.Module
 
