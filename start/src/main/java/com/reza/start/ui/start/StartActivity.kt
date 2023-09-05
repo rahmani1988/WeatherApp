@@ -1,11 +1,13 @@
 package com.reza.start.ui.start
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.reza.core.models.local.analytics.Analytics
 import com.reza.core.ui.base.BaseActivity
 import com.reza.core.util.analytics.AnalyticsHelper
+import com.reza.core.util.constant.AUTH_ACTIVITY
 import com.reza.start.databinding.ActivityStartBinding
 import javax.inject.Inject
 
@@ -77,7 +79,9 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     }
 
     override fun navigateToAuth() {
-
+        val intent = Intent()
+        intent.setClassName(this, AUTH_ACTIVITY)
+        startActivity(intent)
     }
 
     override fun navigateToDashboard() {

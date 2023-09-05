@@ -12,12 +12,4 @@ class DefaultUserManager @Inject constructor() : UserManager {
     override fun isUserSignedIn(): Boolean {
         return auth.currentUser != null
     }
-
-    override fun signUp(email: String, password: String) {
-//        auth.createUserWithEmailAndPassword(email, password)
-//            .addOnCompleteListener(this) { task ->
-//
-//
-//            }
-    }
 }
