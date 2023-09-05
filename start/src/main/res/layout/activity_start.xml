@@ -16,7 +16,7 @@
         android:padding="@dimen/padding_large"
         android:text="@string/weather_app_start_activity"
         android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/large"
+        android:textSize="@dimen/extra_large"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +26,7 @@
         android:layout_height="@dimen/fix_300"
         android:layout_marginTop="@dimen/margin_large"
         android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@+id/btn_start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_title"
@@ -44,5 +45,5 @@
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/large"
-        app:layout_constraintTop_toBottomOf="@id/lottie_anim" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

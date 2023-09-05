@@ -13,8 +13,13 @@ import com.reza.start.ui.start.StartComponentProvider
 import com.reza.app.di.DaggerAppComponent
 import com.reza.auth.ui.AuthComponent
 import com.reza.auth.ui.AuthComponentProvider
+import com.reza.home.ui.HomeComponent
+import com.reza.home.ui.HomeComponentProvider
 
-open class MyApp : Application(), StartComponentProvider, AuthComponentProvider {
+open class MyApp : Application(),
+    StartComponentProvider,
+    AuthComponentProvider,
+    HomeComponentProvider {
 
     private val appComponent: AppComponent by lazy {
         initializeComponent()
@@ -49,5 +54,9 @@ open class MyApp : Application(), StartComponentProvider, AuthComponentProvider 
 
     override fun provideAuthComponent(): AuthComponent {
         return appComponent.authComponent().create()
+    }
+
+    override fun provideHomeComponent(): HomeComponent {
+        return appComponent.homeComponent().create()
     }
 }

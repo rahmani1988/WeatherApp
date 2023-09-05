@@ -1,15 +1,10 @@
 package com.reza.start.ui.start
 
-import com.reza.core.di.IoSchedulers
-import com.reza.core.di.MainSchedulers
 import com.reza.core.util.user.UserManager
-import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class StartPresenter @Inject constructor(
-    @IoSchedulers private val ioScheduler: Scheduler,
-    @MainSchedulers private val mainScheduler: Scheduler,
     private val userManager: UserManager
 ) : StartContract.Presenter {
 

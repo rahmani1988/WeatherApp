@@ -3,6 +3,7 @@ package com.reza.app.di
 import android.content.Context
 import com.reza.auth.ui.AuthComponent
 import com.reza.core.di.ThreadingModule
+import com.reza.home.ui.HomeComponent
 import com.reza.start.ui.start.StartComponent
 import dagger.BindsInstance
 import dagger.Component
@@ -15,7 +16,9 @@ import javax.inject.Singleton
         ThreadingModule::class,
         PresenterModule::class,
         AnalyticsModule::class,
-        UserManagerModule::class
+        UserManagerModule::class,
+        DataSourceModule::class,
+        RepositoryModule::class
     ]
 )
 interface AppComponent {
@@ -28,4 +31,5 @@ interface AppComponent {
 
     fun startComponent(): StartComponent.Factory
     fun authComponent(): AuthComponent.Factory
+    fun homeComponent(): HomeComponent.Factory
 }

@@ -8,6 +8,7 @@ import com.reza.core.models.local.analytics.Analytics
 import com.reza.core.ui.base.BaseActivity
 import com.reza.core.util.analytics.AnalyticsHelper
 import com.reza.core.util.constant.AUTH_ACTIVITY
+import com.reza.core.util.constant.HOME_ACTIVITY
 import com.reza.start.databinding.ActivityStartBinding
 import javax.inject.Inject
 
@@ -55,7 +56,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     }
 
     override fun setupSubscribers() {
-
+        /* NO-OP */
     }
 
     override fun setupListeners() {
@@ -70,26 +71,20 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
         return ActivityStartBinding.inflate(layoutInflater)
     }
 
-    override fun showLoader() {
-
-    }
-
-    override fun hideLoader() {
-
-    }
-
     override fun navigateToAuth() {
-        val intent = Intent()
-        intent.setClassName(this, AUTH_ACTIVITY)
+        val intent = Intent().apply {
+            setClassName(this@StartActivity, AUTH_ACTIVITY)
+        }
         startActivity(intent)
+        finish()
     }
 
     override fun navigateToDashboard() {
-
-    }
-
-    override fun showError(message: String) {
-
+        val intent = Intent().apply {
+            setClassName(this@StartActivity, HOME_ACTIVITY)
+        }
+        startActivity(intent)
+        finish()
     }
 
     override fun onDestroy() {
