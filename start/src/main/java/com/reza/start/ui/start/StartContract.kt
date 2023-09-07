@@ -11,5 +11,6 @@ interface StartContract {
 
     interface Presenter : BasePresenter<View> {
         fun getUser()
+        fun sendAnalyticsEvent()
     }
 }

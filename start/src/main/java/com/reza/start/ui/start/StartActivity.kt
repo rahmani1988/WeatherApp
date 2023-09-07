@@ -3,8 +3,6 @@ package com.reza.start.ui.start
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.reza.core.models.local.analytics.Analytics
 import com.reza.core.ui.base.BaseActivity
 import com.reza.core.util.analytics.AnalyticsHelper
 import com.reza.core.util.constant.AUTH_ACTIVITY
@@ -19,8 +17,9 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     @Inject
     lateinit var presenter: StartContract.Presenter
 
-    @Inject
-    lateinit var analytics: AnalyticsHelper
+    override fun getViewBinding(): ActivityStartBinding {
+        return ActivityStartBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // To initialise startComponent
@@ -38,21 +37,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     }
 
     override fun setupUi() {
-        sendAnalyticsData()
-    }
-
-    private fun sendAnalyticsData() {
-        val params = arrayOf(
-            Analytics.ParamData(Analytics.Param.SCREEN_NAME, StartActivity::class.java.name),
-            Analytics.ParamData(
-                Analytics.Param.SCREEN_CLASS,
-                StartActivity::class.java.simpleName
-            ),
-        )
-        analytics.logEvent(
-            event = Analytics.Event.SCREEN_VIEW,
-            params = params
-        )
+        presenter.sendAnalyticsEvent()
     }
 
     override fun setupSubscribers() {
@@ -65,10 +50,6 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
                 presenter.getUser()
             }
         }
-    }
-
-    override fun getViewBinding(): ActivityStartBinding {
-        return ActivityStartBinding.inflate(layoutInflater)
     }
 
     override fun navigateToAuth() {
