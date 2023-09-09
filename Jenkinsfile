@@ -11,6 +11,8 @@ pipeline {
         FIREBASE_CI_TOKEN = "$env.FIREBASE_CI_TOKEN"
         CHANNEL = "$env.CHANNEL"
         SLACK_URL = "$env.SLACK_URL"
+        KEYSTORE_ALIAS = "$env.KEYSTORE_ALIAS_WEATHER_APP"
+        KEYSTORE_PASSWORD = "$env.KEYSTORE_PASSWORD_WEATHER_APP"
         LC_ALL = "en_US.UTF-8"
         LANG = "en_US.UTF-8"
     }

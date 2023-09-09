@@ -63,9 +63,9 @@ platform :android do
         build_type: BUILD_TYPE,
         properties: {
             "android.injected.signing.store.file" => "../signing/release.keystore",
-            "android.injected.signing.store.password" => "store_password",
-            "android.injected.signing.key.alias" => "key_alias",
-            "android.injected.signing.key.password" => "key_password",
+            "android.injected.signing.store.password" => KEYSTORE_PASSWORD,
+            "android.injected.signing.key.alias" => KEYSTORE_ALIAS,
+            "android.injected.signing.key.password" => KEYSTORE_PASSWORD,
         }
     )
     slack_send(BUILD_TYPE + ' Build Successfully completed...:star-struck: \n Uploading to Firebase', CHANNEL, SLACK_URL)
