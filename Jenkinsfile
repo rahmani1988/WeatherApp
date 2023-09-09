@@ -35,7 +35,7 @@ pipeline {
                 script {
                     lastCommitInfo = sh(script: "git log -1", returnStdout: true).trim()
                     commitContainsSkip = sh(script: "git log -1 | grep 'skip ci'", returnStatus: true)
-                    slackMessage = "*${env.JOB_NAME}* *${env.BRANCH_NAME}* received a new commit. \nHere is commmit info: ${lastCommitInfo}\n*Console Output*: <${BUILD_URL}/console | (Open)>"
+                    slackMessage = "*${env.JOB_NAME}* *${env.BRANCH_NAME}* received a new commit. \nHere is commit info: ${lastCommitInfo}\n*Console Output*: <${BUILD_URL}/console | (Open)>"
                     slack_send(slackMessage)
                     if (commitContainsSkip == 0) {
                         skippingText = " Skipping Build for *${env.BRANCH_NAME}* branch."
