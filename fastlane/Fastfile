@@ -62,7 +62,7 @@ platform :android do
         task: "assemble",
         build_type: BUILD_TYPE,
         properties: {
-            "android.injected.signing.store.file" => "/Users/mohammadrezarahmani/AndroidStudioProjects/WeatherApp/release.keystore",
+            "android.injected.signing.store.file" => "/Users/mohammadrezarahmani/AndroidStudioProjects/WeatherApp/signing/release.keystore",
             "android.injected.signing.store.password" => KEYSTORE_PASSWORD,
             "android.injected.signing.key.alias" => KEYSTORE_ALIAS,
             "android.injected.signing.key.password" => KEYSTORE_PASSWORD,
