@@ -26,17 +26,6 @@ pipeline {
              sh "bundle config set --local path 'vendor/bundle'"
              // install bundles if they're not installed
              sh "bundle check || bundle install --jobs=4 --retry=3"
-
-
-             // Proving signing properties
-             withCredentials([certificate(aliasVariable: 'keystoreAlias',
-                              credentialsId: 'weather_app_signing',
-                              keystoreVariable: 'keystoreLocation',
-                              passwordVariable: 'keystorePassword')]) {
-                 KEY_STORE_FILE = "${keystoreLocation}"
-                 KEY_ALIAS = "${keystoreAlias}"
-                 KEY_PASSWORD = "${keystorePassword}"
-             }
            }
          }
 
