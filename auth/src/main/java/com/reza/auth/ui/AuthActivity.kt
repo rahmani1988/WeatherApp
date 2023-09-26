@@ -3,7 +3,7 @@ package com.reza.auth.ui
 import android.content.Intent
 import com.reza.auth.databinding.ActivityAuthBinding
 import com.reza.core.ui.base.BaseActivity
-import com.reza.core.util.constant.HOME_ACTIVITY
+import com.reza.core.util.constant.Constant
 
 class AuthActivity : BaseActivity<ActivityAuthBinding>(), AuthContract.View {
 
@@ -29,7 +29,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(), AuthContract.View {
 
     override fun navigateToHome() {
         val intent = Intent().apply {
-            setClassName(this@AuthActivity, HOME_ACTIVITY)
+            setClassName(this@AuthActivity, Constant.Activities.HOME_ACTIVITY.path)
         }
         startActivity(intent)
         finish()

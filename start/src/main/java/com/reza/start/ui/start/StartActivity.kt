@@ -4,13 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.reza.core.ui.base.BaseActivity
-import com.reza.core.util.analytics.AnalyticsHelper
-import com.reza.core.util.constant.AUTH_ACTIVITY
-import com.reza.core.util.constant.HOME_ACTIVITY
+import com.reza.core.util.constant.Constant
 import com.reza.start.databinding.ActivityStartBinding
 import javax.inject.Inject
 
 class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
+
+    // TODO: user's current location has to be taken in this activity
 
     private lateinit var startComponent: StartComponent
 
@@ -54,7 +54,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
 
     override fun navigateToAuth() {
         val intent = Intent().apply {
-            setClassName(this@StartActivity, AUTH_ACTIVITY)
+            setClassName(this@StartActivity, Constant.Activities.AUTH_ACTIVITY.path)
         }
         startActivity(intent)
         finish()
@@ -62,7 +62,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
 
     override fun navigateToDashboard() {
         val intent = Intent().apply {
-            setClassName(this@StartActivity, HOME_ACTIVITY)
+            setClassName(this@StartActivity, Constant.Activities.HOME_ACTIVITY.path)
         }
         startActivity(intent)
         finish()
