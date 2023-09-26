@@ -8,8 +8,8 @@ import com.reza.core.util.constant.Constant
 import com.reza.start.databinding.ActivityStartBinding
 import javax.inject.Inject
 
-class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
 
+class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     // TODO: user's current location has to be taken in this activity
 
     private lateinit var startComponent: StartComponent
