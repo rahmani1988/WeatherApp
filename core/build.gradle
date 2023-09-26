@@ -108,19 +108,9 @@ dependencies {
     api rootProject.pagination3
     api rootProject.pagination3RxIntegration
 
-    // Tests
-    testImplementation rootProject.junit
-    testImplementation rootProject.mockitoCore
-    testImplementation rootProject.mockitoKotlin
-    testImplementation rootProject.truth
-    testImplementation rootProject.mockitoNhaarman
-    testImplementation rootProject.robolectric
-    testImplementation rootProject.androidXjunit
-
     // Android Test
-    androidTestImplementation rootProject.androidXjunit
-    androidTestImplementation rootProject.espresso
-    androidTestImplementation rootProject.truth
+    androidTestApi rootProject.androidXjunit
+    androidTestApi rootProject.espresso
+    androidTestApi rootProject.truth
     kaptAndroidTest rootProject.daggerCompiler
-
 }
