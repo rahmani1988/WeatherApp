@@ -108,6 +108,9 @@ dependencies {
     api rootProject.pagination3
     api rootProject.pagination3RxIntegration
 
+    // Test
+    testImplementation rootProject.junit
+
     // Android Test
     androidTestApi rootProject.androidXjunit
     androidTestApi rootProject.espresso
