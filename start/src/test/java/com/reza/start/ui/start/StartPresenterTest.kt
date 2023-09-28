@@ -8,6 +8,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.any
 import org.mockito.kotlin.times
@@ -49,6 +50,7 @@ class StartPresenterTest {
 
         // Then
         verify(view).navigateToDashboard()
+        verify(view, times(1)).navigateToDashboard()
     }
 
     @Test
@@ -61,11 +63,13 @@ class StartPresenterTest {
 
         // Then
         verify(view).navigateToAuth()
+        verify(view, times(1)).navigateToAuth()
     }
 
     @Test
     fun `should send analytics event`() {
         // Given
+        val event = Analytics.Event.SCREEN_VIEW
         val params = arrayOf(
             Analytics.ParamData(Analytics.Param.SCREEN_NAME, StartActivity::class.java.name),
             Analytics.ParamData(
@@ -78,7 +82,7 @@ class StartPresenterTest {
         presenter.sendAnalyticsEvent()
 
         // Then
-        verify(analyticsHelper).logEvent(event = Analytics.Event.SCREEN_VIEW, params = params)
+        verify(analyticsHelper).logEvent(event = event, params = params)
         verify(analyticsHelper, times(1)).logEvent(event = Analytics.Event.SCREEN_VIEW, params = params)
     }
 }
