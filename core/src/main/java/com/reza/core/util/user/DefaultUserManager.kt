@@ -5,11 +5,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import javax.inject.Inject
 
-class DefaultUserManager @Inject constructor() : UserManager {
-
-    private var auth: FirebaseAuth = Firebase.auth
+class DefaultUserManager @Inject constructor(private val firebaseAuth: FirebaseAuth) : UserManager {
 
     override fun isUserSignedIn(): Boolean {
-        return auth.currentUser != null
+        return firebaseAuth.currentUser != null
     }
 }

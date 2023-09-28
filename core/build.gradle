@@ -41,6 +41,9 @@ android {
 }
 
 dependencies {
+    // Projects
+    testImplementation project(':tests')
+
     // AndroidX core
     api rootProject.androidXCore
 
