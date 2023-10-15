@@ -119,4 +119,7 @@ dependencies {
     androidTestApi rootProject.espresso
     androidTestApi rootProject.truth
     kaptAndroidTest rootProject.daggerCompiler
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
+
 }
