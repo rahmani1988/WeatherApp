@@ -27,7 +27,7 @@ class DefaultStringResolverTest {
 
 
         // When
-        val result = stringResolver.getString(R.string)
+     //   val result = stringResolver.getString(R.string)
 
         // Then
     }

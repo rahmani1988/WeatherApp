@@ -33,26 +33,26 @@ class DefaultUserManagerTest {
     }
 
     @Test
-    fun `user has not signed in`() {
+    fun `should return false if user has not signed in`() {
         // Given
         whenever(firebaseAuth.currentUser).thenReturn(null)
 
         // When
-        val result = userManager.isUserSignedIn()
+        val isUserSignedIn = userManager.isUserSignedIn()
 
         // Then
-        assertThat(result).isFalse()
+        assertThat(isUserSignedIn).isFalse()
     }
 
     @Test
-    fun `user has signed in`() {
+    fun `should return true if user has signed in`() {
         // Given
         whenever(firebaseAuth.currentUser).thenReturn(firebaseUser)
 
         // When
-        val result = userManager.isUserSignedIn()
+        val isUserSignedIn = userManager.isUserSignedIn()
 
         // Then
-        assertThat(result).isTrue()
+        assertThat(isUserSignedIn).isTrue()
     }
 }
