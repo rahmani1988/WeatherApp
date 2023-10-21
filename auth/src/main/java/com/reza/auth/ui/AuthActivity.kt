@@ -2,8 +2,10 @@ package com.reza.auth.ui
 
 import android.content.Intent
 import com.reza.auth.databinding.ActivityAuthBinding
+import com.reza.auth.ui.login.LoginFragment
 import com.reza.core.ui.base.BaseActivity
 import com.reza.core.util.constant.Constant
+import com.reza.core.util.extensions.addFragment
 
 class AuthActivity : BaseActivity<ActivityAuthBinding>(), AuthContract.View {
 
@@ -16,7 +18,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(), AuthContract.View {
     }
 
     override fun setupUi() {
-
+        addFragment(LoginFragment(), binding.frameLayoutAuth.id)
     }
 
     override fun setupSubscribers() {
