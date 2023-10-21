@@ -98,23 +98,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_small"
+        android:layout_margin="@dimen/margin_small"
         android:background="@null"
         android:padding="@dimen/padding_small"
         android:src="@drawable/ic_google"
         app:layout_constraintStart_toStartOf="@id/txt_signup"
         app:layout_constraintTop_toBottomOf="@id/txt_signup" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_small"
-        android:background="@null"
+        android:layout_margin="@dimen/margin_small"
         android:padding="@dimen/padding_small"
         android:src="@drawable/ic_email"
         app:layout_constraintEnd_toEndOf="@id/txt_signup"

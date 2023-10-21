@@ -7,6 +7,7 @@ import com.reza.auth.ui.register.RegisterFragment
 import com.reza.core.ui.base.BaseActivity
 import com.reza.core.util.constant.Constant
 import com.reza.core.util.extensions.addFragment
+import com.reza.core.util.extensions.popBackStack
 import com.reza.core.util.extensions.replaceFragment
 
 class AuthActivity : BaseActivity<ActivityAuthBinding>(), AuthContract.View {
@@ -25,6 +26,10 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(), AuthContract.View {
 
     fun navigateToRegister() {
         replaceFragment(RegisterFragment(), binding.frameLayoutAuth.id, true)
+    }
+
+    fun navigateUp() {
+        popBackStack()
     }
 
     override fun setupSubscribers() {

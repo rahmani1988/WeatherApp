@@ -16,7 +16,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     override fun setupListeners() {
         binding.apply {
             imgEmail.setOnClickListener {
-                (requireActivity() as AuthActivity).navigateToRegister()
+                (requireActivity() as? AuthActivity)?.navigateToRegister()
             }
         }
     }
