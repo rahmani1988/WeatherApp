@@ -46,4 +46,8 @@ dependencies {
 
     // Splash Api
     implementation rootProject.splash
+
+    // Android Test
+    androidTestImplementation rootProject.androidXjunit
+    androidTestImplementation rootProject.espresso
 }

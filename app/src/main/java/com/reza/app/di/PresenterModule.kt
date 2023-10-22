@@ -7,6 +7,9 @@ import com.reza.start.ui.start.StartContract
 import com.reza.start.ui.start.StartPresenter
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Singleton
 
 @Module
 abstract class PresenterModule {

@@ -108,6 +108,10 @@ dependencies {
 
     // To avoid Duplicate class androidx.lifecycle.ViewModelLazy found in modules lifecycle-viewmodel-2.5.1-runtime (androidx.lifecycle:lifecycle-viewmodel:2.5.1) and lifecycle-viewmodel-ktx-2.2.0-runtime (androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0)
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+
+    // Android Test
+    androidTestImplementation rootProject.androidXjunit
+    androidTestImplementation rootProject.espresso
 }
 
 File signPropsFile = file('../signing/release.props')

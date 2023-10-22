@@ -43,4 +43,8 @@ dependencies {
     // Projects
     implementation project(':core')
     testImplementation project(':tests')
+
+    // Android Test
+    androidTestImplementation rootProject.androidXjunit
+    androidTestImplementation rootProject.espresso
 }
