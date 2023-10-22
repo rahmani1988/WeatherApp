@@ -9,9 +9,13 @@ interface RegisterContract {
         fun showLoader()
         fun hideLoader()
         fun validateInputs(isValid: Boolean)
+
+        fun navigateToHome()
     }
 
     interface Presenter: BasePresenter<View> {
-
+        fun createUserWithEmailAndPassword(email: String, password: String)
+        fun validateEmail(email: String)
+        fun validatePassword(password: String)
     }
 }

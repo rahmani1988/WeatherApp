@@ -1,22 +1,23 @@
-package com.reza.auth.ui
+package com.reza.auth.ui.register
 
-import com.reza.core.R
 import com.reza.auth.data.repository.AuthRepository
+import com.reza.auth.ui.AuthContract
+import com.reza.core.R
 import com.reza.core.util.string.StringResolver
+import com.reza.core.util.validation.DefaultValidator
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.processors.BehaviorProcessor
 import javax.inject.Inject
 
-
-
-class AuthPresenter @Inject constructor(
+class RegisterPresenter @Inject constructor(
     private val authRepository: AuthRepository,
-    private val stringResolver: StringResolver
-) : AuthContract.Presenter {
+    private val stringResolver: StringResolver,
+    private val validator: DefaultValidator,
+    private val compositeDisposable: CompositeDisposable
+) : RegisterContract.Presenter {
 
-    private var view: AuthContract.View? = null
-    private val compositeDisposable = CompositeDisposable()
+    private var view: RegisterContract.View? = null
     private val isEmailValid = BehaviorProcessor.createDefault(false)
     private val isPasswordValid = BehaviorProcessor.createDefault(false)
 
@@ -41,36 +42,30 @@ class AuthPresenter @Inject constructor(
             ).subscribe({
                 view?.navigateToHome()
             }, { error ->
-                view?.showErrorMessage(error.message ?: stringResolver.getString(R.string.general_error))
+                view?.showErrorMessage(
+                    error.message ?: stringResolver.getString(R.string.general_error)
+                )
             })
         )
     }
 
     override fun validateEmail(email: String) {
-        if (email.matches("".toRegex())) {
-            isEmailValid.onNext(true)
-        } else {
-            isEmailValid.onNext(false)
-        }
+        isEmailValid.onNext(validator.isEmailValid(email))
     }
 
     override fun validatePassword(password: String) {
-        if (password.matches("".toRegex())) {
-            isPasswordValid.onNext(true)
-        } else {
-            isPasswordValid.onNext(false)
-        }
+        isPasswordValid.onNext(validator.isPasswordValid(password))
     }
 
-    override fun attachView(view: AuthContract.View) {
-        this.view = view
+    override fun attachView(view: RegisterContract.View) {
+
     }
 
-    override fun detachView(view: AuthContract.View) {
-        this.view = null
+    override fun detachView(view: RegisterContract.View) {
+
     }
 
     override fun destroy() {
-        compositeDisposable.clear()
+
     }
 }
