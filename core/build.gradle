@@ -78,6 +78,7 @@ dependencies {
     api rootProject.rxJava
     api rootProject.rxAndroid
     api rootProject.retrofitRxJava2Adapter
+    api rootProject.rxKotlin
 
     // Gson
     api rootProject.gson
