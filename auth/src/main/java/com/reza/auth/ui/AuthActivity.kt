@@ -1,6 +1,7 @@
 package com.reza.auth.ui
 
 import android.content.Intent
+import android.os.Bundle
 import com.reza.auth.databinding.ActivityAuthBinding
 import com.reza.auth.ui.login.LoginFragment
 import com.reza.auth.ui.register.RegisterFragment
@@ -11,6 +12,15 @@ import com.reza.core.util.extensions.popBackStack
 import com.reza.core.util.extensions.replaceFragment
 
 class AuthActivity : BaseActivity<ActivityAuthBinding>(), AuthContract.View {
+
+    lateinit var authComponent: AuthComponent
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        // To initialise startComponent
+        authComponent = (applicationContext as AuthComponentProvider).provideAuthComponent()
+
+        super.onCreate(savedInstanceState)
+    }
 
     override fun getViewBinding(): ActivityAuthBinding {
         return ActivityAuthBinding.inflate(layoutInflater)
