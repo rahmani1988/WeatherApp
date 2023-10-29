@@ -1,6 +1,8 @@
 package com.reza.app.di
 
 
+import com.reza.auth.ui.register.RegisterContract
+import com.reza.auth.ui.register.RegisterPresenter
 import com.reza.home.ui.HomeContract
 import com.reza.home.ui.HomePresenter
 import com.reza.start.ui.start.StartContract
@@ -19,4 +21,7 @@ abstract class PresenterModule {
 
     @Binds
     abstract fun bindHomePresenter(homePresenter: HomePresenter): HomeContract.Presenter
+
+    @Binds
+    abstract fun bindRegisterPresenter(registerPresenter: RegisterPresenter): RegisterContract.Presenter
 }

@@ -20,7 +20,8 @@ import javax.inject.Singleton
         DataSourceModule::class,
         RepositoryModule::class,
         UtilModule::class,
-        FirebaseModule::class
+        FirebaseModule::class,
+        RxModule::class
     ]
 )
 interface AppComponent {

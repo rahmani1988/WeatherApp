@@ -34,16 +34,7 @@ class AuthPresenter @Inject constructor(
     }
 
     override fun createUserWithEmailAndPassword(email: String, password: String) {
-        compositeDisposable.add(
-            authRepository.registerUserWithEmailAndPassword(
-                email = email,
-                password = password
-            ).subscribe({
-                view?.navigateToHome()
-            }, { error ->
-                view?.showErrorMessage(error.message ?: stringResolver.getString(R.string.general_error))
-            })
-        )
+
     }
 
     override fun validateEmail(email: String) {

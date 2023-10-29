@@ -1,13 +1,14 @@
 package com.reza.auth.ui.register
 
 import com.reza.auth.data.repository.AuthRepository
-import com.reza.auth.ui.AuthContract
 import com.reza.core.R
 import com.reza.core.util.string.StringResolver
 import com.reza.core.util.validation.DefaultValidator
-import io.reactivex.Flowable
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.processors.BehaviorProcessor
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.kotlin.addTo
+import io.reactivex.rxjava3.kotlin.subscribeBy
+import io.reactivex.rxjava3.processors.BehaviorProcessor
 import javax.inject.Inject
 
 class RegisterPresenter @Inject constructor(
@@ -35,18 +36,16 @@ class RegisterPresenter @Inject constructor(
     }
 
     override fun createUserWithEmailAndPassword(email: String, password: String) {
-        compositeDisposable.add(
-            authRepository.registerUserWithEmailAndPassword(
-                email = email,
-                password = password
-            ).subscribe({
-                view?.navigateToHome()
-            }, { error ->
-                view?.showErrorMessage(
-                    error.message ?: stringResolver.getString(R.string.general_error)
-                )
-            })
-        )
+        authRepository.registerUserWithEmailAndPassword(
+            email = email,
+            password = password
+        ).subscribeBy(onComplete = {
+            view?.navigateToHome()
+        }, onError = { error ->
+            view?.showErrorMessage(
+                error.message ?: stringResolver.getString(R.string.general_error)
+            )
+        }).addTo(compositeDisposable)
     }
 
     override fun validateEmail(email: String) {

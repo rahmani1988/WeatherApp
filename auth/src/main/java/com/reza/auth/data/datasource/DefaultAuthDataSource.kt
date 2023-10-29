@@ -1,7 +1,7 @@
 package com.reza.auth.data.datasource
 
 import com.google.firebase.auth.FirebaseAuth
-import io.reactivex.Completable
+import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
 class DefaultAuthDataSource @Inject constructor(private val firebaseAuth: FirebaseAuth) :
