@@ -6,7 +6,7 @@ import com.reza.core.ui.base.BaseView
 interface StartContract {
     interface View : BaseView {
         fun navigateToAuth()
-        fun navigateToDashboard()
+        fun navigateToHome()
     }
 
     interface Presenter : BasePresenter<View> {

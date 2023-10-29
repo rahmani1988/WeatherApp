@@ -1,5 +1,6 @@
 package com.reza.auth.ui.register
 
+import android.util.Log
 import com.reza.auth.data.repository.AuthRepository
 import com.reza.core.R
 import com.reza.core.util.string.StringResolver
@@ -26,13 +27,11 @@ class RegisterPresenter @Inject constructor(
         /**
          * combining two flowable to validate both inputs
          */
-        compositeDisposable.add(
-            Flowable.combineLatest(isPasswordValid, isEmailValid) { isPasswordValid, isEmailValid ->
-                isEmailValid && isPasswordValid
-            }.subscribe { isValid ->
-                view?.validateInputs(isValid = isValid)
-            }
-        )
+        Flowable.combineLatest(isPasswordValid, isEmailValid) { isPasswordValid, isEmailValid ->
+            isEmailValid && isPasswordValid
+        }.subscribe { isValid ->
+            view?.validateInputs(isValid = isValid)
+        }.addTo(compositeDisposable)
     }
 
     override fun createUserWithEmailAndPassword(email: String, password: String) {

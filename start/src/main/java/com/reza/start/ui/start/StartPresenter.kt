@@ -15,7 +15,7 @@ class StartPresenter @Inject constructor(
     private val compositeDisposable = CompositeDisposable()
 
     override fun getUser() {
-        if (userManager.isUserSignedIn()) view?.navigateToDashboard() else view?.navigateToAuth()
+        if (userManager.isUserSignedIn()) view?.navigateToHome() else view?.navigateToAuth()
     }
 
     override fun sendAnalyticsEvent() {

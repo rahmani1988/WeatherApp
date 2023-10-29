@@ -11,7 +11,7 @@ import com.reza.core.util.extensions.addFragment
 import com.reza.core.util.extensions.popBackStack
 import com.reza.core.util.extensions.replaceFragment
 
-class AuthActivity : BaseActivity<ActivityAuthBinding>(), AuthContract.View {
+class AuthActivity : BaseActivity<ActivityAuthBinding>() {
 
     lateinit var authComponent: AuthComponent
 
@@ -50,27 +50,11 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(), AuthContract.View {
 
     }
 
-    override fun navigateToHome() {
+    fun navigateToHome() {
         val intent = Intent().apply {
             setClassName(this@AuthActivity, Constant.Activities.HOME_ACTIVITY.path)
         }
         startActivity(intent)
         finish()
-    }
-
-    override fun showErrorMessage(error: String) {
-
-    }
-
-    override fun showLoader() {
-
-    }
-
-    override fun hideLoader() {
-
-    }
-
-    override fun validateInputs(isValid: Boolean) {
-        // TODO should enable sign up button
     }
 }

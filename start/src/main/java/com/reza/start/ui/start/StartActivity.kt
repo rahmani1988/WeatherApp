@@ -60,7 +60,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
         finish()
     }
 
-    override fun navigateToDashboard() {
+    override fun navigateToHome() {
         val intent = Intent().apply {
             setClassName(this@StartActivity, Constant.Activities.HOME_ACTIVITY.path)
         }
