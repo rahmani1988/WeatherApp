@@ -9,13 +9,20 @@ import com.reza.auth.ui.AuthActivity
 import com.reza.core.ui.base.BaseFragment
 import com.reza.core.util.extensions.popBackStack
 import io.reactivex.processors.BehaviorProcessor
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.BackpressureStrategy
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.kotlin.withLatestFrom
+import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+
+private const val DEBOUNCING_TIME = 300L
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContract.View {
 
@@ -23,9 +30,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
     lateinit var compositeDisposable: CompositeDisposable
 
     @Inject
-    lateinit var registerPresenter: RegisterPresenter
+    lateinit var registerPresenter: RegisterContract.Presenter
 
-    private val areInputsValid = BehaviorProcessor.createDefault(false)
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (requireActivity() as? AuthActivity)?.authComponent?.inject(this)
@@ -36,47 +42,39 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
     }
 
     override fun registerView() {
-
+        registerPresenter.attachView(this)
     }
 
     override fun setupListeners() {
         binding.apply {
             // handling clicks on back button
-            imgBack.clicks()
-                .debounce(300, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    (requireActivity() as? AuthActivity)?.popBackStack()
-                }
-                .addTo(compositeDisposable)
+            imgBack.clicks().debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS).subscribe {
+                (requireActivity() as? AuthActivity)?.popBackStack()
+            }.addTo(compositeDisposable)
 
             // getting email
             edtEmail.textChanges()
-                .debounce(300, TimeUnit.MILLISECONDS)
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
                     registerPresenter.validateEmail(it.toString())
-                }
-                .addTo(compositeDisposable)
+                }.addTo(compositeDisposable)
 
             // getting password
             edtPassword.textChanges()
-                .debounce(300, TimeUnit.MILLISECONDS)
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
                     registerPresenter.validatePassword(it.toString())
-                }
-                .addTo(compositeDisposable)
+                }.addTo(compositeDisposable)
 
             // handling clicks on login button
             btnLogin.clicks()
-                .toFlowable(BackpressureStrategy.LATEST)
-                .withLatestFrom(areInputsValid)
-                .debounce(300, TimeUnit.MILLISECONDS)
-                .subscribe {
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .subscribeBy {
                     registerPresenter.createUserWithEmailAndPassword(
-                        email = edtEmail.text.toString(),
-                        password = edtPassword.text.toString()
+                        email = edtEmail.text.toString().trim(),
+                        password = edtPassword.text.toString().trim()
                     )
-                }
-                .addTo(compositeDisposable)
+                }.addTo(compositeDisposable)
         }
     }
 
@@ -97,7 +95,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
     }
 
     override fun validateInputs(isValid: Boolean) {
-        areInputsValid.onNext(isValid)
+        binding.btnLogin.isEnabled = isValid
     }
 
     override fun navigateToHome() {
@@ -107,5 +105,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
     override fun onDestroyView() {
         super.onDestroyView()
         compositeDisposable.clear()
+        registerPresenter.detachView(this)
+        registerPresenter.destroy()
     }
 }

@@ -5,11 +5,13 @@ import com.reza.auth.data.repository.AuthRepository
 import com.reza.core.R
 import com.reza.core.util.string.StringResolver
 import com.reza.core.util.validation.DefaultValidator
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.processors.BehaviorProcessor
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class RegisterPresenter @Inject constructor(
@@ -29,22 +31,27 @@ class RegisterPresenter @Inject constructor(
          */
         Flowable.combineLatest(isPasswordValid, isEmailValid) { isPasswordValid, isEmailValid ->
             isEmailValid && isPasswordValid
-        }.subscribe { isValid ->
-            view?.validateInputs(isValid = isValid)
-        }.addTo(compositeDisposable)
+        }
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { isValid ->
+                view?.validateInputs(isValid = isValid)
+            }.addTo(compositeDisposable)
     }
 
     override fun createUserWithEmailAndPassword(email: String, password: String) {
         authRepository.registerUserWithEmailAndPassword(
             email = email,
             password = password
-        ).subscribeBy(onComplete = {
-            view?.navigateToHome()
-        }, onError = { error ->
-            view?.showErrorMessage(
-                error.message ?: stringResolver.getString(R.string.general_error)
-            )
-        }).addTo(compositeDisposable)
+        ).subscribeBy(
+            onComplete = {
+                view?.navigateToHome()
+            }, onError = { error ->
+                view?.showErrorMessage(
+                    error.message ?: stringResolver.getString(R.string.general_error)
+                )
+            }
+        ).addTo(compositeDisposable)
     }
 
     override fun validateEmail(email: String) {
@@ -56,11 +63,11 @@ class RegisterPresenter @Inject constructor(
     }
 
     override fun attachView(view: RegisterContract.View) {
-
+        this.view = view
     }
 
     override fun detachView(view: RegisterContract.View) {
-
+        this.view = null
     }
 
     override fun destroy() {
