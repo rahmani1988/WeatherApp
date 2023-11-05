@@ -2,6 +2,7 @@ package com.reza.auth.ui.register
 
 import android.content.Context
 import android.util.Log
+import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.textChanges
 import com.reza.auth.databinding.FragmentRegisterBinding
@@ -48,9 +49,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
     override fun setupListeners() {
         binding.apply {
             // handling clicks on back button
-            imgBack.clicks().debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS).subscribe {
-                (requireActivity() as? AuthActivity)?.popBackStack()
-            }.addTo(compositeDisposable)
+            imgBack.clicks()
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    (requireActivity() as? AuthActivity)?.popBackStack()
+                }.addTo(compositeDisposable)
 
             // getting email
             edtEmail.textChanges()
@@ -83,7 +86,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
     }
 
     override fun showErrorMessage(error: String) {
-
+        Snackbar.make(binding.root, error, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun showLoader() {

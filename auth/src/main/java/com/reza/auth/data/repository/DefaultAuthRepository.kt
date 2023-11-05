@@ -10,4 +10,8 @@ class DefaultAuthRepository @Inject constructor(private val authDataSource: Auth
     override fun registerUserWithEmailAndPassword(email: String, password: String): Completable {
         return authDataSource.registerUserWithEmailAndPassword(email = email, password = password)
     }
+
+    override fun loginUserWithEmailAndPassword(email: String, password: String): Completable {
+        return authDataSource.loginUserWithEmailAndPassword(email = email, password = password)
+    }
 }

@@ -1,9 +1,9 @@
-package com.reza.auth.ui.register
+package com.reza.auth.ui.login
 
 import com.reza.core.ui.base.BasePresenter
 import com.reza.core.ui.base.BaseView
 
-interface RegisterContract {
+interface LoginContract {
     interface View: BaseView {
         fun showErrorMessage(error: String)
         fun showLoader()
@@ -13,8 +13,6 @@ interface RegisterContract {
     }
 
     interface Presenter: BasePresenter<View> {
-        fun createUserWithEmailAndPassword(email: String, password: String)
-        fun validateEmail(email: String)
-        fun validatePassword(password: String)
+
     }
 }

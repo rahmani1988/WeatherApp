@@ -18,4 +18,17 @@ class DefaultAuthDataSource @Inject constructor(private val firebaseAuth: Fireba
                 }
         }
     }
+
+    override fun loginUserWithEmailAndPassword(email: String, password: String): Completable {
+        return Completable.create { emitter ->
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        emitter.onComplete()
+                    } else {
+                        emitter.onError(task.exception ?: Exception("failed to login"))
+                    }
+                }
+        }
+    }
 }
