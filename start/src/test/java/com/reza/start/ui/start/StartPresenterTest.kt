@@ -49,8 +49,8 @@ class StartPresenterTest {
         presenter.getUser()
 
         // Then
-        verify(view).navigateToDashboard()
-        verify(view, times(1)).navigateToDashboard()
+        verify(view).navigateToHome()
+        verify(view, times(1)).navigateToHome()
     }
 
     @Test
