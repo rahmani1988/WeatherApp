@@ -1,6 +1,7 @@
 package com.reza.app.di
 
-
+import com.reza.auth.ui.login.LoginContract
+import com.reza.auth.ui.login.LoginPresenter
 import com.reza.auth.ui.register.RegisterContract
 import com.reza.auth.ui.register.RegisterPresenter
 import com.reza.home.ui.HomeContract
@@ -9,9 +10,6 @@ import com.reza.start.ui.start.StartContract
 import com.reza.start.ui.start.StartPresenter
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import io.reactivex.disposables.CompositeDisposable
-import javax.inject.Singleton
 
 @Module
 abstract class PresenterModule {
@@ -21,7 +19,4 @@ abstract class PresenterModule {
 
     @Binds
     abstract fun bindHomePresenter(homePresenter: HomePresenter): HomeContract.Presenter
-
-    @Binds
-    abstract fun bindRegisterPresenter(registerPresenter: RegisterPresenter): RegisterContract.Presenter
 }

@@ -6,15 +6,12 @@ import com.reza.core.di.ComputationSchedulers
 import com.reza.core.di.MainSchedulers
 import com.reza.core.util.string.StringResolver
 import com.reza.core.util.validation.DefaultValidator
-import io.reactivex.internal.schedulers.ComputationScheduler
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.processors.BehaviorProcessor
-import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class RegisterPresenter @Inject constructor(

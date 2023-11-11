@@ -23,7 +23,7 @@ object ThreadingModule {
 
     @Provides
     @Singleton
-    @IoSchedulers
+    @ComputationSchedulers
     fun provideComputationScheduler(): Scheduler = Schedulers.computation()
 
     @Provides

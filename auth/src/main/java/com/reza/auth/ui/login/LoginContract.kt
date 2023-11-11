@@ -13,6 +13,8 @@ interface LoginContract {
     }
 
     interface Presenter: BasePresenter<View> {
-
+        fun loginUserWithEmailAndPassword(email: String, password: String)
+        fun validateEmail(email: String)
+        fun validatePassword(password: String)
     }
 }

@@ -1,6 +1,7 @@
 package com.reza.app.di
 
 import android.content.Context
+import com.reza.auth.di.AuthModule
 import com.reza.auth.ui.AuthComponent
 import com.reza.core.di.ThreadingModule
 import com.reza.home.ui.HomeComponent
@@ -20,7 +21,8 @@ import javax.inject.Singleton
         DataSourceModule::class,
         RepositoryModule::class,
         UtilModule::class,
-        FirebaseModule::class
+        FirebaseModule::class,
+        AuthModule::class
     ]
 )
 interface AppComponent {
