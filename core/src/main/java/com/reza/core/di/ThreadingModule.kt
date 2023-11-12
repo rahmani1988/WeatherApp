@@ -13,7 +13,6 @@ import javax.inject.Singleton
 object ThreadingModule {
 
     @Provides
-    @Singleton
     fun provideCompositeDisposable() = CompositeDisposable()
 
     @Provides

@@ -39,7 +39,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
     }
 
     override fun setupUi() {
-
+        /* NO-OP */
     }
 
     override fun registerView() {
@@ -48,35 +48,33 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
 
     override fun setupListeners() {
         binding.apply {
-            // handling clicks on back button
+            // buttons
             imgBack.clicks()
-                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                //.debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
                     (requireActivity() as? AuthActivity)?.popBackStack()
                 }.addTo(compositeDisposable)
 
-            // getting email
-            edtEmail.textChanges()
-                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    registerPresenter.validateEmail(it.toString())
-                }.addTo(compositeDisposable)
-
-            // getting password
-            edtPassword.textChanges()
-                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
-                .subscribe {
-                    registerPresenter.validatePassword(it.toString())
-                }.addTo(compositeDisposable)
-
-            // handling clicks on login button
-            btnLogin.clicks()
+            btnRegister.clicks()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribeBy {
                     registerPresenter.createUserWithEmailAndPassword(
                         email = edtEmail.text.toString().trim(),
                         password = edtPassword.text.toString().trim()
                     )
+                }.addTo(compositeDisposable)
+
+            // text fields
+            edtEmail.textChanges()
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    registerPresenter.validateEmail(it.toString())
+                }.addTo(compositeDisposable)
+
+            edtPassword.textChanges()
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    registerPresenter.validatePassword(it.toString())
                 }.addTo(compositeDisposable)
         }
     }
@@ -90,15 +88,17 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
     }
 
     override fun showLoader() {
-        // TODO: show loader on login button and disable that
+        // TODO: hide text on register button
+        // TODO: show loader on register button
     }
 
     override fun hideLoader() {
-        // TODO: hide loader on login button and enable that
+        // TODO: hide loader on register button
+        // TODO: show text on register button
     }
 
     override fun validateInputs(isValid: Boolean) {
-        binding.btnLogin.isEnabled = isValid
+        binding.btnRegister.isEnabled = isValid
     }
 
     override fun navigateToHome() {
@@ -107,8 +107,12 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
 
     override fun onDestroyView() {
         super.onDestroyView()
-        compositeDisposable.clear()
         registerPresenter.detachView(this)
         registerPresenter.destroy()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
     }
 }
