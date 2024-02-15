@@ -44,6 +44,8 @@ dependencies {
     implementation project(':core')
     testImplementation project(':tests')
 
+    implementation rootProject.playServicesAuth
+
     // Android Test
     androidTestImplementation rootProject.androidXjunit
     androidTestImplementation rootProject.espresso
