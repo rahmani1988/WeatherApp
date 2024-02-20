@@ -1,5 +1,6 @@
 package com.reza.auth.ui.login
 
+import android.util.Log
 import com.reza.auth.data.repository.AuthRepository
 import com.reza.core.R
 import com.reza.core.di.ComputationSchedulers

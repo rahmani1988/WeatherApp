@@ -64,6 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
+        android:enabled="false"
         android:fontFamily="@font/open_sans_regular"
         android:gravity="center"
         android:padding="@dimen/padding_medium"

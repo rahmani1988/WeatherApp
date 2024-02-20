@@ -9,7 +9,8 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
-    lateinit var binding: VB
+    private var _binding: VB? = null
+    val binding get() = _binding!!
     abstract fun setupUi()
     abstract fun registerView()
     abstract fun setupListeners()
@@ -21,7 +22,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = getViewBinding()
+        _binding = getViewBinding()
         return binding.root
     }
 
@@ -30,5 +31,10 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         registerView()
         setupUi()
         setupListeners()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
