@@ -1,7 +1,11 @@
 package com.reza.auth.ui.login
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.textChanges
@@ -12,6 +16,7 @@ import com.reza.core.util.extensions.popBackStack
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
+import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -24,6 +29,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
 
     @Inject
     lateinit var loginPresenter: LoginContract.Presenter
+
+    private val googleLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val intent = result.data
+            val task = GoogleSignIn.getSignedInAccountFromIntent(intent)
+        }
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -42,10 +54,18 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
         binding.apply {
             // buttons
             imgEmail.clicks()
-                //.debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
                     (requireActivity() as? AuthActivity)?.navigateToRegister()
                 }.addTo(compositeDisposable)
+
+            imgGoogle.clicks()
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .subscribe {
+
+                }
+                .addTo(compositeDisposable)
+
 
             // handling clicks on login button
             btnLogin.clicks()

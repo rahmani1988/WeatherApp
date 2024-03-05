@@ -159,8 +159,10 @@ def getProps(path) {
 }
 
 def getAdMobApiKey() {
+    // to get the variable from remote
     def adMobApiKey = System.getenv("AD_MOB_APP_ID")
     if (adMobApiKey == null || adMobApiKey.length() == 0) {
+        // to get the variable from local
         def localFile = file("../local.properties")
         def properties = new Properties()
         properties.load(new FileInputStream(localFile))
