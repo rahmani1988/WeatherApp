@@ -5,8 +5,15 @@ import android.content.Context
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.google.android.gms.auth.api.identity.Identity
+import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.GoogleAuthProvider
 import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.textChanges
 import com.reza.auth.databinding.FragmentLoginBinding
@@ -30,12 +37,21 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
     @Inject
     lateinit var loginPresenter: LoginContract.Presenter
 
-    private val googleLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val intent = result.data
-            val task = GoogleSignIn.getSignedInAccountFromIntent(intent)
+    private lateinit var googleSignInClient: GoogleSignInClient
+
+    private val googleLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                try {
+                    GoogleSignIn.getSignedInAccountFromIntent(result.data).result?.let {
+                        val credentials = GoogleAuthProvider.getCredential(it.idToken, null)
+                        loginPresenter.loginWithCredentials(credentials)
+                    }
+                } catch (exp: ApiException) {
+                    Log.d("naghi", "ApiException. ${exp.message}")
+                }
+            }
         }
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -43,7 +59,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
     }
 
     override fun setupUi() {
-        /* NO-OP */
+        val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("379294229380-5f63vv0nol0ojpmpqoiiehf4rqoeo9iq.apps.googleusercontent.com")
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), options)
     }
 
     override fun registerView() {
@@ -62,7 +83,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
             imgGoogle.clicks()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
-
+                    googleLauncher.launch(googleSignInClient.signInIntent)
                 }
                 .addTo(compositeDisposable)
 

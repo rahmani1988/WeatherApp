@@ -1,5 +1,6 @@
 package com.reza.auth.ui.login
 
+import com.google.firebase.auth.AuthCredential
 import com.reza.core.ui.base.BasePresenter
 import com.reza.core.ui.base.BaseView
 
@@ -14,6 +15,7 @@ interface LoginContract {
 
     interface Presenter: BasePresenter<View> {
         fun loginUserWithEmailAndPassword(email: String, password: String)
+        fun loginWithCredentials(authCredential: AuthCredential)
         fun validateEmail(email: String)
         fun validatePassword(password: String)
     }
