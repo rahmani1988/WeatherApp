@@ -3,11 +3,7 @@ package com.reza.auth.ui.login
 import android.app.Activity
 import android.content.Context
 import android.util.Log
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
-import com.google.android.gms.auth.api.identity.Identity
-import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -16,14 +12,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.GoogleAuthProvider
 import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.textChanges
+import com.reza.auth.BuildConfig
 import com.reza.auth.databinding.FragmentLoginBinding
 import com.reza.auth.ui.AuthActivity
 import com.reza.core.ui.base.BaseFragment
-import com.reza.core.util.extensions.popBackStack
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
-import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -60,7 +55,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
 
     override fun setupUi() {
         val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("379294229380-5f63vv0nol0ojpmpqoiiehf4rqoeo9iq.apps.googleusercontent.com")
+            .requestIdToken(BuildConfig.GOOGLE_SING_IN_WEB_CLIENT_ID)
             .requestEmail()
             .build()
 
