@@ -1,17 +1,22 @@
 package com.reza.auth.data.repository
 
-import com.reza.auth.data.datasource.AuthDataSource
+import com.google.firebase.auth.AuthCredential
+import com.reza.auth.data.datasource.remote.AuthRemoteDataSource
 import io.reactivex.rxjava3.core.Completable
 
 import javax.inject.Inject
 
-class DefaultAuthRepository @Inject constructor(private val authDataSource: AuthDataSource) :
+class DefaultAuthRepository @Inject constructor(private val authRemoteDataSource: AuthRemoteDataSource) :
     AuthRepository {
     override fun registerUserWithEmailAndPassword(email: String, password: String): Completable {
-        return authDataSource.registerUserWithEmailAndPassword(email = email, password = password)
+        return authRemoteDataSource.registerUserWithEmailAndPassword(email = email, password = password)
     }
 
     override fun loginUserWithEmailAndPassword(email: String, password: String): Completable {
-        return authDataSource.loginUserWithEmailAndPassword(email = email, password = password)
+        return authRemoteDataSource.loginUserWithEmailAndPassword(email = email, password = password)
+    }
+
+    override fun loginWithCredential(authCredential: AuthCredential): Completable {
+        return authRemoteDataSource.loginWithCredential(authCredential = authCredential)
     }
 }

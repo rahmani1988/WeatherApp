@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class DefaultUserManager @Inject constructor(private val firebaseAuth: FirebaseAuth) : UserManager {
 
-    override fun isUserSignedIn(): Boolean {
+    override fun isUserLoggedIn(): Boolean {
         return firebaseAuth.currentUser != null
     }
 }

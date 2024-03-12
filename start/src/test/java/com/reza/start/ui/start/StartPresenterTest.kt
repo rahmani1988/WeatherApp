@@ -8,9 +8,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.any
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
@@ -43,7 +41,7 @@ class StartPresenterTest {
     @Test
     fun `should navigate to dashboard`() {
         // Given
-        whenever(userManager.isUserSignedIn()).thenReturn(true)
+        whenever(userManager.isUserLoggedIn()).thenReturn(true)
 
         // When
         presenter.getUser()
@@ -56,7 +54,7 @@ class StartPresenterTest {
     @Test
     fun `should navigate to auth`() {
         // Given
-        whenever(userManager.isUserSignedIn()).thenReturn(false)
+        whenever(userManager.isUserLoggedIn()).thenReturn(false)
 
         // When
         presenter.getUser()

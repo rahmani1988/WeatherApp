@@ -38,7 +38,7 @@ class DefaultUserManagerTest {
         whenever(firebaseAuth.currentUser).thenReturn(null)
 
         // When
-        val isUserSignedIn = userManager.isUserSignedIn()
+        val isUserSignedIn = userManager.isUserLoggedIn()
 
         // Then
         assertThat(isUserSignedIn).isFalse()
@@ -50,7 +50,7 @@ class DefaultUserManagerTest {
         whenever(firebaseAuth.currentUser).thenReturn(firebaseUser)
 
         // When
-        val isUserSignedIn = userManager.isUserSignedIn()
+        val isUserSignedIn = userManager.isUserLoggedIn()
 
         // Then
         assertThat(isUserSignedIn).isTrue()

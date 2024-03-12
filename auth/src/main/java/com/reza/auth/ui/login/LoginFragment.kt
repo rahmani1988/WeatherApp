@@ -59,7 +59,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
             .requestEmail()
             .build()
 
+
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), options)
+
+        googleSignInClient.signOut()
     }
 
     override fun registerView() {
@@ -68,7 +71,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
 
     override fun setupListeners() {
         binding.apply {
-            // buttons
             imgEmail.clicks()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
@@ -82,8 +84,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
                 }
                 .addTo(compositeDisposable)
 
-
-            // handling clicks on login button
             btnLogin.clicks()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribeBy {
@@ -93,7 +93,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
                     )
                 }.addTo(compositeDisposable)
 
-            // text fields
             edtEmail.textChanges()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {

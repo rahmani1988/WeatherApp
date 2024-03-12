@@ -18,7 +18,6 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         // To initialise authComponent
         authComponent = (applicationContext as AuthComponentProvider).provideAuthComponent()
-
         super.onCreate(savedInstanceState)
     }
 
