@@ -13,8 +13,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-
-        buildConfigField "String", "GOOGLE_SING_IN_WEB_CLIENT_ID", getGoogleSignInWebClientID()
     }
 
     buildTypes {
@@ -46,25 +44,7 @@ dependencies {
     implementation project(':core')
     testImplementation project(':tests')
 
-    implementation rootProject.playServicesAuth
-
     // Android Test
     androidTestImplementation rootProject.androidXjunit
     androidTestImplementation rootProject.espresso
-}
-
-def getGoogleSignInWebClientID() {
-    // to get the variable from remote
-    def googleSignInWebClientId = System.getenv("GOOGLE_SING_IN_WEB_CLIENT_ID")
-    if (googleSignInWebClientId == null || googleSignInWebClientId.length() == 0) {
-        // to get the variable from local
-        def localFile = file("../local.properties")
-        def properties = new Properties()
-        properties.load(new FileInputStream(localFile))
-        googleSignInWebClientId = properties['GOOGLE_SING_IN_WEB_CLIENT_ID']
-        if (googleSignInWebClientId == null) {
-            logger.error("You need to either place appropriate local.properties or set proper environment variables on Jenkins for GOOGLE SING IN WEB CLIENT ID key")
-        }
-    }
-    return googleSignInWebClientId
 }

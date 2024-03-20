@@ -1,8 +1,6 @@
 package com.reza.auth.ui.login
 
-import android.util.Log
 import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.FirebaseAuth
 import com.reza.auth.data.repository.AuthRepository
 import com.reza.core.R
 import com.reza.core.di.ComputationSchedulers
@@ -23,8 +21,7 @@ class LoginPresenter @Inject constructor(
     private val validator: DefaultValidator,
     private val compositeDisposable: CompositeDisposable,
     @ComputationSchedulers private val computationScheduler: Scheduler,
-    @MainSchedulers private val mainScheduler: Scheduler,
-    private val firebaseAuth: FirebaseAuth
+    @MainSchedulers private val mainScheduler: Scheduler
 ) : LoginContract.Presenter {
 
     private var view: LoginContract.View? = null
@@ -59,18 +56,16 @@ class LoginPresenter @Inject constructor(
     }
 
     override fun loginWithCredentials(authCredential: AuthCredential) {
-        firebaseAuth.signInWithCredential(authCredential)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("naghi", "signInWithCredential:success")
-
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("naghi", "signInWithCredential:failure", task.exception)
-
+        authRepository.loginWithCredential(authCredential)
+            .subscribeBy(
+                onComplete = {
+                    view?.navigateToHome()
+                }, onError = { error ->
+                    view?.showErrorMessage(
+                        error = error.message ?: stringResolver.getString(R.string.general_error)
+                    )
                 }
-            }
+            ).addTo(compositeDisposable)
     }
 
     override fun validateEmail(email: String) {

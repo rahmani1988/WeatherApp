@@ -2,23 +2,22 @@ package com.reza.auth.ui.login
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.GoogleAuthProvider
 import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.textChanges
-import com.reza.auth.BuildConfig
 import com.reza.auth.databinding.FragmentLoginBinding
 import com.reza.auth.ui.AuthActivity
 import com.reza.core.ui.base.BaseFragment
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -32,18 +31,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
     @Inject
     lateinit var loginPresenter: LoginContract.Presenter
 
-    private lateinit var googleSignInClient: GoogleSignInClient
+    @Inject
+    lateinit var googleSignInClient: GoogleSignInClient
 
     private val googleLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 try {
-                    GoogleSignIn.getSignedInAccountFromIntent(result.data).result?.let {
-                        val credentials = GoogleAuthProvider.getCredential(it.idToken, null)
-                        loginPresenter.loginWithCredentials(credentials)
-                    }
+                    GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                        .result?.let {
+                            val credentials = GoogleAuthProvider.getCredential(it.idToken, null)
+                            loginPresenter.loginWithCredentials(credentials)
+                        }
                 } catch (exp: ApiException) {
-                    Log.d("naghi", "ApiException. ${exp.message}")
+                    Timber.e(exp)
                 }
             }
         }
@@ -54,15 +55,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
     }
 
     override fun setupUi() {
-        val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(BuildConfig.GOOGLE_SING_IN_WEB_CLIENT_ID)
-            .requestEmail()
-            .build()
 
-
-        googleSignInClient = GoogleSignIn.getClient(requireActivity(), options)
-
-        googleSignInClient.signOut()
     }
 
     override fun registerView() {
@@ -80,7 +73,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
             imgGoogle.clicks()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
-                    googleLauncher.launch(googleSignInClient.signInIntent)
+//                    googleLauncher.launch(googleSignInClient.signInIntent)
                 }
                 .addTo(compositeDisposable)
 
