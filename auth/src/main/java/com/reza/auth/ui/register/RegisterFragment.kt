@@ -2,6 +2,7 @@ package com.reza.auth.ui.register
 
 import android.content.Context
 import android.util.Log
+import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.textChanges
@@ -50,7 +51,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
         binding.apply {
             // buttons
             imgBack.clicks()
-                //.debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
                     (requireActivity() as? AuthActivity)?.popBackStack()
                 }.addTo(compositeDisposable)
@@ -88,13 +89,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
     }
 
     override fun showLoader() {
-        // TODO: hide text on register button
-        // TODO: show loader on register button
+        binding.progressBar.isVisible = true
     }
 
     override fun hideLoader() {
-        // TODO: hide loader on register button
-        // TODO: show text on register button
+        binding.progressBar.isVisible = false
     }
 
     override fun validateInputs(isValid: Boolean) {

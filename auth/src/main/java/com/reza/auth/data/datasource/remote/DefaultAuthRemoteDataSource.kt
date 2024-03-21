@@ -1,5 +1,6 @@
 package com.reza.auth.data.datasource.remote
 
+import android.util.Log
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.reza.auth.data.datasource.remote.AuthRemoteDataSource

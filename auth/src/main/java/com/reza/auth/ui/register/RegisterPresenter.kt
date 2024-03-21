@@ -2,7 +2,7 @@ package com.reza.auth.ui.register
 
 import com.reza.auth.data.repository.AuthRepository
 import com.reza.core.R
-import com.reza.core.di.ComputationSchedulers
+import com.reza.core.di.IoSchedulers
 import com.reza.core.di.MainSchedulers
 import com.reza.core.util.string.StringResolver
 import com.reza.core.util.validation.DefaultValidator
@@ -19,7 +19,7 @@ class RegisterPresenter @Inject constructor(
     private val stringResolver: StringResolver,
     private val validator: DefaultValidator,
     private val compositeDisposable: CompositeDisposable,
-    @ComputationSchedulers private val computationScheduler: Scheduler,
+    @IoSchedulers private val ioScheduler: Scheduler,
     @MainSchedulers private val mainScheduler: Scheduler
 ) : RegisterContract.Presenter {
 
@@ -33,8 +33,7 @@ class RegisterPresenter @Inject constructor(
          */
         Flowable.combineLatest(isPasswordValid, isEmailValid) { isPasswordValid, isEmailValid ->
             isEmailValid && isPasswordValid
-        }
-            .subscribeOn(computationScheduler)
+        }.subscribeOn(ioScheduler)
             .observeOn(mainScheduler)
             .subscribe { isValid ->
                 view?.validateInputs(isValid = isValid)
@@ -42,18 +41,23 @@ class RegisterPresenter @Inject constructor(
     }
 
     override fun createUserWithEmailAndPassword(email: String, password: String) {
+        view?.showLoader()
         authRepository.registerUserWithEmailAndPassword(
             email = email,
             password = password
-        ).subscribeBy(
-            onComplete = {
-                view?.navigateToHome()
-            }, onError = { error ->
-                view?.showErrorMessage(
-                    error.message ?: stringResolver.getString(R.string.general_error)
-                )
-            }
-        ).addTo(compositeDisposable)
+        ).subscribeOn(ioScheduler)
+            .observeOn(mainScheduler)
+            .subscribeBy(
+                onComplete = {
+                    view?.hideLoader()
+                    view?.navigateToHome()
+                }, onError = { error ->
+                    view?.hideLoader()
+                    view?.showErrorMessage(
+                        error.message ?: stringResolver.getString(R.string.general_error)
+                    )
+                }
+            ).addTo(compositeDisposable)
     }
 
     override fun validateEmail(email: String) {

@@ -1,9 +1,11 @@
 package com.reza.auth.ui.login
 
+import android.util.Log
 import com.google.firebase.auth.AuthCredential
 import com.reza.auth.data.repository.AuthRepository
 import com.reza.core.R
 import com.reza.core.di.ComputationSchedulers
+import com.reza.core.di.IoSchedulers
 import com.reza.core.di.MainSchedulers
 import com.reza.core.util.string.StringResolver
 import com.reza.core.util.validation.DefaultValidator
@@ -20,7 +22,7 @@ class LoginPresenter @Inject constructor(
     private val stringResolver: StringResolver,
     private val validator: DefaultValidator,
     private val compositeDisposable: CompositeDisposable,
-    @ComputationSchedulers private val computationScheduler: Scheduler,
+    @IoSchedulers private val ioScheduler: Scheduler,
     @MainSchedulers private val mainScheduler: Scheduler
 ) : LoginContract.Presenter {
 
@@ -34,8 +36,7 @@ class LoginPresenter @Inject constructor(
          */
         Flowable.combineLatest(isPasswordValid, isEmailValid) { isPasswordValid, isEmailValid ->
             isEmailValid && isPasswordValid
-        }
-            .subscribeOn(computationScheduler)
+        }.subscribeOn(ioScheduler)
             .observeOn(mainScheduler)
             .subscribe { isValid ->
                 view?.validateInputs(isValid = isValid)
@@ -43,11 +44,16 @@ class LoginPresenter @Inject constructor(
     }
 
     override fun loginUserWithEmailAndPassword(email: String, password: String) {
+        view?.showLoader()
         authRepository.loginUserWithEmailAndPassword(email = email, password = password)
+            .subscribeOn(ioScheduler)
+            .observeOn(ioScheduler)
             .subscribeBy(
                 onComplete = {
+                    view?.hideLoader()
                     view?.navigateToHome()
                 }, onError = { error ->
+                    view?.hideLoader()
                     view?.showErrorMessage(
                         error.message ?: stringResolver.getString(R.string.general_error)
                     )
@@ -56,11 +62,16 @@ class LoginPresenter @Inject constructor(
     }
 
     override fun loginWithCredentials(authCredential: AuthCredential) {
+        view?.showLoader()
         authRepository.loginWithCredential(authCredential)
+            .subscribeOn(ioScheduler)
+            .observeOn(mainScheduler)
             .subscribeBy(
                 onComplete = {
+                    view?.hideLoader()
                     view?.navigateToHome()
                 }, onError = { error ->
+                    view?.hideLoader()
                     view?.showErrorMessage(
                         error = error.message ?: stringResolver.getString(R.string.general_error)
                     )

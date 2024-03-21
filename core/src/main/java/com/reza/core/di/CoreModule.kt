@@ -12,6 +12,7 @@ import javax.inject.Singleton
 
 @Module
 object CoreModule {
+    //TODO: investigate scoping
     @Provides
     @Singleton
     fun provideGoogleSingInClient(context: Context): GoogleSignInClient {
@@ -19,7 +20,6 @@ object CoreModule {
             .requestIdToken(BuildConfig.GOOGLE_SING_IN_WEB_CLIENT_ID)
             .requestEmail()
             .build()
-
         return GoogleSignIn.getClient(context, options)
     }
 }

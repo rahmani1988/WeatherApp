@@ -2,7 +2,9 @@ package com.reza.auth.ui.login
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
@@ -13,10 +15,14 @@ import com.jakewharton.rxbinding4.view.clicks
 import com.jakewharton.rxbinding4.widget.textChanges
 import com.reza.auth.databinding.FragmentLoginBinding
 import com.reza.auth.ui.AuthActivity
+import com.reza.core.di.MainSchedulers
 import com.reza.core.ui.base.BaseFragment
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.kotlin.subscribeBy
+import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -66,6 +72,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
         binding.apply {
             imgEmail.clicks()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     (requireActivity() as? AuthActivity)?.navigateToRegister()
                 }.addTo(compositeDisposable)
@@ -73,12 +80,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
             imgGoogle.clicks()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
-//                    googleLauncher.launch(googleSignInClient.signInIntent)
+                    googleLauncher.launch(googleSignInClient.signInIntent)
                 }
                 .addTo(compositeDisposable)
 
             btnLogin.clicks()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy {
                     loginPresenter.loginUserWithEmailAndPassword(
                         email = edtEmail.text.toString().trim(),
@@ -109,13 +117,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
     }
 
     override fun showLoader() {
-        // TODO: hide text on login button
-        // TODO: show loader on login button
+        binding.progressBar.isVisible = true
     }
 
     override fun hideLoader() {
-        // TODO: hide loader on login button
-        // TODO: show text on login button
+        binding.progressBar.isVisible = false
     }
 
     override fun validateInputs(isValid: Boolean) {

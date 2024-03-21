@@ -1,5 +1,6 @@
 package com.reza.auth.data.repository
 
+import android.util.Log
 import com.google.firebase.auth.AuthCredential
 import com.reza.auth.data.datasource.remote.AuthRemoteDataSource
 import io.reactivex.rxjava3.core.Completable
