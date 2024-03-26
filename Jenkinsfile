@@ -15,6 +15,7 @@ pipeline {
         KEYSTORE_PASSWORD = "$env.KEYSTORE_PASSWORD_WEATHER_APP"
         LC_ALL = "en_US.UTF-8"
         LANG = "en_US.UTF-8"
+        GOOGLE_SING_IN_WEB_CLIENT_ID = "$env.GOOGLE_SING_IN_WEB_CLIENT_ID"
     }
 
     stages {

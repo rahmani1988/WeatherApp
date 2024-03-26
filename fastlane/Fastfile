@@ -36,6 +36,7 @@ platform :android do
         SLACK_URL = ENV["SLACK_URL"]
         KEYSTORE_ALIAS = ENV["KEYSTORE_ALIAS"]
         KEYSTORE_PASSWORD = ENV["KEYSTORE_PASSWORD"]
+        GOOGLE_SING_IN_WEB_CLIENT_ID = ENV["GOOGLE_SING_IN_WEB_CLIENT_ID"]
     end
 
     # public_lanes
