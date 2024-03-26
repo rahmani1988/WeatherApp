@@ -16,7 +16,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
-        buildConfigField "String", "GOOGLE_SING_IN_WEB_CLIENT_ID", getGoogleSignInWebClientID()
+        buildConfigField "String", "GOOGLE_SING_IN_WEB_CLIENT_ID", "\"379294229380-5f63vv0nol0ojpmpqoiiehf4rqoeo9iq.apps.googleusercontent.com\""
     }
 
     buildTypes {
