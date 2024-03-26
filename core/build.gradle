@@ -137,7 +137,7 @@ def getGoogleSignInWebClientID() {
         def localFile = file("../local.properties")
         def properties = new Properties()
         properties.load(new FileInputStream(localFile))
-        googleSignInWebClientId = properties['GOOGLE_SING_IN_WEB_CLIENT_ID']
+        googleSignInWebClientId = properties["GOOGLE_SING_IN_WEB_CLIENT_ID"]
         if (googleSignInWebClientId == null) {
             logger.error("You need to either place appropriate local.properties or set proper environment variables on Jenkins for GOOGLE SING IN WEB CLIENT ID key")
         }
