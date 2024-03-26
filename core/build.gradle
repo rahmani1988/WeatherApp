@@ -16,7 +16,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
-        buildConfigField "String", "GOOGLE_SING_IN_WEB_CLIENT_ID", "\"$getGoogleSignInWebClientID()\""
+        buildConfigField "String", "GOOGLE_SING_IN_WEB_CLIENT_ID", "\"${getGoogleSignInWebClientID()}\""
     }
 
     buildTypes {
@@ -132,6 +132,7 @@ dependencies {
 def getGoogleSignInWebClientID() {
     // to get the variable from remote
     def googleSignInWebClientId = System.getenv("GOOGLE_SING_IN_WEB_CLIENT_ID")
+    print("naghi " + googleSignInWebClientId)
     if (googleSignInWebClientId == null || googleSignInWebClientId.length() == 0) {
         // to get the variable from local
         def localFile = file("../local.properties")
