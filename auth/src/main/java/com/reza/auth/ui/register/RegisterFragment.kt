@@ -58,6 +58,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(), RegisterContra
 
             btnRegister.clicks()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy {
                     registerPresenter.createUserWithEmailAndPassword(
                         email = edtEmail.text.toString().trim(),

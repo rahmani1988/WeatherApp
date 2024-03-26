@@ -47,7 +47,7 @@ class LoginPresenter @Inject constructor(
         view?.showLoader()
         authRepository.loginUserWithEmailAndPassword(email = email, password = password)
             .subscribeOn(ioScheduler)
-            .observeOn(ioScheduler)
+            .observeOn(mainScheduler)
             .subscribeBy(
                 onComplete = {
                     view?.hideLoader()
