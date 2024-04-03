@@ -1,7 +1,5 @@
 package com.reza.home.ui
 
-import android.util.Log
-import com.google.firebase.auth.FirebaseAuth
 import com.reza.core.util.user.DefaultUserManager
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
