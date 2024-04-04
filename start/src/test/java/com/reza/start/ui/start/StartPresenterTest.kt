@@ -3,6 +3,9 @@ package com.reza.start.ui.start
 import com.reza.core.models.local.analytics.Analytics
 import com.reza.core.util.analytics.AnalyticsHelper
 import com.reza.core.util.user.UserManager
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -27,21 +30,30 @@ class StartPresenterTest {
 
     private lateinit var presenter: StartPresenter
 
+    private val testScheduler = Schedulers.trampoline()
+    private val compositeDisposable = CompositeDisposable()
+
     @Before
     fun setup() {
-        presenter = StartPresenter(analyticsHelper = analyticsHelper, userManager = userManager)
+        presenter = StartPresenter(
+            analyticsHelper = analyticsHelper,
+            userManager = userManager,
+            ioScheduler = testScheduler,
+            mainScheduler = testScheduler,
+            compositeDisposable = compositeDisposable
+        )
         presenter.attachView(view)
     }
 
     @After
     fun tearDown() {
-        presenter.attachView(view)
+        presenter.detachView(view)
     }
 
     @Test
-    fun `should navigate to dashboard`() {
+    fun `should navigate to home`() {
         // Given
-        whenever(userManager.isUserLoggedIn()).thenReturn(true)
+        whenever(userManager.isUserLoggedIn()).thenReturn(Single.just(true))
 
         // When
         presenter.getUser()
@@ -54,7 +66,7 @@ class StartPresenterTest {
     @Test
     fun `should navigate to auth`() {
         // Given
-        whenever(userManager.isUserLoggedIn()).thenReturn(false)
+        whenever(userManager.isUserLoggedIn()).thenReturn(Single.error(Exception("")))
 
         // When
         presenter.getUser()
@@ -81,6 +93,9 @@ class StartPresenterTest {
 
         // Then
         verify(analyticsHelper).logEvent(event = event, params = params)
-        verify(analyticsHelper, times(1)).logEvent(event = Analytics.Event.SCREEN_VIEW, params = params)
+        verify(analyticsHelper, times(1)).logEvent(
+            event = Analytics.Event.SCREEN_VIEW,
+            params = params
+        )
     }
 }

@@ -1,10 +1,8 @@
 package com.reza.auth.ui.login
 
-import android.util.Log
 import com.google.firebase.auth.AuthCredential
 import com.reza.auth.data.repository.AuthRepository
 import com.reza.core.R
-import com.reza.core.di.ComputationSchedulers
 import com.reza.core.di.IoSchedulers
 import com.reza.core.di.MainSchedulers
 import com.reza.core.util.string.StringResolver
