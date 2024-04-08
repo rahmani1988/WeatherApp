@@ -1,13 +1,20 @@
 package com.reza.core.util.user
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.reza.core.models.local.user.User
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
-class DefaultUserManager @Inject constructor(private val firebaseAuth: FirebaseAuth) : UserManager {
+class DefaultUserManager @Inject constructor(
+    private val firebaseAuth: FirebaseAuth
+) : UserManager {
 
     override fun isUserLoggedIn(): Single<Boolean> {
         return Single.create { emitter ->
@@ -94,6 +101,34 @@ class DefaultUserManager @Inject constructor(private val firebaseAuth: FirebaseA
             } catch (exp: Exception) {
                 emitter.onError(exp)
             }
+        }
+    }
+
+    override fun reAuthenticateUser(
+        email: String?,
+        password: String?,
+        authCredential: AuthCredential?
+    ): Completable {
+        return Completable.create { emitter ->
+            firebaseAuth.currentUser?.let { user ->
+                if (authCredential != null) {
+                    // Google sing in method has been used
+                    user.reauthenticate(authCredential).addOnCompleteListener {
+                        emitter.onComplete()
+                    }
+                } else {
+                    // Email and password sing in method has been used
+                    if (email == null || password == null) {
+                        emitter.onError(Exception("Email and password have to be not null"))
+                    } else {
+                        val credential =
+                            EmailAuthProvider.getCredential(email, password)
+                        user.reauthenticate(credential).addOnCompleteListener {
+                            emitter.onComplete()
+                        }
+                    }
+                }
+            } ?: emitter.onError(Exception("No user found"))
         }
     }
 }
