@@ -12,8 +12,9 @@ interface UserManager {
     fun updateProfile(name: String): Single<Boolean>
     fun delete(): Single<Boolean>
     fun reAuthenticateUser(
-        username: String?,
+        email: String?,
         password: String?,
-        credentials: AuthCredential?
+        authCredential: AuthCredential?
     ): Completable
+    fun signOut(): Completable
 }

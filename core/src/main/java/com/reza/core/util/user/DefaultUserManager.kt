@@ -9,30 +9,40 @@ import com.reza.core.models.local.user.User
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class DefaultUserManager @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : UserManager {
 
     override fun isUserLoggedIn(): Single<Boolean> {
         return Single.create { emitter ->
-            firebaseAuth.currentUser?.let {
-                emitter.onSuccess(true)
-            } ?: emitter.onError(Exception("User is not logged in"))
+            try {
+                firebaseAuth.currentUser?.let {
+                    emitter.onSuccess(true)
+                } ?: emitter.onError(Exception("User is not logged in"))
+            } catch (exp: Exception) {
+                emitter.onError(exp)
+            }
         }
     }
 
     override fun getUserInfo(): Single<User> {
         return Single.create { emitter ->
-            firebaseAuth.currentUser?.let {
-                val user = User(email = it.email,
-                    displayName = it.displayName,
-                    photoUrl = it.photoUrl,
-                    isEmailVerified = it.isEmailVerified,
-                    userId = it.uid,
-                    providers = it.providerData.map { info -> info.providerId })
-                emitter.onSuccess(user)
-            } ?: emitter.onError(Exception("No user found"))
+            try {
+                firebaseAuth.currentUser?.let {
+                    val user = User(email = it.email,
+                        displayName = it.displayName,
+                        photoUrl = it.photoUrl,
+                        isEmailVerified = it.isEmailVerified,
+                        userId = it.uid,
+                        providers = it.providerData.map { info -> info.providerId })
+                    emitter.onSuccess(user)
+                } ?: emitter.onError(Exception("No user found"))
+            } catch (exp: Exception) {
+                emitter.onError(exp)
+            }
         }
     }
 
@@ -108,25 +118,40 @@ class DefaultUserManager @Inject constructor(
         authCredential: AuthCredential?
     ): Completable {
         return Completable.create { emitter ->
-            firebaseAuth.currentUser?.let { user ->
-                if (authCredential != null) {
-                    // Google sing in method has been used
-                    user.reauthenticate(authCredential).addOnCompleteListener {
-                        emitter.onComplete()
-                    }
-                } else {
-                    // Email and password sing in method has been used
-                    if (email == null || password == null) {
-                        emitter.onError(Exception("Email and password have to be not null"))
-                    } else {
-                        val credential =
-                            EmailAuthProvider.getCredential(email, password)
-                        user.reauthenticate(credential).addOnCompleteListener {
+            try {
+                firebaseAuth.currentUser?.let { user ->
+                    if (authCredential != null) {
+                        // Google sing in method has been used
+                        user.reauthenticate(authCredential).addOnCompleteListener {
                             emitter.onComplete()
                         }
+                    } else {
+                        // Email and password sing in method has been used
+                        if (email == null || password == null) {
+                            emitter.onError(Exception("Email and password have to be not null"))
+                        } else {
+                            val credential =
+                                EmailAuthProvider.getCredential(email, password)
+                            user.reauthenticate(credential).addOnCompleteListener {
+                                emitter.onComplete()
+                            }
+                        }
                     }
-                }
-            } ?: emitter.onError(Exception("No user found"))
+                } ?: emitter.onError(Exception("No user found"))
+            } catch (exp: Exception) {
+                emitter.onError(exp)
+            }
+        }
+    }
+
+    override fun signOut(): Completable {
+        return Completable.create { emitter ->
+            try {
+                firebaseAuth.signOut()
+                emitter.onComplete()
+            } catch (exp: Exception) {
+                emitter.onError(exp)
+            }
         }
     }
 }
