@@ -85,14 +85,14 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txt_signup"
+        android:id="@+id/txt_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
         android:fontFamily="@font/open_sans_regular"
         android:gravity="center"
         android:padding="@dimen/padding_medium"
-        android:text="@string/signUpWith_auth"
+        android:text="@string/registerWith_auth"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/regular"
         android:textStyle="bold"
@@ -108,8 +108,8 @@
         android:background="@null"
         android:padding="@dimen/padding_small"
         android:src="@drawable/ic_google"
-        app:layout_constraintStart_toStartOf="@id/txt_signup"
-        app:layout_constraintTop_toBottomOf="@id/txt_signup" />
+        app:layout_constraintStart_toStartOf="@id/txt_register"
+        app:layout_constraintTop_toBottomOf="@id/txt_register" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_email"
@@ -118,8 +118,8 @@
         android:layout_margin="@dimen/margin_small"
         android:padding="@dimen/padding_small"
         android:src="@drawable/ic_email"
-        app:layout_constraintEnd_toEndOf="@id/txt_signup"
-        app:layout_constraintTop_toBottomOf="@id/txt_signup" />
+        app:layout_constraintEnd_toEndOf="@id/txt_register"
+        app:layout_constraintTop_toBottomOf="@id/txt_register" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
