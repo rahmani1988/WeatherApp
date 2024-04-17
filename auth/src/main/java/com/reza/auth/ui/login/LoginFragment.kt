@@ -26,6 +26,12 @@ private const val DEBOUNCING_TIME = 300L
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
 
+    companion object{
+        fun newInstance() = LoginFragment()
+    }
+
+    private var loginFragmentCallbacks: LoginContract.LoginFragmentCallbacks? = null
+
     @Inject
     lateinit var compositeDisposable: CompositeDisposable
 
@@ -53,6 +59,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (requireActivity() as? AuthActivity)?.authComponent?.inject(this)
+        loginFragmentCallbacks = context as LoginContract.LoginFragmentCallbacks
     }
 
     override fun setupUi() {
@@ -87,6 +94,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
                         email = edtEmail.text.toString().trim(),
                         password = edtPassword.text.toString().trim()
                     )
+                }.addTo(compositeDisposable)
+
+            btnLoginWithEmailLink.clicks()
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy {
+                    loginFragmentCallbacks?.onEmailLinkClicked()
                 }.addTo(compositeDisposable)
 
             edtEmail.textChanges()
@@ -135,6 +149,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
 
     override fun onDestroy() {
         super.onDestroy()
+        loginFragmentCallbacks = null
         compositeDisposable.clear()
     }
 }

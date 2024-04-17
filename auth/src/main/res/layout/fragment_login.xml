@@ -76,13 +76,29 @@
         app:layout_constraintTop_toBottomOf="@+id/text_input_password"
         tools:layout_editor_absoluteX="16dp" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login_with_email_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium"
+        android:drawableEnd="@drawable/ic_link"
+        android:fontFamily="@font/open_sans_regular"
+        android:gravity="center"
+        android:padding="@dimen/padding_medium"
+        android:text="@string/loginWithEmailLink_auth"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/large"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        tools:layout_editor_absoluteX="16dp" />
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="@dimen/margin_medium"
         android:background="@color/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login_with_email_link" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_register"

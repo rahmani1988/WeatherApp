@@ -3,6 +3,8 @@ package com.reza.auth.ui
 import android.content.Intent
 import android.os.Bundle
 import com.reza.auth.databinding.ActivityAuthBinding
+import com.reza.auth.ui.emailLink.EmailLinkFragment
+import com.reza.auth.ui.login.LoginContract
 import com.reza.auth.ui.login.LoginFragment
 import com.reza.auth.ui.register.RegisterFragment
 import com.reza.core.ui.base.BaseActivity
@@ -11,7 +13,7 @@ import com.reza.core.util.extensions.addFragment
 import com.reza.core.util.extensions.popBackStack
 import com.reza.core.util.extensions.replaceFragment
 
-class AuthActivity : BaseActivity<ActivityAuthBinding>() {
+class AuthActivity : BaseActivity<ActivityAuthBinding>(), LoginContract.LoginFragmentCallbacks, LoginEmailLinkClickHandler, RegisterClickHandler {
 
     lateinit var authComponent: AuthComponent
 
@@ -30,11 +32,15 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
     }
 
     override fun setupUi() {
-        addFragment(LoginFragment(), binding.frameLayoutAuth.id, false)
+        addFragment(LoginFragment.newInstance(), binding.frameLayoutAuth.id, false)
     }
 
     fun navigateToRegister() {
         replaceFragment(RegisterFragment(), binding.frameLayoutAuth.id, true)
+    }
+
+    private fun navigateToRegisterWithEmailLink() {
+        replaceFragment(EmailLinkFragment(this), binding.frameLayoutAuth.id, true)
     }
 
     fun navigateUp() {
@@ -55,5 +61,21 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
         }
         startActivity(intent)
         finish()
+    }
+
+    override fun onLoginClicked() {
+        navigateToRegister()
+    }
+
+    override fun onEmailLinkClicked() {
+         navigateToRegisterWithEmailLink()
+    }
+
+    override fun onLoginWithEmailLinkClicked() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onRegisterClicked() {
+        navigateToHome()
     }
 }

@@ -1,10 +1,10 @@
-package com.reza.auth.ui.login
+package com.reza.auth.ui.emailLink
 
 import com.google.firebase.auth.AuthCredential
 import com.reza.core.ui.base.BasePresenter
 import com.reza.core.ui.base.BaseView
 
-interface LoginContract {
+interface EmailLinkContract {
     interface View: BaseView {
         fun showErrorMessage(error: String)
         fun showLoader()
@@ -14,14 +14,7 @@ interface LoginContract {
     }
 
     interface Presenter: BasePresenter<View> {
-        fun loginUserWithEmailAndPassword(email: String, password: String)
-        fun loginWithCredentials(authCredential: AuthCredential)
+        fun loginUserWithEmailLink(email: String)
         fun validateEmail(email: String)
-        fun validatePassword(password: String)
-    }
-
-    interface LoginFragmentCallbacks {
-        fun onLoginClicked()
-        fun onEmailLinkClicked()
     }
 }
