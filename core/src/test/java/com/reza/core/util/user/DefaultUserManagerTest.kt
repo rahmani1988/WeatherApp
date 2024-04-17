@@ -1,6 +1,5 @@
 package com.reza.core.util.user
 
-import com.google.common.truth.Truth.assertThat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import org.junit.Before
@@ -41,7 +40,7 @@ class DefaultUserManagerTest {
         val isUserSignedIn = userManager.isUserLoggedIn()
 
         // Then
-        assertThat(isUserSignedIn).isFalse()
+        isUserSignedIn.test().assertError(Exception::class.java)
     }
 
     @Test
@@ -53,6 +52,6 @@ class DefaultUserManagerTest {
         val isUserSignedIn = userManager.isUserLoggedIn()
 
         // Then
-        assertThat(isUserSignedIn).isTrue()
+        isUserSignedIn.test().assertResult(true).dispose()
     }
 }
