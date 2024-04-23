@@ -1,5 +1,6 @@
 package com.reza.auth.ui
 
+import com.reza.auth.ui.emailLink.EmailLinkFragment
 import com.reza.auth.ui.login.LoginFragment
 import com.reza.auth.ui.register.RegisterFragment
 import com.reza.core.di.ActivityScope
@@ -17,4 +18,5 @@ interface AuthComponent {
     fun inject(activity: AuthActivity)
     fun inject(fragment: RegisterFragment)
     fun inject(fragment: LoginFragment)
+    fun inject(fragment: EmailLinkFragment)
 }

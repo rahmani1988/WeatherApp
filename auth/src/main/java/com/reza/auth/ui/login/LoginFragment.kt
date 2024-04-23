@@ -26,11 +26,11 @@ private const val DEBOUNCING_TIME = 300L
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
 
-    companion object{
+    companion object {
         fun newInstance() = LoginFragment()
     }
 
-    private var loginFragmentCallbacks: LoginContract.LoginFragmentCallbacks? = null
+    private var loginFragmentClickHandler: LoginContract.LoginFragmentClickHandler? = null
 
     @Inject
     lateinit var compositeDisposable: CompositeDisposable
@@ -59,7 +59,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (requireActivity() as? AuthActivity)?.authComponent?.inject(this)
-        loginFragmentCallbacks = context as LoginContract.LoginFragmentCallbacks
+        loginFragmentClickHandler = context as LoginContract.LoginFragmentClickHandler
     }
 
     override fun setupUi() {
@@ -76,7 +76,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    (requireActivity() as? AuthActivity)?.navigateToRegister()
+                    loginFragmentClickHandler?.onNavigateToRegister()
                 }.addTo(compositeDisposable)
 
             imgGoogle.clicks()
@@ -100,7 +100,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy {
-                    loginFragmentCallbacks?.onEmailLinkClicked()
+                    loginFragmentClickHandler?.onEmailLinkClicked()
                 }.addTo(compositeDisposable)
 
             edtEmail.textChanges()
@@ -147,9 +147,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
         loginPresenter.destroy()
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        loginFragmentClickHandler = null
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        loginFragmentCallbacks = null
         compositeDisposable.clear()
     }
 }

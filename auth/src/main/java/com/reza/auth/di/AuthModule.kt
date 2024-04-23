@@ -1,5 +1,7 @@
 package com.reza.auth.di
 
+import com.reza.auth.ui.emailLink.EmailLinkContract
+import com.reza.auth.ui.emailLink.EmailLinkPresenter
 import com.reza.auth.ui.login.LoginContract
 import com.reza.auth.ui.login.LoginPresenter
 import com.reza.auth.ui.register.RegisterContract
@@ -14,4 +16,7 @@ abstract class AuthModule {
 
     @Binds
     abstract fun bindRegisterPresenter(registerPresenter: RegisterPresenter): RegisterContract.Presenter
+
+    @Binds
+    abstract fun bindEmailLinkPresenter(emailLinkPresenter: EmailLinkPresenter): EmailLinkContract.Presenter
 }

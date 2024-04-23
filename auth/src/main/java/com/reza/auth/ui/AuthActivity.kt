@@ -3,6 +3,7 @@ package com.reza.auth.ui
 import android.content.Intent
 import android.os.Bundle
 import com.reza.auth.databinding.ActivityAuthBinding
+import com.reza.auth.ui.emailLink.EmailLinkContract
 import com.reza.auth.ui.emailLink.EmailLinkFragment
 import com.reza.auth.ui.login.LoginContract
 import com.reza.auth.ui.login.LoginFragment
@@ -13,7 +14,8 @@ import com.reza.core.util.extensions.addFragment
 import com.reza.core.util.extensions.popBackStack
 import com.reza.core.util.extensions.replaceFragment
 
-class AuthActivity : BaseActivity<ActivityAuthBinding>(), LoginContract.LoginFragmentCallbacks, LoginEmailLinkClickHandler, RegisterClickHandler {
+class AuthActivity : BaseActivity<ActivityAuthBinding>(), LoginContract.LoginFragmentClickHandler,
+    EmailLinkContract.EmailLinkClickHandler {
 
     lateinit var authComponent: AuthComponent
 
@@ -35,12 +37,12 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(), LoginContract.LoginFra
         addFragment(LoginFragment.newInstance(), binding.frameLayoutAuth.id, false)
     }
 
-    fun navigateToRegister() {
+    private fun navigateToRegister() {
         replaceFragment(RegisterFragment(), binding.frameLayoutAuth.id, true)
     }
 
     private fun navigateToRegisterWithEmailLink() {
-        replaceFragment(EmailLinkFragment(this), binding.frameLayoutAuth.id, true)
+        replaceFragment(EmailLinkFragment(), binding.frameLayoutAuth.id, true)
     }
 
     fun navigateUp() {
@@ -63,19 +65,15 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(), LoginContract.LoginFra
         finish()
     }
 
-    override fun onLoginClicked() {
+    override fun onEmailLinkClicked() {
+        navigateToRegisterWithEmailLink()
+    }
+
+    override fun onNavigateToRegister() {
         navigateToRegister()
     }
 
-    override fun onEmailLinkClicked() {
-         navigateToRegisterWithEmailLink()
-    }
-
-    override fun onLoginWithEmailLinkClicked() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onRegisterClicked() {
-        navigateToHome()
+    override fun onBackClicked() {
+        popBackStack()
     }
 }

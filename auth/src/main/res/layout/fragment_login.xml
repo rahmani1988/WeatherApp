@@ -141,6 +141,7 @@
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="@dimen/elevation_small"
         android:indeterminate="false"
         android:indeterminateTint="@color/colorPrimary"
         android:textAlignment="center"

@@ -20,8 +20,8 @@ interface LoginContract {
         fun validatePassword(password: String)
     }
 
-    interface LoginFragmentCallbacks {
-        fun onLoginClicked()
+    interface LoginFragmentClickHandler {
         fun onEmailLinkClicked()
+        fun onNavigateToRegister()
     }
 }
