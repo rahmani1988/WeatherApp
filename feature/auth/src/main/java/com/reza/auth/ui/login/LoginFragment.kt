@@ -36,7 +36,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
     lateinit var compositeDisposable: CompositeDisposable
 
     @Inject
-    lateinit var loginPresenter: LoginContract.Presenter
+    lateinit var presenter: LoginContract.Presenter
 
     @Inject
     lateinit var googleSignInClient: GoogleSignInClient
@@ -48,7 +48,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
                     GoogleSignIn.getSignedInAccountFromIntent(result.data)
                         .result?.let {
                             val credentials = GoogleAuthProvider.getCredential(it.idToken, null)
-                            loginPresenter.loginWithCredentials(credentials)
+                            presenter.loginWithCredentials(credentials)
                         }
                 } catch (exp: ApiException) {
                     Timber.e(exp)
@@ -67,7 +67,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
     }
 
     override fun registerView() {
-        loginPresenter.attachView(this)
+        presenter.attachView(this)
     }
 
     override fun setupListeners() {
@@ -90,7 +90,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy {
-                    loginPresenter.loginUserWithEmailAndPassword(
+                    presenter.loginUserWithEmailAndPassword(
                         email = edtEmail.text.toString().trim(),
                         password = edtPassword.text.toString().trim()
                     )
@@ -106,13 +106,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
             edtEmail.textChanges()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
-                    loginPresenter.validateEmail(it.toString())
+                    presenter.validateEmail(it.toString())
                 }.addTo(compositeDisposable)
 
             edtPassword.textChanges()
                 .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
                 .subscribe {
-                    loginPresenter.validatePassword(it.toString())
+                    presenter.validatePassword(it.toString())
                 }.addTo(compositeDisposable)
         }
     }
@@ -143,8 +143,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(), LoginContract.View {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        loginPresenter.detachView(this)
-        loginPresenter.destroy()
+        presenter.detachView(this)
+        presenter.destroy()
     }
 
     override fun onDetach() {

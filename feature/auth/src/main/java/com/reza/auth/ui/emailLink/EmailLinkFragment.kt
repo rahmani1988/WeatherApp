@@ -2,11 +2,13 @@ package com.reza.auth.ui.emailLink
 
 import android.content.Context
 import com.jakewharton.rxbinding4.view.clicks
+import com.jakewharton.rxbinding4.widget.textChanges
 import com.reza.auth.databinding.FragmentEmailLinkBinding
 import com.reza.auth.ui.AuthActivity
 import com.reza.auth.ui.login.LoginContract
 import com.reza.core.ui.base.BaseFragment
 import com.reza.core.util.extensions.popBackStack
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.util.concurrent.TimeUnit
@@ -28,7 +30,7 @@ class EmailLinkFragment :
     lateinit var compositeDisposable: CompositeDisposable
 
     @Inject
-    lateinit var emailLinkPresenter: EmailLinkContract.Presenter
+    lateinit var presenter: EmailLinkContract.Presenter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -66,7 +68,7 @@ class EmailLinkFragment :
     }
 
     override fun registerView() {
-        emailLinkPresenter.attachView(this)
+        presenter.attachView(this)
     }
 
     override fun setupListeners() {
@@ -77,6 +79,20 @@ class EmailLinkFragment :
                 .subscribe {
                     emailLinkClickHandler?.onBackClicked()
                 }.addTo(compositeDisposable)
+
+            edtEmail.textChanges()
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .subscribe {
+                    presenter.validateEmail(it.toString())
+                }.addTo(compositeDisposable)
+
+            btnRegister.clicks()
+                .debounce(DEBOUNCING_TIME, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    presenter.loginUserWithEmailLink(email = edtEmail.text.toString().trim(),)
+                }
+                .addTo(compositeDisposable)
         }
     }
 
@@ -86,8 +102,8 @@ class EmailLinkFragment :
 
     override fun onDestroyView() {
         super.onDestroyView()
-        emailLinkPresenter.detachView(this)
-        emailLinkPresenter.destroy()
+        presenter.detachView(this)
+        presenter.destroy()
     }
 
     override fun onDestroy() {
