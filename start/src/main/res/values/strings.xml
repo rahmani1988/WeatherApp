@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!-- StartActivity -->
-    <string name="weather_app_start_activity">Weather Forecast</string>
-    <string name="start">Start</string>
-
-</resources>

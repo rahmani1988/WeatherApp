@@ -1,0 +1,145 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.reza.core'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 34
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        buildConfigField "String", "GOOGLE_SING_IN_WEB_CLIENT_ID", "\"${getGoogleSignInWebClientID()}\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        staging {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    // Projects
+    testImplementation project(':base:tests')
+
+    // AndroidX core
+    api rootProject.androidXCore
+
+    // Appcompat
+    api rootProject.appcompat
+
+    // Material
+    api rootProject.material
+
+    // ConstraintLayout
+    api rootProject.constraintlayout
+
+    // Dagger2
+    api rootProject.dagger
+    kapt rootProject.daggerCompiler
+
+    // Glide
+    api rootProject.glide
+    annotationProcessor rootProject.glideAnnotationProcessor
+
+    // Networking
+    api rootProject.retrofit
+    api rootProject.retrofitGsonConverter
+    api rootProject.retrofitRxJava2Adapter
+    api rootProject.okHttp3
+    api rootProject.okHttp3LoggingInterceptor
+
+    // Timber
+    api rootProject.timber
+
+    // RxJava2
+    api rootProject.rxJava
+    api rootProject.rxAndroid
+    api rootProject.retrofitRxJava2Adapter
+    api rootProject.rxKotlin
+
+    // Gson
+    api rootProject.gson
+
+    // Firebase
+    api platform(rootProject.firebaseBom)
+    api rootProject.analytics
+    api rootProject.auth
+    api rootProject.playServicesAuth
+    api rootProject.appCheck
+    api rootProject.appCheckPlayIntegrity
+    // Don't use the debug provider in production builds of your app
+    api rootProject.appCheckDubug
+    androidTestApi rootProject.appCheckDebugTesting
+
+    // Lottie
+    api rootProject.lottie
+
+    // RxSharedPref
+    api rootProject.rxSharedPref
+
+    // Shimmer
+    api rootProject.shimmer
+
+    // Idling Resource
+    api rootProject.idlingResources
+
+    // RxBinding
+    api rootProject.rxBinding
+
+    // Pagination3
+    api rootProject.pagination3
+    api rootProject.pagination3RxIntegration
+
+    // Test
+    testImplementation rootProject.junit
+
+    // Android Test
+    androidTestApi rootProject.androidXjunit
+    androidTestApi rootProject.espresso
+    androidTestApi rootProject.truth
+    kaptAndroidTest rootProject.daggerCompiler
+
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
+
+}
+
+def getGoogleSignInWebClientID() {
+    // to get the variable from remote
+    def googleSignInWebClientId = System.getenv("GOOGLE_SING_IN_WEB_CLIENT_ID")
+    if (googleSignInWebClientId == null || googleSignInWebClientId.length() == 0) {
+        // to get the variable from local
+        def localFile = file("/Users/mohammadrezarahmani/AndroidStudioProjects/WeatherApp/local.properties")
+        def properties = new Properties()
+        properties.load(new FileInputStream(localFile))
+        googleSignInWebClientId = properties["GOOGLE_SING_IN_WEB_CLIENT_ID"]
+        if (googleSignInWebClientId == null) {
+            logger.error("You need to either place appropriate local.properties or set proper environment variables on Jenkins for GOOGLE SING IN WEB CLIENT ID key")
+        }
+    }
+    return googleSignInWebClientId
+}

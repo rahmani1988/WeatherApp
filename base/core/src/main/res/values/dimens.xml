@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- dimensions -->
+
+    <!-- fixed -->
+    <dimen name="fix_300">300dp</dimen>
+    <dimen name="fix_400">400dp</dimen>
+
+    <!-- font size -->
+    <dimen name="small">12sp</dimen>
+    <dimen name="regular">16sp</dimen>
+    <dimen name="large">20sp</dimen>
+    <dimen name="extra_large">32sp</dimen>
+
+    <!-- paddings -->
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">32dp</dimen>
+
+    <!-- margins -->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+
+    <!-- elevation -->
+    <dimen name="elevation_small">4dp</dimen>
+</resources>

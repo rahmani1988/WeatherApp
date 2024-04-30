@@ -1,8 +1,8 @@
 rootProject.name = "WeatherApp"
 include ':app'
-include ':core'
+include ':base:core'
 include ':benchmark'
-include ':start'
-include ':auth'
-include ':home'
-include ':tests'
+include ':feature:start'
+include ':feature:auth'
+include ':feature:home'
+include ':base:tests'

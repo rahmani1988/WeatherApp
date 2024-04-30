@@ -94,11 +94,11 @@ android {
 dependencies {
 
     // Projects
-    implementation project(':core')
-    implementation project(':start')
-    implementation project(':auth')
-    implementation project(':home')
-    testImplementation project(':tests')
+    implementation project(':base:core')
+    implementation project(':feature:start')
+    implementation project(':feature:auth')
+    implementation project(':feature:home')
+    testImplementation project(':base:tests')
 
     // Dagger2
     kapt rootProject.daggerCompiler
