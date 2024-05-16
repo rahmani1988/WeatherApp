@@ -5,6 +5,21 @@
         <activity
             android:name="com.reza.home.ui.HomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.WeatherApp" />
+            android:theme="@style/Theme.WeatherApp" >
+
+            <!-- for dynamic links -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="www.rezaweatherapp.com/home"
+                    android:scheme="https"/>
+                <data
+                    android:host="www.rezaweatherapp.com/home"
+                    android:scheme="http"/>
+            </intent-filter>
+
+        </activity>
     </application>
 </manifest>
