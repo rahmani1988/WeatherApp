@@ -1,8 +1,14 @@
 package com.reza.start.ui.start
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData
+import com.google.firebase.ktx.Firebase
 import com.reza.core.ui.base.BaseActivity
 import com.reza.core.util.constant.Constant
 import com.reza.start.databinding.ActivityStartBinding
@@ -30,6 +36,27 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
 
         // Enable support for Splash Screen API for proper Android 12+ support
         installSplashScreen()
+
+        getDynamicLink()
+    }
+
+    private fun getDynamicLink() {
+        FirebaseDynamicLinks.getInstance()
+            .getDynamicLink(intent)
+            .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
+                // Get deep link from result (may be null if no link is found)
+                var deepLink: Uri? = null
+                if (pendingDynamicLinkData != null) {
+                    deepLink = pendingDynamicLinkData.link
+
+                }
+
+                // Handle the deep link. For example, open the linked
+                // content, or apply promotional credit to the user's
+                // account.
+                // ...
+            }
+            .addOnFailureListener(this) { e -> Log.w("naghi", "getDynamicLink:onFailure", e) }
     }
 
     override fun registerView() {
