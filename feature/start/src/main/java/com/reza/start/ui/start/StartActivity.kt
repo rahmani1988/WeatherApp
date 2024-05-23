@@ -44,6 +44,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
         FirebaseDynamicLinks.getInstance()
             .getDynamicLink(intent)
             .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
+                Log.i("naghi", "getDynamicLink: ${pendingDynamicLinkData?.link}")
                 // Get deep link from result (may be null if no link is found)
                 var deepLink: Uri? = null
                 if (pendingDynamicLinkData != null) {

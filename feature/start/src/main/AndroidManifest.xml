@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <application>
         <activity
             android:name="com.reza.start.ui.start.StartActivity"
@@ -12,16 +14,18 @@
             </intent-filter>
 
             <!-- for dynamic links -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:host="www.rezaweatherapp.com/start"
-                    android:scheme="https"/>
-                <data
-                    android:host="www.rezaweatherapp.com/start"
-                    android:scheme="http"/>
+            <intent-filter
+                android:autoVerify="true"
+                tools:targetApi="m">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="rezaweatherapp.com/start" />
+                <data android:scheme="http" />
+                <data android:host="rezaweatherapp.com/start" />
             </intent-filter>
         </activity>
     </application>
