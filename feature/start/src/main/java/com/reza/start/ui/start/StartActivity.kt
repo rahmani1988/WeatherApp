@@ -45,6 +45,9 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
             .getDynamicLink(intent)
             .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
                 Log.i("naghi", "getDynamicLink: ${pendingDynamicLinkData?.link}")
+                if(pendingDynamicLinkData?.link?.path?.contains("/home") == true) {
+                   //navigateToHome()
+                }
                 // Get deep link from result (may be null if no link is found)
                 var deepLink: Uri? = null
                 if (pendingDynamicLinkData != null) {

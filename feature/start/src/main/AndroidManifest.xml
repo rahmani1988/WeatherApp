@@ -14,18 +14,16 @@
             </intent-filter>
 
             <!-- for dynamic links -->
-            <intent-filter
-                android:autoVerify="true"
-                tools:targetApi="m">
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="https" />
-                <data android:host="rezaweatherapp.com/start" />
+                <data android:host="www.rezaweatherapp.com/start" />
                 <data android:scheme="http" />
-                <data android:host="rezaweatherapp.com/start" />
+                <data android:host="www.rezaweatherapp.com/start" />
             </intent-filter>
         </activity>
     </application>

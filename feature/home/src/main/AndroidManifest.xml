@@ -18,9 +18,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data android:scheme="https" />
-                <data android:host="rezaweatherapp.com/home" />
+                <data android:host="www.rezaweatherapp.com/home" />
                 <data android:scheme="http" />
-                <data android:host="rezaweatherapp.com/home" />
+                <data android:host="www.rezaweatherapp.com/home"/>
             </intent-filter>
 
         </activity>
