@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import com.reza.core.ui.base.BaseActivity
 import com.reza.core.util.constant.Constant
@@ -41,12 +42,11 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     }
 
     private fun getDynamicLink() {
-        FirebaseDynamicLinks.getInstance()
+        Firebase.dynamicLinks
             .getDynamicLink(intent)
             .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
-                Log.i("naghi", "getDynamicLink: ${pendingDynamicLinkData?.link}")
-                if(pendingDynamicLinkData?.link?.path?.contains("/home") == true) {
-                   //navigateToHome()
+                if (pendingDynamicLinkData?.link?.path?.contains("/home") == true) {
+                    navigateToHome()
                 }
                 // Get deep link from result (may be null if no link is found)
                 var deepLink: Uri? = null

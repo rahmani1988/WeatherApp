@@ -47,7 +47,7 @@ ext {
     appCheck = "com.google.firebase:firebase-appcheck-ktx"
     appCheckPlayIntegrity = "com.google.firebase:firebase-appcheck-playintegrity"
     appCheckDebugTesting = "com.google.firebase:firebase-appcheck-debug-testing"
-    dynamicLinks = "com.google.firebase:firebase-dynamic-links"
+    dynamicLinks = "com.google.firebase:firebase-dynamic-links-ktx"
 
     // Timber
     timber = "com.jakewharton.timber:timber:4.7.1"
