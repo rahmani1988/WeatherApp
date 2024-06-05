@@ -1,12 +1,6 @@
 package com.reza.home.ui
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData
-import com.google.firebase.dynamiclinks.ktx.dynamicLinks
-import com.google.firebase.ktx.Firebase
 import com.reza.core.ui.base.BaseActivity
 import com.reza.home.databinding.ActivityHomeBinding
 import javax.inject.Inject

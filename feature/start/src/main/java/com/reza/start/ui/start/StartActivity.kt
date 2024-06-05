@@ -15,7 +15,6 @@ import com.reza.core.util.constant.Constant
 import com.reza.start.databinding.ActivityStartBinding
 import javax.inject.Inject
 
-
 class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
     // TODO: user's current location has to be taken in this activity
 
@@ -45,6 +44,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
         Firebase.dynamicLinks
             .getDynamicLink(intent)
             .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
+                // navigate to target activities
                 if (pendingDynamicLinkData?.link?.path?.contains("/home") == true) {
                     navigateToHome()
                 }
