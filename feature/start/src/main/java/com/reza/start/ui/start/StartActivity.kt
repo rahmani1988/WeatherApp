@@ -13,10 +13,10 @@ import com.google.firebase.ktx.Firebase
 import com.reza.core.ui.base.BaseActivity
 import com.reza.core.util.constant.Constant
 import com.reza.start.databinding.ActivityStartBinding
+import timber.log.Timber
 import javax.inject.Inject
 
 class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
-    // TODO: user's current location has to be taken in this activity
 
     private lateinit var startComponent: StartComponent
 
@@ -40,27 +40,42 @@ class StartActivity : BaseActivity<ActivityStartBinding>(), StartContract.View {
         getDynamicLink()
     }
 
+    /**
+     * Retrieves a dynamic link from Firebase and handles the navigation to the target activity.
+     * It also extracts the deep link from the result and allows for further processing of the link data.
+     */
     private fun getDynamicLink() {
         Firebase.dynamicLinks
             .getDynamicLink(intent)
             .addOnSuccessListener(this) { pendingDynamicLinkData: PendingDynamicLinkData? ->
-                // navigate to target activities
-                if (pendingDynamicLinkData?.link?.path?.contains("/home") == true) {
-                    navigateToHome()
-                }
-                // Get deep link from result (may be null if no link is found)
-                var deepLink: Uri? = null
-                if (pendingDynamicLinkData != null) {
-                    deepLink = pendingDynamicLinkData.link
+                // Navigate to the target activity based on the dynamic link path.
+                handleDynamicLinkNavigation(pendingDynamicLinkData?.link?.path)
 
-                }
+                // Extract the deep link from the result.
+                val deepLink: Uri? = pendingDynamicLinkData?.link
 
-                // Handle the deep link. For example, open the linked
-                // content, or apply promotional credit to the user's
-                // account.
+                // Handle the deep link (e.g., open content, apply promotional credit).
                 // ...
             }
-            .addOnFailureListener(this) { e -> Log.w("naghi", "getDynamicLink:onFailure", e) }
+            .addOnFailureListener(this) { e ->
+                // Log the error using Timber.
+                Timber.e(e)
+            }
+    }
+
+    /**
+     * Handles navigation based on the path extracted from a dynamic link.
+     *
+     * @param path The path segment of the dynamic link, which determines the navigation target.
+     */
+    private fun handleDynamicLinkNavigation(path: String?) {
+        when (path) {
+            "/home" -> {
+                navigateToHome()
+            }
+            // Add more cases for other possible paths and their corresponding navigation actions.
+            else -> Unit // Handle cases where the path is null or doesn't match any defined routes.
+        }
     }
 
     override fun registerView() {
